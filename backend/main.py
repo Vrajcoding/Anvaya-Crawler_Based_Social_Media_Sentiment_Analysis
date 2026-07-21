@@ -3,9 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 import asyncio
 from storage.seed_data import initialize_seed_data
 from utils.config import settings
-from api.routes import posts, alerts, trends, network, watchlist, feedback, reports, stats
+from api.routes import posts, alerts, trends, network, watchlist, feedback, reports, stats, settings_router, agent_status
 from api.websocket import ws_manager
 from agents.orchestrator import orchestrator
+from crawlers.spiders.real_social_spider import RealSocialCrawler
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -31,6 +32,9 @@ app.include_router(watchlist.router, prefix=settings.API_PREFIX)
 app.include_router(feedback.router, prefix=settings.API_PREFIX)
 app.include_router(reports.router, prefix=settings.API_PREFIX)
 app.include_router(stats.router, prefix=settings.API_PREFIX)
+app.include_router(settings_router.router, prefix=settings.API_PREFIX)
+app.include_router(agent_status.router, prefix=settings.API_PREFIX)
+
 
 @app.on_event("startup")
 async def startup_event():
@@ -40,11 +44,19 @@ async def startup_event():
     asyncio.create_task(background_crawler_loop())
 
 async def background_crawler_loop():
-    """Background task simulating continuous live social media crawling and agent processing."""
+    """Background task running continuous live social media harvesting, Scapy packet capture, and multi-agent processing."""
+    cycle = 0
+    platforms = ["x", "instagram", "facebook", "youtube"]
     while True:
-        await asyncio.sleep(12)  # Crawl new post every 12 seconds
+        await asyncio.sleep(10)  # Crawl new post every 10 seconds
+        cycle += 1
         try:
-            res = orchestrator.trigger_live_crawl_step()
+            if settings.USE_REAL_CRAWLER and cycle % 4 == 1:
+                # Refresh live RSS/web feeds every 40 seconds
+                await RealSocialCrawler.fetch_live_web_posts()
+                
+            platform = platforms[cycle % len(platforms)]
+            res = orchestrator.trigger_live_crawl_step(platform=platform)
             post = res.get("post")
             alert = res.get("alert")
             
@@ -61,6 +73,7 @@ async def background_crawler_loop():
                 })
         except Exception as e:
             print(f"Error in background crawler loop: {e}")
+
 
 @app.websocket("/ws/alerts")
 async def websocket_endpoint(websocket: WebSocket):

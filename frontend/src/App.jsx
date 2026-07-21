@@ -9,10 +9,13 @@ import Watchlist from './pages/Watchlist';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
 import { AlertOctagon, X } from 'lucide-react';
+import { useLanguage } from './services/LanguageContext';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [liveAlertNotification, setLiveAlertNotification] = useState(null);
+  const { t } = useLanguage();
+
 
   useEffect(() => {
     // Establish WebSocket connection for real-time live alert toast popups
@@ -76,7 +79,7 @@ export default function App() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <AlertOctagon size={28} />
             <div>
-              <strong style={{ fontSize: '1.15rem' }}>🚨 आपातकालीन अलर्ट (EMERGENCY CRITICAL ALERT):</strong>
+              <strong style={{ fontSize: '1.15rem' }}>{t('emergency_banner_title')}</strong>
               <span style={{ marginLeft: '10px', fontSize: '1.05rem', fontWeight: 600 }}>{liveAlertNotification.description}</span>
             </div>
           </div>
@@ -90,7 +93,7 @@ export default function App() {
                 setLiveAlertNotification(null);
               }}
             >
-              अलर्ट कतार में देखें (View Alert)
+              {t('btn_view_alert')}
             </button>
 
             <button 

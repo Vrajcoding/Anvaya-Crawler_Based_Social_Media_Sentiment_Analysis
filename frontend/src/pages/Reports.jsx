@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { generateReport } from '../services/api';
 import { FileText, Printer, Shield, CheckCircle } from 'lucide-react';
+import { useLanguage } from '../services/LanguageContext';
 
 export default function Reports() {
-  const [title, setTitle] = useState('सूरत हिंसा एवं पत्थरबाजी भड़काने वाले सोशल मीडिया खातों की जांच रिपोर्ट');
-  const [description, setDescription] = useState('साइबर सेल गुजरात राज्य द्वारा सूरत क्षेत्र में अफवाह फैलाने वाले एक्स एवं फेसबुक एकाउंट्स की विशेष साइबर थ्रेट रिपोर्ट।');
+  const { t } = useLanguage();
+  const [title, setTitle] = useState('Surat Cyber Intelligence & Threat Analysis Report');
+  const [description, setDescription] = useState('Official intelligence brief compiled by Surat Cyber Cell regarding inflammatory social media posts and stone-pelting rumors.');
   const [severity, setSeverity] = useState('CRITICAL');
   const [generating, setGenerating] = useState(false);
   const [reportResult, setReportResult] = useState(null);
@@ -26,14 +28,14 @@ export default function Reports() {
     <div className="gov-container">
       <div className="page-title-banner">
         <div>
-          <h2>📄 सरकारी पुलिस थ्रेट रिपोर्ट जनरेटर (Official CTI Police Reports)</h2>
-          <p>उच्चाधिकारियों एवं वरिष्ठ कमान को प्रस्तुत करने हेतु औपचारिक साइबर रिपोर्ट तैयार करें</p>
+          <h2>{t('reports_page_title')}</h2>
+          <p>{t('reports_page_subtitle')}</p>
         </div>
       </div>
 
       <div className="gov-card" style={{ border: '2px solid var(--gov-navy)' }}>
         <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--gov-navy-dark)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <FileText size={20} color="var(--gov-navy)" /> नई पुलिस रिपोर्ट तैयार करें (Compile Official Incident Report)
+          <FileText size={20} color="var(--gov-navy)" /> {t('report_compile_title')}
         </h3>
 
         <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
@@ -55,9 +57,9 @@ export default function Reports() {
                 onChange={(e) => setSeverity(e.target.value)}
                 style={{ width: '100%', border: '2px solid var(--border-gov)', padding: '0.75rem', borderRadius: '6px', fontSize: '1rem', fontWeight: 700 }}
               >
-                <option value="CRITICAL">🔴 CRITICAL (अत्यंत गंभीर)</option>
-                <option value="HIGH">🟧 HIGH (गंभीर)</option>
-                <option value="MEDIUM">🟨 MEDIUM (मध्यम)</option>
+                <option value="CRITICAL">🔴 CRITICAL</option>
+                <option value="HIGH">🟧 HIGH</option>
+                <option value="MEDIUM">🟨 MEDIUM</option>
               </select>
             </div>
           </div>
@@ -74,7 +76,7 @@ export default function Reports() {
 
           <button type="submit" className="btn-gov-primary" disabled={generating} style={{ width: 'fit-content' }}>
             <FileText size={18} />
-            <span>{generating ? 'रिपोर्ट तैयार हो रही है...' : 'सरकारी रिपोर्ट जनरेट करें (Generate Report)'}</span>
+            <span>{generating ? 'रिपोर्ट तैयार हो रही है...' : t('report_btn_generate')}</span>
           </button>
         </form>
       </div>
@@ -102,7 +104,7 @@ export default function Reports() {
           <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'space-between', paddingTop: '1.5rem', borderTop: '2px dashed var(--border-gov)' }}>
             <div>
               <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>जांच अधिकारी हस्ताक्षर (Investigating Officer Sign):</div>
-              <div style={{ fontWeight: 800, marginTop: '1.5rem', color: 'var(--gov-navy-dark)' }}>इंसपेक्टर आर. के. पटेल</div>
+              <div style={{ fontWeight: 800, marginTop: '1.5rem', color: 'var(--gov-navy-dark)' }}>{t('duty_officer_name')}</div>
             </div>
 
             <div style={{ textAlign: 'right' }}>
@@ -117,3 +119,4 @@ export default function Reports() {
     </div>
   );
 }
+

@@ -1,5 +1,9 @@
 import os
+from dotenv import load_dotenv
 from pydantic import BaseModel
+
+# Load environment variables from .env if present
+load_dotenv()
 
 class Settings(BaseModel):
     APP_NAME: str = "SentinelAI"
@@ -27,7 +31,17 @@ class Settings(BaseModel):
     # Crawlers
     CRAWL_INTERVAL_MINUTES: int = 5
     
+    # OpenRouter API & Multi-Agent Models
+    OPENROUTER_API_KEY: str = os.getenv("OPENROUTER_API_KEY", "your_openrouter_api_key_here")
+    OPENROUTER_BASE_URL: str = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
+    AGENT_NLP_MODEL: str = os.getenv("AGENT_NLP_MODEL", "google/gemini-2.0-flash-exp:free")
+    AGENT_THREAT_MODEL: str = os.getenv("AGENT_THREAT_MODEL", "meta-llama/llama-3.3-70b-instruct:free")
+    AGENT_REPORT_MODEL: str = os.getenv("AGENT_REPORT_MODEL", "deepseek/deepseek-chat:free")
+    AGENT_ALERT_MODEL: str = os.getenv("AGENT_ALERT_MODEL", "qwen/qwen-2.5-7b-instruct:free")
+    USE_REAL_CRAWLER: bool = True
+    
     # Database
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./sentinelai.db")
 
 settings = Settings()
+

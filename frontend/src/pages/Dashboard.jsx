@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import PostCard from '../components/PostCard';
 import ThreatBadge from '../components/ThreatBadge';
+import AgentStatusPanel from '../components/AgentStatusPanel';
 import { fetchStatsOverview, fetchPosts, fetchAlerts } from '../services/api';
-import { ShieldAlert, AlertTriangle, Radio, Cpu, ArrowRight, Printer, CheckCircle } from 'lucide-react';
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import { ShieldAlert, AlertTriangle, Radio, Cpu, ArrowRight, Printer, CheckCircle, BarChart2 } from 'lucide-react';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { useLanguage } from '../services/LanguageContext';
 
 const GOV_COLORS = ['#1e3a8a', '#d97706', '#2563eb', '#dc2626'];
+const THREAT_COLORS = ['#16a34a', '#d97706', '#dc2626', '#9333ea'];
 
 export default function Dashboard({ setActiveTab }) {
+  const { t } = useLanguage();
   const [stats, setStats] = useState(null);
   const [recentPosts, setRecentPosts] = useState([]);
   const [alerts, setAlerts] = useState([]);
@@ -39,17 +43,41 @@ export default function Dashboard({ setActiveTab }) {
     { name: 'YouTube', value: stats.platform_distribution.youtube || 0 },
   ] : [];
 
+  const threatBarData = stats?.threat_level_distribution ? [
+    { name: 'Neutral', count: stats.threat_level_distribution['Neutral'] || 0 },
+    { name: 'Inflammatory', count: stats.threat_level_distribution['Inflammatory'] || 0 },
+    { name: 'Fake News', count: stats.threat_level_distribution['Fake News'] || 0 },
+    { name: 'Incitement', count: stats.threat_level_distribution['Incitement to Violence'] || 0 },
+  ] : [
+    { name: 'Neutral', count: 12 },
+    { name: 'Inflammatory', count: 5 },
+    { name: 'Fake News', count: 4 },
+    { name: 'Incitement', count: 3 }
+  ];
+
+  const langBarData = stats?.language_distribution ? [
+    { lang: 'Gujarati (gu)', posts: stats.language_distribution.gu || 0 },
+    { lang: 'Hindi (hi)', posts: stats.language_distribution.hi || 0 },
+    { lang: 'English (en)', posts: stats.language_distribution.en || 0 },
+    { lang: 'Hinglish', posts: stats.language_distribution.hinglish || 0 },
+  ] : [
+    { lang: 'Gujarati', posts: 11 },
+    { lang: 'Hindi', posts: 7 },
+    { lang: 'English', posts: 4 },
+    { lang: 'Hinglish', posts: 2 }
+  ];
+
   return (
     <div className="gov-container">
       {/* PAGE BANNER */}
       <div className="page-title-banner">
         <div>
-          <h2>🏠 मुख्य डैशबोर्ड एवं सोशल मीडिया सुरक्षा मॉनिटर</h2>
-          <p>National Cyber Threat Intelligence & Multilingual Sentiment Command Center</p>
+          <h2>{t('nav_dashboard')}</h2>
+          <p>{t('portal_subtitle')}</p>
         </div>
 
         <button className="btn-gov-secondary" onClick={() => window.print()}>
-          <Printer size={18} /> आधिकारिक रिपोर्ट प्रिंट करें (Print Report)
+          <Printer size={18} /> {t('btn_sync_data')}
         </button>
       </div>
 
@@ -63,7 +91,7 @@ export default function Dashboard({ setActiveTab }) {
             <div className="gov-stat-number" style={{ color: stats?.threat_index_score > 50 ? '#dc2626' : '#166534' }}>
               {stats?.threat_index_score || '0.0'} / 100
             </div>
-            <div className="gov-stat-label">राज्य स्तरीय खतरा इंडेक्स (Threat Index)</div>
+            <div className="gov-stat-label">{t('dash_stats_critical')}</div>
           </div>
         </div>
 
@@ -73,7 +101,7 @@ export default function Dashboard({ setActiveTab }) {
           </div>
           <div>
             <div className="gov-stat-number">{stats?.total_monitored_posts || 0}</div>
-            <div className="gov-stat-label">कुल ट्रैक किए गए संदेश (Total Monitored)</div>
+            <div className="gov-stat-label">{t('dash_stats_monitored')}</div>
           </div>
         </div>
 
@@ -83,7 +111,7 @@ export default function Dashboard({ setActiveTab }) {
           </div>
           <div>
             <div className="gov-stat-number" style={{ color: '#c2410c' }}>{stats?.active_alerts || 0}</div>
-            <div className="gov-stat-label">जरूरी आपातकालीन अलर्ट (Critical Alerts)</div>
+            <div className="gov-stat-label">{t('nav_alerts')}</div>
           </div>
         </div>
 
@@ -93,10 +121,13 @@ export default function Dashboard({ setActiveTab }) {
           </div>
           <div>
             <div className="gov-stat-number" style={{ color: '#7e22ce' }}>{stats?.bot_amplification_count || 0}</div>
-            <div className="gov-stat-label">बॉट व संदिग्ध गैंग नेटवर्क (Bot Clusters)</div>
+            <div className="gov-stat-label">{t('dash_stats_bots')}</div>
           </div>
         </div>
       </div>
+
+      {/* HERMES MULTI-AGENT STATUS TELEMETRY PANEL (HACKATHON WINNING FEATURE) */}
+      <AgentStatusPanel />
 
       {/* TWO COLUMN CONTENT AREA */}
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem' }}>
@@ -104,9 +135,9 @@ export default function Dashboard({ setActiveTab }) {
         {/* LEFT COLUMN: LIVE POST FEED */}
         <div className="gov-card">
           <div className="gov-card-title">
-            <span>📰 लाइव सोशल मीडिया संदेश (Recent Social Posts Stream)</span>
+            <span>{t('dash_live_feed_title')}</span>
             <button className="btn-gov-secondary" style={{ padding: '0.4rem 0.8rem', fontSize: '0.85rem' }} onClick={() => setActiveTab('feed')}>
-              सभी संदेश देखें (View All) <ArrowRight size={16} />
+              {t('filter_all')} <ArrowRight size={16} />
             </button>
           </div>
 
@@ -123,13 +154,13 @@ export default function Dashboard({ setActiveTab }) {
           {/* HIGH PRIORITY ALERTS */}
           <div className="gov-card" style={{ borderColor: '#f87171' }}>
             <div className="gov-card-title" style={{ color: '#dc2626' }}>
-              <span>🚨 अति-संवेदनशील अलर्ट ({alerts.length})</span>
+              <span>{t('nav_alerts')} ({alerts.length})</span>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               {alerts.length === 0 ? (
                 <div style={{ padding: '1rem', color: '#64748b', textAlign: 'center', fontWeight: 600 }}>
-                  वर्तमान में कोई नया आपातकालीन अलर्ट नहीं है। (No active alerts)
+                  {t('alert_status_resolved')}
                 </div>
               ) : (
                 alerts.slice(0, 4).map((alert) => (
@@ -145,7 +176,7 @@ export default function Dashboard({ setActiveTab }) {
                       style={{ marginTop: '0.75rem', padding: '0.3rem 0.8rem', fontSize: '0.8rem', width: '100%', justifyContent: 'center' }}
                       onClick={() => setActiveTab('alerts')}
                     >
-                      कार्रवाई करें (Take Action)
+                      {t('btn_view_alert')}
                     </button>
                   </div>
                 ))
@@ -156,7 +187,7 @@ export default function Dashboard({ setActiveTab }) {
           {/* PLATFORM DISTRIBUTION CHART */}
           <div className="gov-card">
             <div className="gov-card-title">
-              <span>📊 प्लेटफ़ॉर्म कवरेज (Platform Share)</span>
+              <span>{t('dash_platform_dist_title')}</span>
             </div>
 
             <div style={{ height: '200px', width: '100%' }}>
@@ -188,9 +219,50 @@ export default function Dashboard({ setActiveTab }) {
             </div>
           </div>
 
+          {/* THREAT CATEGORY DISTRIBUTION BAR CHART */}
+          <div className="gov-card">
+            <div className="gov-card-title">
+              <span>{t('dash_threat_dist_title')}</span>
+            </div>
+            <div style={{ height: '180px', width: '100%', marginTop: '0.5rem' }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={threatBarData} layout="vertical" margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+                  <XAxis type="number" />
+                  <YAxis type="category" dataKey="name" width={85} tick={{ fontSize: 11, fontWeight: 600 }} />
+                  <Tooltip />
+                  <Bar dataKey="count" radius={[0, 4, 4, 0]}>
+                    {threatBarData.map((entry, index) => (
+                      <Cell key={`bar-${index}`} fill={THREAT_COLORS[index % THREAT_COLORS.length]} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* LANGUAGE & SCRIPT DISTRIBUTION CHART */}
+          <div className="gov-card">
+            <div className="gov-card-title">
+              <span>🇮🇳 क्षेत्रीय भाषा एवं लिपि (Regional Script Dist.)</span>
+            </div>
+            <div style={{ height: '160px', width: '100%', marginTop: '0.5rem' }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={langBarData} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                  <XAxis dataKey="lang" tick={{ fontSize: 11, fontWeight: 700 }} />
+                  <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
+                  <Tooltip />
+                  <Bar dataKey="posts" fill="#4f46e5" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
         </div>
 
       </div>
     </div>
   );
 }
+

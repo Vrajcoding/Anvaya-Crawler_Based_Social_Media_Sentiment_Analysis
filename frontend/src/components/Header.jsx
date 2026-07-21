@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Shield, PhoneCall, UserCheck, RefreshCw, ZoomIn, ZoomOut, AlertTriangle } from 'lucide-react';
+import { useLanguage } from '../services/LanguageContext';
 
 export default function Header({ activeTab, setActiveTab, onRefresh }) {
-  const [lang, setLang] = useState('hi');
+  const { lang, setLang, t } = useLanguage();
   const [fontSize, setFontSize] = useState('normal');
 
   const toggleFontSize = () => {
@@ -16,11 +17,11 @@ export default function Header({ activeTab, setActiveTab, onRefresh }) {
       {/* GOV TOP UTILITY BAR */}
       <div className="gov-top-bar">
         <div>
-          <span>🇮🇳 भारत सरकार | Govt. of India</span>
-          <span>गृह विभाग (गुजरात राज्य) | Home Department</span>
+          <span>{t('gov_top_title')}</span>
+          <span>{t('gov_top_dept')}</span>
           <span style={{ color: '#facc15', fontWeight: 700 }}>
             <PhoneCall size={14} style={{ display: 'inline', marginRight: '4px' }} />
-            साइबर कंट्रोल रूम हेल्पलाइन: 1930 / 079-23254300
+            {t('cyber_helpline')}
           </span>
         </div>
 
@@ -30,19 +31,20 @@ export default function Header({ activeTab, setActiveTab, onRefresh }) {
             onClick={toggleFontSize} 
             style={{ background: 'transparent', border: '1px solid #475569', color: '#fff', padding: '0.2rem 0.6rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 700 }}
           >
-            {fontSize === 'normal' ? '🔍 बड़ा टेक्स्ट (A+)' : '🔍 सामान्य टेक्स्ट (A-)'}
+            {fontSize === 'normal' ? t('text_size_large') : t('text_size_normal')}
           </button>
 
           {/* LANGUAGE SELECTOR */}
           <select 
             value={lang} 
             onChange={(e) => setLang(e.target.value)}
-            style={{ background: '#1e293b', color: '#fff', border: '1px solid #475569', padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 700 }}
+            style={{ background: '#1e293b', color: '#fff', border: '1px solid #fde047', padding: '0.3rem 0.7rem', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 800, cursor: 'pointer', boxShadow: '0 0 10px rgba(253, 224, 71, 0.2)' }}
           >
-            <option value="hi">हिंदी (Hindi)</option>
-            <option value="gu">ગુજરાતી (Gujarati)</option>
-            <option value="en">English</option>
+            <option value="en">🌐 English</option>
+            <option value="hi">🇮🇳 हिंदी</option>
+            <option value="gu">🇮🇳 ગુજરાતી</option>
           </select>
+
         </div>
       </div>
 
@@ -54,22 +56,22 @@ export default function Header({ activeTab, setActiveTab, onRefresh }) {
           </div>
 
           <div className="emblem-title">
-            <h1>SentinelAI — राष्ट्रीय सोशल मीडिया सुरक्षा एवं खतरा विश्लेषक</h1>
-            <p>National Social Media Threat & Intelligence Monitoring Portal (ERH26_PS_05)</p>
+            <h1>{t('portal_title')}</h1>
+            <p>{t('portal_subtitle')}</p>
           </div>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>ड्यूटी अधिकारी (On-Duty Officer):</div>
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>{t('on_duty_label')}</div>
             <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--gov-navy-dark)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <UserCheck size={18} color="var(--gov-navy)" /> इंसपेक्टर आर. के. पटेल (Surat Cyber Cell)
+              <UserCheck size={18} color="var(--gov-navy)" /> {t('duty_officer_name')}
             </div>
           </div>
 
           <button className="btn-gov-secondary" onClick={onRefresh} style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>
             <RefreshCw size={16} />
-            <span>डेटा अपडेट / Sync</span>
+            <span>{t('btn_sync_data')}</span>
           </button>
         </div>
       </div>
@@ -80,51 +82,59 @@ export default function Header({ activeTab, setActiveTab, onRefresh }) {
           className={`gov-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
           onClick={() => setActiveTab('dashboard')}
         >
-          🏠 मुख्य डैशबोर्ड (Overview)
+          {t('nav_dashboard')}
         </div>
 
         <div 
           className={`gov-nav-item ${activeTab === 'alerts' ? 'active' : ''}`}
           onClick={() => setActiveTab('alerts')}
         >
-          🚨 आपातकालीन अलर्ट (Critical Alerts)
+          {t('nav_alerts')}
         </div>
 
         <div 
           className={`gov-nav-item ${activeTab === 'feed' ? 'active' : ''}`}
           onClick={() => setActiveTab('feed')}
         >
-          📰 सोशल मीडिया लाइव फीड (Social Feed)
+          {t('nav_feed')}
         </div>
 
         <div 
           className={`gov-nav-item ${activeTab === 'trends' ? 'active' : ''}`}
           onClick={() => setActiveTab('trends')}
         >
-          📈 अफवाहें और ट्रेंड (Spikes & Rumors)
+          {t('nav_trends')}
         </div>
 
         <div 
           className={`gov-nav-item ${activeTab === 'network' ? 'active' : ''}`}
           onClick={() => setActiveTab('network')}
         >
-          🕸️ संदिग्ध गैंग व बॉट नेटवर्क (Bot Networks)
+          {t('nav_network')}
         </div>
 
         <div 
           className={`gov-nav-item ${activeTab === 'watchlist' ? 'active' : ''}`}
           onClick={() => setActiveTab('watchlist')}
         >
-          🎯 निगरानी सूची (Watchlist Targets)
+          {t('nav_watchlist')}
         </div>
 
         <div 
           className={`gov-nav-item ${activeTab === 'reports' ? 'active' : ''}`}
           onClick={() => setActiveTab('reports')}
         >
-          📄 सरकारी पुलिस रिपोर्ट (Police Reports)
+          {t('nav_reports')}
+        </div>
+
+        <div 
+          className={`gov-nav-item ${activeTab === 'settings' ? 'active' : ''}`}
+          onClick={() => setActiveTab('settings')}
+        >
+          {t('nav_settings')}
         </div>
       </nav>
     </header>
   );
 }
+

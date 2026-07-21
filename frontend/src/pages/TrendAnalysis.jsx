@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { fetchTrendingHashtags, fetchTrendingKeywords } from '../services/api';
 import { TrendingUp, Flame, AlertCircle, Printer } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import { useLanguage } from '../services/LanguageContext';
 
 export default function TrendAnalysis() {
+  const { t } = useLanguage();
   const [hashtags, setHashtags] = useState([]);
   const [keywords, setKeywords] = useState([]);
 
@@ -26,19 +28,19 @@ export default function TrendAnalysis() {
     <div className="gov-container">
       <div className="page-title-banner">
         <div>
-          <h2>📈 अफवाहें एवं ट्रेंड विश्लेषण (Social Rumors & Spike Anomaly Tracker)</h2>
-          <p>क्षेत्रीय हैशटैग, भड़काऊ कीवर्ड एवं अपरिमेय उछाल (Z-score spike) का स्वचालित मापन</p>
+          <h2>{t('trends_page_title')}</h2>
+          <p>{t('trends_page_subtitle')}</p>
         </div>
 
         <button className="btn-gov-secondary" onClick={() => window.print()}>
-          <Printer size={18} /> प्रिंट रिपोर्ट (Print)
+          <Printer size={18} /> {t('btn_sync_data')}
         </button>
       </div>
 
       {/* HASHTAG VOLUME BAR CHART */}
       <div className="gov-card">
         <div className="gov-card-title">
-          <span>📊 ट्रेंडिंग हैशटैग आयतन (Trending Hashtag Volume Velocity)</span>
+          <span>{t('trends_chart_title')}</span>
         </div>
 
         <div style={{ height: '280px', width: '100%' }}>
@@ -60,7 +62,7 @@ export default function TrendAnalysis() {
         {/* HASHTAGS SPIKE LIST */}
         <div className="gov-card">
           <div className="gov-card-title" style={{ color: '#c2410c' }}>
-            <span>🔥 तेजी से फैलते हैशटैग (High Velocity Hashtags)</span>
+            <span>{t('trends_spiking_tags')}</span>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -84,7 +86,7 @@ export default function TrendAnalysis() {
         {/* KEYWORDS SPIKE LIST */}
         <div className="gov-card">
           <div className="gov-card-title" style={{ color: 'var(--gov-navy-dark)' }}>
-            <span>⚠️ निगरानी योग्य संवेदनशील शब्द (High Risk Keywords)</span>
+            <span>{t('trends_sensitive_keywords')}</span>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -109,3 +111,4 @@ export default function TrendAnalysis() {
     </div>
   );
 }
+
