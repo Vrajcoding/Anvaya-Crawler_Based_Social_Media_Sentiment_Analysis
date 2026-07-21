@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
 import PostCard from '../components/PostCard';
 import { fetchPosts, analyzeCustomText } from '../services/api';
-import { Filter, Search, Send, Sparkles } from 'lucide-react';
+import { Filter, Search, Send, Sparkles, AlertCircle } from 'lucide-react';
 
 export default function ThreatFeed() {
   const [posts, setPosts] = useState([]);
@@ -52,51 +51,77 @@ export default function ThreatFeed() {
   };
 
   return (
-    <div>
-      <Header 
-        title="Multilingual Threat Feed" 
-        subtitle="Filterable social posts with local-language Gujarati, Hindi, and Hinglish NLP breakdown"
-        onRefresh={loadPosts}
-      />
+    <div className="gov-container">
+      <div className="page-title-banner">
+        <div>
+          <h2>📰 सोशल मीडिया लाइव फीड (Social Media Threat Feed)</h2>
+          <p>गुजरात राज्य पुलिस द्वारा निगरानी की जा रही एक्स (ट्विटर), इंस्टाग्राम, फेसबुक एवं यूट्यूब की पोस्ट्स</p>
+        </div>
+      </div>
 
-      {/* ANALYST TESTER TOOL */}
-      <div className="card-glass" style={{ marginBottom: '1.5rem', background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.7) 100%)', borderColor: 'var(--accent-cyan)' }}>
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Sparkles size={18} /> Test Real-time NLP Threat Classifier
+      {/* QUICK PRESET SEARCH BUTTONS FOR POLICE OFFICERS */}
+      <div className="gov-card" style={{ background: '#f8fafc', borderLeft: '6px solid var(--gov-gold)' }}>
+        <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--gov-navy-dark)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <Search size={18} color="var(--gov-gold)" /> एक-क्लिक त्वरित खोज (Quick One-Click Search Presets for Police):
+        </h4>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+          <button className="btn-gov-secondary" style={{ padding: '0.4rem 0.85rem', fontSize: '0.9rem' }} onClick={() => setQuery('सुरत')}>
+            📍 सूरत (Surat)
+          </button>
+          <button className="btn-gov-secondary" style={{ padding: '0.4rem 0.85rem', fontSize: '0.9rem' }} onClick={() => setQuery('पथराव')}>
+            🧱 पत्थरबाजी (Stone Pelting)
+          </button>
+          <button className="btn-gov-secondary" style={{ padding: '0.4rem 0.85rem', fontSize: '0.9rem' }} onClick={() => setQuery('जहर')}>
+            ⚠️ पानी में जहर (Water Poison Rumor)
+          </button>
+          <button className="btn-gov-secondary" style={{ padding: '0.4rem 0.85rem', fontSize: '0.9rem' }} onClick={() => setQuery('दंगा')}>
+            🔥 दंगा / हिंसा (Riots Call)
+          </button>
+          <button className="btn-gov-secondary" style={{ padding: '0.4rem 0.85rem', fontSize: '0.9rem' }} onClick={() => setQuery('')}>
+            🔄 सभी फ़िल्टर साफ़ करें (Clear Filter)
+          </button>
+        </div>
+      </div>
+
+      {/* CUSTOM SUSPICIOUS TEXT TESTER */}
+      <div className="gov-card" style={{ border: '2px solid var(--gov-navy)' }}>
+        <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--gov-navy-dark)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Sparkles color="var(--gov-navy)" size={20} /> संदिग्ध संदेश का AI विश्लेषण करें (Test Suspicious Text)
         </h3>
-        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
-          Enter any sample text in Gujarati, Hindi, Hinglish, or English to test classification, transliteration, and threat scoring.
+        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
+          व्हाट्सएप या सोशल मीडिया पर प्राप्त किसी भी संदिग्ध हिंदी, गुजराती या हिंग्लिश संदेश को यहाँ पेस्ट करके जांचें:
         </p>
 
         <form onSubmit={handleCustomAnalyze} style={{ display: 'flex', gap: '0.75rem' }}>
           <input 
             type="text" 
-            placeholder="e.g. કાલે ચોક બજારમાં ઈંટ પથ્થર લઈને ભેગા થાઓ... OR kal 10 baje petrol bomb leke aao!"
+            placeholder="उदा: કાલે ચોક બજારમાં ઈંટ પથ્થર સાથે રાત્રે 9 વાગે ભેગા થાઓ... या कल 10 बजे हमला करेंगे!"
             value={customText}
             onChange={(e) => setCustomText(e.target.value)}
-            style={{ flex: 1, background: '#090d16', border: '1px solid var(--border-color)', color: '#fff', padding: '0.75rem 1rem', borderRadius: '8px', outline: 'none' }}
+            style={{ flex: 1, border: '2px solid var(--border-gov)', padding: '0.75rem 1rem', borderRadius: '8px', fontSize: '1rem', outline: 'none' }}
           />
-          <button type="submit" className="btn-primary" disabled={analyzing}>
-            <Send size={16} />
-            <span>{analyzing ? 'Analyzing...' : 'Run NLP Classifier'}</span>
+          <button type="submit" className="btn-gov-primary" disabled={analyzing}>
+            <Send size={18} />
+            <span>{analyzing ? 'जांच जारी...' : 'जांच करें (Analyze)'}</span>
           </button>
         </form>
 
         {analysisResult && (
-          <div style={{ marginTop: '1rem', padding: '1rem', background: '#090d16', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-            <h4 style={{ fontSize: '0.9rem', color: '#4ade80', marginBottom: '0.5rem' }}>✅ Classification Complete:</h4>
+          <div style={{ marginTop: '1rem', padding: '1rem', background: '#f0fdf4', borderRadius: '8px', border: '2px solid #4ade80' }}>
+            <h4 style={{ color: '#166534', marginBottom: '0.5rem' }}>✅ विश्लेषण परिणाम (Analysis Complete):</h4>
             <PostCard post={analysisResult} />
           </div>
         )}
       </div>
 
-      {/* FILTERS BAR */}
-      <div className="filter-bar">
-        <div className="filter-group">
-          <Filter size={16} color="var(--accent-cyan)" />
-          <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Platform:</span>
-          <select value={platform} onChange={(e) => setPlatform(e.target.value)}>
-            <option value="all">All Platforms</option>
+      {/* FILTERS CONTROL BAR */}
+      <div className="gov-card" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <Filter size={18} color="var(--gov-navy)" />
+          <strong style={{ fontSize: '0.95rem' }}>प्लेटफ़ॉर्म:</strong>
+          <select value={platform} onChange={(e) => setPlatform(e.target.value)} style={{ padding: '0.5rem', borderRadius: '6px', border: '1px solid var(--border-gov)', fontSize: '0.95rem', fontWeight: 600 }}>
+            <option value="all">सभी प्लेटफ़ॉर्म (All)</option>
             <option value="x">X (Twitter)</option>
             <option value="instagram">Instagram</option>
             <option value="facebook">Facebook</option>
@@ -104,44 +129,45 @@ export default function ThreatFeed() {
           </select>
         </div>
 
-        <div className="filter-group">
-          <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Threat Level:</span>
-          <select value={threatLevel} onChange={(e) => setThreatLevel(e.target.value)}>
-            <option value="all">All Threat Levels</option>
-            <option value="Incitement to Violence">Incitement to Violence</option>
-            <option value="Fake News">Fake News</option>
-            <option value="Inflammatory">Inflammatory</option>
-            <option value="Neutral">Neutral</option>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <strong style={{ fontSize: '0.95rem' }}>खतरा स्तर:</strong>
+          <select value={threatLevel} onChange={(e) => setThreatLevel(e.target.value)} style={{ padding: '0.5rem', borderRadius: '6px', border: '1px solid var(--border-gov)', fontSize: '0.95rem', fontWeight: 600 }}>
+            <option value="all">सभी खतरे (All Threat Levels)</option>
+            <option value="Incitement to Violence">हिंसा भड़काना (Incitement to Violence)</option>
+            <option value="Fake News">झूठी खबर (Fake News)</option>
+            <option value="Inflammatory">भड़काऊ (Inflammatory)</option>
+            <option value="Neutral">सामान्य (Neutral)</option>
           </select>
         </div>
 
-        <div className="filter-group">
-          <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Language:</span>
-          <select value={language} onChange={(e) => setLanguage(e.target.value)}>
-            <option value="all">All Languages</option>
-            <option value="gu">Gujarati (ગુજરાતી)</option>
-            <option value="hi">Hindi (हिंदी)</option>
-            <option value="hinglish">Hinglish (Code-Mixed)</option>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <strong style={{ fontSize: '0.95rem' }}>भाषा:</strong>
+          <select value={language} onChange={(e) => setLanguage(e.target.value)} style={{ padding: '0.5rem', borderRadius: '6px', border: '1px solid var(--border-gov)', fontSize: '0.95rem', fontWeight: 600 }}>
+            <option value="all">सभी भाषाएं (All Languages)</option>
+            <option value="gu">ગુજરાતી (Gujarati)</option>
+            <option value="hi">हिंदी (Hindi)</option>
+            <option value="hinglish">Hinglish (कोड-मिक्स)</option>
             <option value="en">English</option>
           </select>
         </div>
 
-        <div className="filter-group" style={{ marginLeft: 'auto' }}>
-          <Search size={16} color="var(--text-dim)" />
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <Search size={18} color="var(--text-muted)" />
           <input 
             type="text" 
-            placeholder="Search keywords or @user..."
+            placeholder="खोजें (Search text or account)..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            style={{ padding: '0.5rem 0.85rem', borderRadius: '6px', border: '1px solid var(--border-gov)', fontSize: '0.95rem' }}
           />
         </div>
       </div>
 
-      {/* POSTS FEED LIST */}
-      <div className="feed-list">
+      {/* POSTS LIST */}
+      <div>
         {posts.length === 0 ? (
-          <div className="card-glass" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-dim)' }}>
-            No posts found matching the selected filters.
+          <div className="gov-card" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+            चयनित फ़िल्टर के अनुसार कोई संदेश नहीं मिला। (No posts found)
           </div>
         ) : (
           posts.map((post) => (

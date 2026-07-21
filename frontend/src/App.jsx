@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from './components/Sidebar';
+import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
 import ThreatFeed from './pages/ThreatFeed';
 import TrendAnalysis from './pages/TrendAnalysis';
@@ -8,6 +8,7 @@ import Alerts from './pages/Alerts';
 import Watchlist from './pages/Watchlist';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
+import { AlertOctagon, X } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -22,7 +23,6 @@ export default function App() {
         const data = JSON.parse(event.data);
         if (data.type === 'NEW_ALERT') {
           setLiveAlertNotification(data.data);
-          setTimeout(() => setLiveAlertNotification(null), 6000);
         }
       } catch (e) {
         console.error(e);
@@ -56,43 +56,54 @@ export default function App() {
   };
 
   return (
-    <div className="app-container">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+    <div style={{ background: '#f8fafc', minHeight: '100vh' }}>
+      <Header activeTab={activeTab} setActiveTab={setActiveTab} onRefresh={() => window.location.reload()} />
       
-      <main className="main-content">
-        {/* LIVE REAL-TIME ALERT TOAST POPUP */}
-        {liveAlertNotification && (
-          <div style={{
-            position: 'fixed',
-            bottom: '2rem',
-            right: '2rem',
-            background: '#090d16',
-            border: '2px solid #ef4444',
-            boxShadow: '0 0 30px rgba(239,68,68,0.5)',
-            borderRadius: '12px',
-            padding: '1.25rem',
-            zIndex: 100,
-            maxWidth: '400px',
-            animation: 'slideIn 0.3s ease-out'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#ef4444', fontWeight: 800 }}>
-              <span>🚨 LIVE THREAT DETECTED</span>
+      {/* HIGH VISIBILITY EMERGENCY ALERT BANNER FOR POLICE OFFICERS */}
+      {liveAlertNotification && (
+        <div style={{
+          background: '#dc2626',
+          color: '#ffffff',
+          padding: '1rem 2rem',
+          display: 'flex',
+          justify: 'space-between',
+          alignItems: 'center',
+          boxShadow: '0 4px 12px rgba(220, 38, 38, 0.4)',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1000
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <AlertOctagon size={28} />
+            <div>
+              <strong style={{ fontSize: '1.15rem' }}>🚨 आपातकालीन अलर्ट (EMERGENCY CRITICAL ALERT):</strong>
+              <span style={{ marginLeft: '10px', fontSize: '1.05rem', fontWeight: 600 }}>{liveAlertNotification.description}</span>
             </div>
-            <div style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#fff' }}>
-              {liveAlertNotification.description}
-            </div>
+          </div>
+
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <button 
-              className="btn-primary" 
-              style={{ marginTop: '0.75rem', width: '100%', justifyContent: 'center', background: '#ef4444' }}
-              onClick={() => setActiveTab('alerts')}
+              className="btn-gov-secondary" 
+              style={{ padding: '0.4rem 1rem', fontSize: '0.9rem', background: '#fff', color: '#dc2626', borderColor: '#fff' }}
+              onClick={() => {
+                setActiveTab('alerts');
+                setLiveAlertNotification(null);
+              }}
             >
-              View In Alert Queue
+              अलर्ट कतार में देखें (View Alert)
+            </button>
+
+            <button 
+              onClick={() => setLiveAlertNotification(null)}
+              style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer' }}
+            >
+              <X size={24} />
             </button>
           </div>
-        )}
+        </div>
+      )}
 
-        {renderTabContent()}
-      </main>
+      {renderTabContent()}
     </div>
   );
 }
