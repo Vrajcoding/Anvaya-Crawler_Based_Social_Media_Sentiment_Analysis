@@ -25,6 +25,7 @@ export const translations = {
     nav_watchlist: "🎯 निगरानी सूची",
     nav_reports: "📄 सरकारी पुलिस रिपोर्ट",
     nav_settings: "⚙️ एआई नियंत्रण व सेटिंग्स",
+    nav_crawl: "⚡ प्रॉम्प्ट क्रॉलर",
     
     // Emergency Banner
     emergency_banner_title: "🚨 आपातकालीन अलर्ट (गंभीर खतरा):",
@@ -154,6 +155,7 @@ export const translations = {
     nav_watchlist: "🎯 દેખરેખ સૂચિ",
     nav_reports: "📄 સરકારી પોલીસ રિપોર્ટ",
     nav_settings: "⚙️ એઆઈ નિયંત્રણ અને સેટિંગ્સ",
+    nav_crawl: "⚡ પ્રોમ્પ્ટ ક્રોલર",
     
     // Emergency Banner
     emergency_banner_title: "🚨 ઈમરજન્સી એલર્ટ (ગંભીર જોખમ):",
@@ -283,6 +285,7 @@ export const translations = {
     nav_watchlist: "🎯 Target Watchlist",
     nav_reports: "📄 Official Police CTI Reports",
     nav_settings: "⚙️ AI & OpenRouter Settings",
+    nav_crawl: "⚡ Prompt Crawler",
     
     // Emergency Banner
     emergency_banner_title: "🚨 EMERGENCY CRITICAL ALERT:",

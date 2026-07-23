@@ -133,6 +133,14 @@ export default function Header({ activeTab, setActiveTab, onRefresh }) {
         >
           {t('nav_settings')}
         </div>
+
+        <div
+          className={`gov-nav-item ${activeTab === 'crawl' ? 'active' : ''}`}
+          onClick={() => setActiveTab('crawl')}
+          style={activeTab === 'crawl' ? { background: 'linear-gradient(135deg,#3b82f6,#8b5cf6)', color: '#fff', borderRadius: '6px' } : {}}
+        >
+          ⚡ {t('nav_crawl') || 'Crawl'}
+        </div>
       </nav>
     </header>
   );

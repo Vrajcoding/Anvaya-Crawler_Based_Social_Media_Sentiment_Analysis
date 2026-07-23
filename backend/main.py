@@ -4,6 +4,7 @@ import asyncio
 from storage.seed_data import initialize_seed_data
 from utils.config import settings
 from api.routes import posts, alerts, trends, network, watchlist, feedback, reports, stats, settings_router, agent_status
+from api.routes.crawl_routes import router as crawl_router
 from api.websocket import ws_manager
 from agents.orchestrator import orchestrator
 from crawlers.spiders.real_social_spider import RealSocialCrawler
@@ -34,6 +35,7 @@ app.include_router(reports.router, prefix=settings.API_PREFIX)
 app.include_router(stats.router, prefix=settings.API_PREFIX)
 app.include_router(settings_router.router, prefix=settings.API_PREFIX)
 app.include_router(agent_status.router, prefix=settings.API_PREFIX)
+app.include_router(crawl_router, prefix=settings.API_PREFIX)
 
 
 @app.on_event("startup")

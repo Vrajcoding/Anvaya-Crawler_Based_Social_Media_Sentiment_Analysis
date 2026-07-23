@@ -8,6 +8,7 @@ import Alerts from './pages/Alerts';
 import Watchlist from './pages/Watchlist';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
+import PromptCrawler from './components/PromptCrawler';
 import { AlertOctagon, X } from 'lucide-react';
 import { useLanguage } from './services/LanguageContext';
 
@@ -53,6 +54,8 @@ export default function App() {
         return <Reports />;
       case 'settings':
         return <Settings />;
+      case 'crawl':
+        return <PromptCrawler />;
       default:
         return <Dashboard setActiveTab={setActiveTab} />;
     }
