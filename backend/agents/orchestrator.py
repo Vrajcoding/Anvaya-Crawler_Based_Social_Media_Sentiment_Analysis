@@ -89,7 +89,29 @@ class HermesOrchestrator:
             "processed_items": processed_batch
         }
 
+    def process_account_crawl(
+        self,
+        account_handle: str,
+        platform: str = "all",
+        limit: int = 20
+    ) -> Dict[str, Any]:
+        """Executes account harvest via CrawlerAgent and processes all posts through 6-agent Hermes pipeline."""
+        crawl_result = self.crawler_agent.crawl_account(
+            account_handle=account_handle,
+            platform=platform,
+            limit=limit
+        )
+        posts = crawl_result.get("posts", [])
+        processed_batch = self.process_crawled_posts(posts)
+        return {
+            "account_handle": account_handle,
+            "platform": platform,
+            "harvested_count": len(posts),
+            "processed_items": processed_batch
+        }
+
     def get_all_agents_status(self) -> List[Dict[str, Any]]:
+
         """Returns unified health, latency, memory depth, and capability status of all 6 Hermes agents."""
         return [agent.get_status_summary() for agent in self.agent_registry.values()]
 

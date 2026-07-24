@@ -119,15 +119,22 @@ class InstagramCrawler:
         ]
         
         results = []
+        target_handle = None
+        if hashtag:
+            clean_tag = hashtag.strip()
+            if clean_tag.startswith("@") or not " " in clean_tag:
+                target_handle = clean_tag if clean_tag.startswith("@") else f"@{clean_tag}"
+
         for s in samples:
             post_id = f"ig-{uuid.uuid4().hex[:8]}"
+            author = target_handle or f"@ig_reel_cti_{random.randint(10, 99)}"
             post = {
                 "id": post_id,
                 "platform": "instagram",
-                "author_username": f"@ig_reel_cti_{random.randint(10, 99)}",
-                "author_id": f"ig_usr_{random.randint(1000, 9999)}",
+                "author_username": author,
+                "author_id": f"ig_usr_{hash(author) % 100000}",
                 "content": s["caption"],
-                "url": f"https://instagram.com/p/{post_id}",
+                "url": f"https://instagram.com/{author.replace('@', '')}/p/{post_id}",
                 "hashtags": [w.strip("#.,!") for w in s["caption"].split() if w.startswith("#")] or ["InstaAlert"],
                 "language": s["lang"],
                 "geo_location": {"city": s["city"], "state": "Gujarat", "lat": 21.1702 if s["city"]=="Surat" else 23.0225, "lng": 72.8311 if s["city"]=="Surat" else 72.5714},
@@ -147,3 +154,4 @@ class InstagramCrawler:
                 }
             results.append(post)
         return results
+

@@ -119,15 +119,22 @@ class FacebookCrawler:
         ]
         
         results = []
+        target_handle = None
+        if group_name:
+            clean_g = group_name.strip()
+            if clean_g.startswith("@") or not " " in clean_g:
+                target_handle = clean_g if clean_g.startswith("@") else f"@{clean_g}"
+
         for s in samples:
             post_id = f"fb-{uuid.uuid4().hex[:8]}"
+            author = target_handle or f"@{random.choice(['Surat_Rebel', 'Gujarat_Samachar_Group', 'Civic_Watch_Surat', 'Deshi_Voice'])}"
             results.append({
                 "id": post_id,
                 "platform": "facebook",
-                "author_username": f"{random.choice(['Surat_Rebel', 'Gujarat_Samachar_Group', 'Civic_Watch_Surat', 'Deshi_Voice'])}",
-                "author_id": f"fb_usr_{random.randint(1000, 9999)}",
+                "author_username": author,
+                "author_id": f"fb_usr_{hash(author) % 100000}",
                 "content": s["text"],
-                "url": f"https://facebook.com/groups/surat.forum/permalink/{post_id}",
+                "url": f"https://facebook.com/{author.replace('@', '')}/posts/{post_id}",
                 "hashtags": [w.strip("#.,!") for w in s["text"].split() if w.startswith("#")] or ["FacebookGroupAlert"],
                 "language": s["lang"],
                 "geo_location": {"city": s["city"], "state": "Gujarat", "lat": 21.1702 if s["city"]=="Surat" else 23.0225, "lng": 72.8311 if s["city"]=="Surat" else 72.5714},
@@ -139,3 +146,4 @@ class FacebookCrawler:
                 "source_type": "FB_DEDICATED_CRAWLER"
             })
         return results
+

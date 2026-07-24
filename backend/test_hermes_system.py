@@ -103,11 +103,20 @@ def run_tests():
     assert live_crawl_res["post"] is not None, "Live crawl step failed"
     print(f"  [OK] Live Crawled & Pipeline Processed Post #{live_crawl_res['post']['id'][:8]} from platform '{live_crawl_res['post']['platform']}'")
 
-    # 6. Final Status Telemetry Verification
-    print("\n--- [TEST 6] Final Telemetry Verification ---")
+    # 6. Test Targeted Account Crawl
+    print("\n--- [TEST 6] Targeted Account Handle Crawl Step ---")
+    acct_crawl_res = orchestrator.process_account_crawl("@target_surat_informer", platform="x", limit=5)
+    assert acct_crawl_res["harvested_count"] > 0, "Account handle crawl failed to harvest posts"
+    sample_acct_post = acct_crawl_res["processed_items"][0]["post"]
+    assert sample_acct_post["author_username"] == "@target_surat_informer", f"Expected author @target_surat_informer, got {sample_acct_post['author_username']}"
+    print(f"  [OK] Successfully Crawled Account '@target_surat_informer' on X | Harvested & Processed {acct_crawl_res['harvested_count']} posts")
+
+    # 7. Final Status Telemetry Verification
+    print("\n--- [TEST 7] Final Telemetry Verification ---")
     final_status = orchestrator.get_all_agents_status()
     for agent_st in final_status:
         print(f"  - Agent: {agent_st['agent_id']:<22} | Processed: {agent_st['total_processed']:<3} | Memory Depth: {agent_st['memory_depth']:<3} | Registered Tools: {len(agent_st['tools_registered'])}")
+
 
     print("\n================================================================")
     print("SUCCESS: HERMES MULTI-AGENT SYSTEM ALL TESTS PASSED WITH 0 ERRORS")

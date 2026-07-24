@@ -40,6 +40,11 @@ class CrawlerAgent(SentinelAgent):
             description="Executes parallel multi-platform prompt crawl across X, YouTube, Instagram, GoogleSuggest, Web"
         )
         self.register_tool(
+            name="crawl_account",
+            func=self.crawl_account,
+            description="Crawls posts, tweets, photos, and videos directly from a target user account handle/ID across X, Instagram, Facebook, and YouTube"
+        )
+        self.register_tool(
             name="add_to_watchlist",
             func=self.hybrid_crawler.add_to_watchlist,
             description="Registers search queries for continuous background crawler monitoring"
@@ -49,6 +54,51 @@ class CrawlerAgent(SentinelAgent):
             func=self.hybrid_crawler.get_status,
             description="Returns health, active watchlists, uptime, and crawl counters"
         )
+
+    def crawl_account(
+        self,
+        account_handle: str,
+        platform: Optional[str] = "all",
+        limit: int = 20
+    ) -> Dict[str, Any]:
+        """Harvests posts explicitly published by or targeting a specific user handle/account ID."""
+        start_t = time.time()
+        clean_handle = account_handle.strip()
+        if not clean_handle.startswith("@"):
+            clean_handle = f"@{clean_handle}"
+
+        self.set_status("RUNNING", f"Harvesting account '{clean_handle}' on platform '{platform}'")
+        target_platforms = [platform.lower()] if platform and platform.lower() in self.platform_crawlers else self.round_robin_platforms
+
+        posts = []
+        for p in target_platforms:
+            crawler_cls = self.platform_crawlers[p]
+            for _ in range(min(limit, 5)):
+                try:
+                    post = crawler_cls.get_next_post(clean_handle)
+                    post["author_username"] = clean_handle
+                    posts.append(post)
+                except Exception as e:
+                    self.log_memory({"action": "account_crawl_error", "error": str(e), "platform": p})
+
+        self.last_execution_time_ms = round((time.time() - start_t) * 1000, 2)
+        self.total_processed += len(posts)
+        self.set_status("COMPLETED", f"Harvested {len(posts)} posts for account '{clean_handle}'")
+        self.log_memory({
+            "action": "account_crawl",
+            "account_handle": clean_handle,
+            "platform": platform,
+            "posts_harvested": len(posts),
+            "duration_ms": self.last_execution_time_ms
+        })
+        return {
+            "account_handle": clean_handle,
+            "platform": platform,
+            "count": len(posts),
+            "duration_ms": self.last_execution_time_ms,
+            "posts": posts
+        }
+
 
     def fetch_next_sample(self, target_platform: Optional[str] = None) -> Dict[str, Any]:
         """Harvests the next live post from target platform or round-robin schedule."""

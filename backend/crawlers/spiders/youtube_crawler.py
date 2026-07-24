@@ -86,15 +86,15 @@ class YouTubeCrawler:
             return random.choice(cls._generate_yt_threat_samples())
 
     @classmethod
-    def _generate_yt_threat_samples(cls) -> List[Dict[str, Any]]:
+    def _generate_yt_threat_samples(cls, account_handle: Optional[str] = None) -> List[Dict[str, Any]]:
         """Generates high-fidelity YouTube video comment/title threat intelligence."""
         samples = [
             {
-                "text": "ब्रेकिंग न्यूज़: अहमदाबाद के मुख्य पानी के स्रोत में जहर मिला दिया गया है! तुरंत पानी पीना बंद करें और घर से बाहर निकलें! ⚠️🚫 #FakeNewsAlert #Panic",
-                "lang": "hi",
+                "text": "અહમદાબાદ સ્થિતિ સમીક્ષા: મુખ્ય પાણીના સ્ત્રોત વિશેની વાયરલ અફવાઓથી સાવચેત રહો! #FactCheck #GujaratPolice",
+                "lang": "gu",
                 "city": "Ahmedabad",
-                "bot": True,
-                "group": "coord_group_beta"
+                "bot": False,
+                "group": None
             },
             {
                 "text": "VIDEO COMMENT: કાલે ચોક બજારમાં બધા આવી જજો! ઈંટ પથ્થર સાથે રાત્રે 9 વાગે! આ પોલીસને બતાવી દઈએ! #SuratProtest #YTComment",
@@ -120,15 +120,21 @@ class YouTubeCrawler:
         ]
         
         results = []
+        target_handle = None
+        if account_handle:
+            clean_h = account_handle.strip()
+            target_handle = clean_h if clean_h.startswith("@") else f"@{clean_h}"
+
         for s in samples:
             post_id = f"yt-{uuid.uuid4().hex[:8]}"
+            author = target_handle or f"@{random.choice(['TruthUnmasked_HI', 'Surat_Viral_CLIPS', 'Gujarat_News_24', 'Deshi_Commenter'])}"
             results.append({
                 "id": post_id,
                 "platform": "youtube",
-                "author_username": f"{random.choice(['TruthUnmasked_HI', 'Surat_Viral_CLIPS', 'Gujarat_News_24', 'Deshi_Commenter'])}",
-                "author_id": f"yt_ch_{random.randint(100, 999)}",
+                "author_username": author,
+                "author_id": f"yt_ch_{abs(hash(author)) % 100000}",
                 "content": s["text"],
-                "url": f"https://youtube.com/watch?v={post_id}",
+                "url": f"https://youtube.com/@{author.replace('@', '')}/videos",
                 "hashtags": [w.strip("#.,!") for w in s["text"].split() if w.startswith("#")] or ["YouTubeAlert"],
                 "language": s["lang"],
                 "geo_location": {"city": s["city"], "state": "Gujarat", "lat": 21.1702 if s["city"]=="Surat" else 23.0225, "lng": 72.8311 if s["city"]=="Surat" else 72.5714},

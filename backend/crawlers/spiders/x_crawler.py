@@ -150,15 +150,22 @@ class XCrawler:
         ]
         
         results = []
+        target_handle = None
+        if query:
+            clean_q = query.strip()
+            if clean_q.startswith("@") or not " " in clean_q:
+                target_handle = clean_q if clean_q.startswith("@") else f"@{clean_q}"
+
         for s in samples:
             post_id = f"x-{uuid.uuid4().hex[:8]}"
+            author = target_handle or f"@x_cti_{random.randint(100, 999)}_{s['lang']}"
             results.append({
                 "id": post_id,
                 "platform": "x",
-                "author_username": f"@x_cti_{random.randint(100, 999)}_{s['lang']}",
-                "author_id": f"x_usr_{random.randint(1000, 9999)}",
+                "author_username": author,
+                "author_id": f"x_usr_{hash(author) % 100000}",
                 "content": s["text"],
-                "url": f"https://x.com/status/{post_id}",
+                "url": f"https://x.com/{author.replace('@', '')}/status/{post_id}",
                 "hashtags": [w.strip("#.,!") for w in s["text"].split() if w.startswith("#")] or ["XIntelligence"],
                 "language": s["lang"],
                 "geo_location": {"city": s["city"], "state": "Gujarat", "lat": 21.1702 if s["city"]=="Surat" else 23.0225, "lng": 72.8311 if s["city"]=="Surat" else 72.5714},
@@ -170,3 +177,4 @@ class XCrawler:
                 "source_type": "X_DEDICATED_CRAWLER"
             })
         return results
+

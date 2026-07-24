@@ -152,11 +152,25 @@ async def crawl_single_platform(
         "results": {platform: result},
     }
 
-    if result.get("posts"):
-        orchestrator.process_crawled_posts(result["posts"])
+class AccountCrawlRequest(BaseModel):
+    account_handle: str = Field(..., min_length=1, max_length=100, example="@target_user")
+    platform: Optional[str] = Field(default="all", example="x")
+    limit: int = Field(default=20, ge=1, le=100)
 
-    background_tasks.add_task(_publish_to_kafka, wrapped)
-    return wrapped
+
+@router.post("/account", summary="Targeted account handle/ID crawl")
+async def crawl_by_account(request: AccountCrawlRequest) -> Dict[str, Any]:
+    """
+    **Targeted Account Endpoint** — crawl posts, tweets, photos, or videos directly from
+    a specified user account handle/ID across X, Instagram, Facebook, or YouTube.
+    """
+    from agents.orchestrator import orchestrator
+    return orchestrator.process_account_crawl(
+        account_handle=request.account_handle,
+        platform=request.platform or "all",
+        limit=request.limit
+    )
+
 
 
 
