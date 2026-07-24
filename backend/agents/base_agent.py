@@ -1,4 +1,6 @@
 import time
+import inspect
+import asyncio
 from typing import Dict, Any, List, Callable, Optional
 
 class SentinelAgent:
@@ -29,14 +31,28 @@ class SentinelAgent:
         }
         
     def invoke_tool(self, tool_name: str, **kwargs) -> Any:
-        """Invokes a registered tool and logs execution in agent memory."""
+        """Invokes a registered tool (sync or async) and logs execution in agent memory."""
         if tool_name not in self.tools:
             raise ValueError(f"Tool '{tool_name}' not registered in agent '{self.agent_id}'")
             
         tool_meta = self.tools[tool_name]
+        func = tool_meta["func"]
         start_t = time.time()
         try:
-            result = tool_meta["func"](**kwargs)
+            if inspect.iscoroutinefunction(func):
+                try:
+                    loop = asyncio.get_event_loop()
+                except RuntimeError:
+                    loop = asyncio.new_event_loop()
+                    asyncio.set_event_loop(loop)
+                if loop.is_running():
+                    # For nested loop compatibility
+                    import nest_asyncio
+                    nest_asyncio.apply()
+                result = loop.run_until_complete(func(**kwargs))
+            else:
+                result = func(**kwargs)
+
             duration = round((time.time() - start_t) * 1000, 2)
             self.log_memory({
                 "action": "tool_invocation",
@@ -84,4 +100,5 @@ class SentinelAgent:
             "tools_registered": list(self.tools.keys()),
             "memory_depth": len(self.memory)
         }
+
 

@@ -85,12 +85,10 @@ async def crawl_by_prompt(
     background_tasks: BackgroundTasks,
 ) -> Dict[str, Any]:
     """
-    **Main endpoint** — crawl all selected platforms in parallel with one prompt.
-
-    - Automatically routes X/GoogleSuggest/Web to fast httpx crawlers.
-    - Routes YouTube/Instagram to Playwright (or httpx fallback).
-    - Optionally publishes results to Kafka `raw-posts` topic in the background.
+    **Main endpoint** — crawl all selected platforms in parallel with one prompt
+    and process all harvested posts through the 6-agent Hermes pipeline.
     """
+    from agents.orchestrator import orchestrator
     platforms = request.platforms or ALL_PLATFORMS
     crawler = get_hybrid_crawler()
 
@@ -103,6 +101,15 @@ async def crawl_by_prompt(
 
     if "error" in result:
         raise HTTPException(status_code=400, detail=result["error"])
+
+    # Run all harvested posts through 6-agent Hermes pipeline
+    flattened_posts = []
+    for platform_res in result.get("results", {}).values():
+        if isinstance(platform_res, dict) and "posts" in platform_res:
+            flattened_posts.extend(platform_res.get("posts", []))
+            
+    if flattened_posts:
+        orchestrator.process_crawled_posts(flattened_posts)
 
     # Publish to Kafka asynchronously (non-blocking)
     background_tasks.add_task(_publish_to_kafka, result)
@@ -117,9 +124,10 @@ async def crawl_single_platform(
     background_tasks: BackgroundTasks,
 ) -> Dict[str, Any]:
     """
-    Crawl a single platform for quick testing or targeted queries.
+    Crawl a single platform for quick testing or targeted queries and run through Hermes pipeline.
     Platform must be one of: X, YouTube, Instagram, GoogleSuggest, Web
     """
+    from agents.orchestrator import orchestrator
     if platform not in ALL_PLATFORMS:
         raise HTTPException(
             status_code=400,
@@ -144,8 +152,12 @@ async def crawl_single_platform(
         "results": {platform: result},
     }
 
+    if result.get("posts"):
+        orchestrator.process_crawled_posts(result["posts"])
+
     background_tasks.add_task(_publish_to_kafka, wrapped)
     return wrapped
+
 
 
 @router.post("/watchlist/add", summary="Add query to continuous watchlist")
