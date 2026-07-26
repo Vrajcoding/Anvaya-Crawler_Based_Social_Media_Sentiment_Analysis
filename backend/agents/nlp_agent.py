@@ -138,3 +138,5 @@ Return ONLY valid JSON with exactly the following keys:
         return enriched_post
 
 
+# Alias for backward compatibility
+NLPAgent = NLPClassifierAgent

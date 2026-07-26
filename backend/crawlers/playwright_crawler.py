@@ -66,10 +66,11 @@ async def _yt_search_playwright(query: str, limit: int, fetch_comments: bool) ->
                     views = _parse_count(view_match.group(1)) if view_match else 0
 
                     vid_id = hashlib.md5(video_url.encode()).hexdigest()[:10]
+                    clean_channel = re.sub(r'\W+', '_', channel).lower()[:20]
                     cr = CrawlResult(
                         id=f"yt-{vid_id}",
                         platform="YouTube",
-                        author_username=f"@{re.sub(r'\\W+', '_', channel).lower()[:20]}",
+                        author_username=f"@{clean_channel}",
                         author_id=f"yt_{vid_id[:8]}",
                         content=title[:400],
                         url=video_url,
@@ -187,10 +188,11 @@ async def _yt_search_httpx(query: str, limit: int) -> List[CrawlResult]:
                                 if not title or not vid_id:
                                     continue
                                 cid = hashlib.md5(vid_id.encode()).hexdigest()[:10]
+                                clean_channel = re.sub(r'\W+', '_', channel).lower()[:20]
                                 results.append(CrawlResult(
                                     id=f"yt-{cid}",
                                     platform="YouTube",
-                                    author_username=f"@{re.sub(r'\\W+', '_', channel).lower()[:20]}",
+                                    author_username=f"@{clean_channel}",
                                     author_id=f"yt_{cid[:8]}",
                                     content=title[:400],
                                     url=f"https://www.youtube.com/watch?v={vid_id}",

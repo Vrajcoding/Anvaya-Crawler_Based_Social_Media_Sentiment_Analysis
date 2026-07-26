@@ -56,6 +56,11 @@ Provide valid JSON with two strings:
                 ai_summary = ai_res.get("executive_synthesis", "")
                 ai_recommendations = ai_res.get("actionable_recommendations", "")
 
+        default_recs = (
+            "- Immediately alert local jurisdiction police control room.\n"
+            "- Issue formal advisory combating rumor spread on social media.\n"
+            "- Coordinate with platform nodes (X, Facebook, Telegram) to take down inflammatory URLs."
+        )
         report_content = f"""# 🛡️ SENTINEL AI — CYBER THREAT INTELLIGENCE REPORT
 **Generated At:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}
 **AI Synthesis Agent:** `{settings.AGENT_REPORT_MODEL}` (OpenRouter Multi-Agent)
@@ -67,7 +72,7 @@ Provide valid JSON with two strings:
 {ai_summary or description}
 
 ## 2. Tactical Recommendations & Action Plan
-{ai_recommendations or "- Immediately alert local jurisdiction police control room.\n- Issue formal advisory combating rumor spread on social media.\n- Coordinate with platform nodes (X, Facebook, Telegram) to take down inflammatory URLs."}
+{ai_recommendations or default_recs}
 
 ## 3. Threat Vector & Key Metrics
 - Total Monitored Posts in Window: {len(posts)}
