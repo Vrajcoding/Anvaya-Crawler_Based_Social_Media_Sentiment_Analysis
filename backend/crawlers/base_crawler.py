@@ -79,7 +79,10 @@ class BaseCrawler(ABC):
         platform: str,
         limit: int = 20,
         fetch_comments: bool = False,
+<<<<<<< HEAD
         time_filter: str = "all",
+=======
+>>>>>>> fc97258 (Reddit Source Added)
     ) -> List[CrawlResult]:
         """
         Execute a crawl for the given query on the specified platform.

@@ -30,13 +30,20 @@ except ImportError:
 
 # ── YouTube (Playwright) ─────────────────────────────────────────────────────
 
+<<<<<<< HEAD
 async def _yt_search_playwright(query: str, limit: int, fetch_comments: bool, time_filter: str = "all") -> List[CrawlResult]:
+=======
+async def _yt_search_playwright(query: str, limit: int, fetch_comments: bool) -> List[CrawlResult]:
+>>>>>>> fc97258 (Reddit Source Added)
     """Full browser YouTube search extraction."""
     results: List[CrawlResult] = []
     encoded = quote_plus(query)
     search_url = f"https://www.youtube.com/results?search_query={encoded}"
+<<<<<<< HEAD
     if time_filter == "24h":
         search_url += "&sp=EgIIQA%253D%253D"
+=======
+>>>>>>> fc97258 (Reddit Source Added)
 
     async with async_playwright() as pw:
         browser: Browser = await pw.chromium.launch(headless=True)
@@ -101,10 +108,13 @@ async def _yt_search_playwright(query: str, limit: int, fetch_comments: bool, ti
 async def _yt_fetch_comments(page: Page, video_url: str) -> List[Dict[str, str]]:
     """Navigate to a YouTube video and extract the first 50 visible comments."""
     comments: List[Dict[str, str]] = []
+<<<<<<< HEAD
     # If it's a shorts URL, convert to watch?v= URL to load the standard comment interface
     if "/shorts/" in video_url:
         video_url = video_url.replace("/shorts/", "/watch?v=")
         
+=======
+>>>>>>> fc97258 (Reddit Source Added)
     try:
         await page.goto(video_url, wait_until="networkidle", timeout=25_000)
         # Scroll to trigger comment section load
@@ -236,6 +246,7 @@ async def _yt_search_httpx(query: str, limit: int) -> List[CrawlResult]:
     return results[:limit]
 
 
+<<<<<<< HEAD
 # ── Instagram (httpx & playwright) ───────────────────────────────────────────
 
 async def _instagram_search_playwright(query: str, limit: int, fetch_comments: bool, time_filter: str = "all") -> List[CrawlResult]:
@@ -317,6 +328,9 @@ async def _instagram_search_playwright(query: str, limit: int, fetch_comments: b
             
     return results[:limit]
 
+=======
+# ── Instagram (httpx only — no browser required for public hashtag API) ──────
+>>>>>>> fc97258 (Reddit Source Added)
 
 async def _instagram_search(query: str, limit: int) -> List[CrawlResult]:
     """
@@ -411,7 +425,10 @@ class PlaywrightCrawler(BaseCrawler):
         platform: str,
         limit: int = 20,
         fetch_comments: bool = False,
+<<<<<<< HEAD
         time_filter: str = "all",
+=======
+>>>>>>> fc97258 (Reddit Source Added)
     ) -> List[CrawlResult]:
         limiter = get_limiter(platform)
         await limiter.acquire()
@@ -419,17 +436,24 @@ class PlaywrightCrawler(BaseCrawler):
         if platform == "YouTube":
             if PLAYWRIGHT_AVAILABLE:
                 try:
+<<<<<<< HEAD
                     return await _yt_search_playwright(query, limit, fetch_comments, time_filter)
+=======
+                    return await _yt_search_playwright(query, limit, fetch_comments)
+>>>>>>> fc97258 (Reddit Source Added)
                 except Exception as e:
                     print(f"[PlaywrightCrawler] Playwright failed ({e}), falling back to httpx")
             return await _yt_search_httpx(query, limit)
 
         elif platform == "Instagram":
+<<<<<<< HEAD
             if PLAYWRIGHT_AVAILABLE:
                 res = await _instagram_search_playwright(query, limit, fetch_comments, time_filter)
                 if res:
                     return res
                 print("[PlaywrightCrawler] Playwright Instagram returned 0 results, falling back to httpx")
+=======
+>>>>>>> fc97258 (Reddit Source Added)
             return await _instagram_search(query, limit)
 
         return []

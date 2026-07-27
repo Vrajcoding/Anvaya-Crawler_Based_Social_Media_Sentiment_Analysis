@@ -36,7 +36,11 @@ class ScrapyCrawler(BaseCrawler):
     No API tokens required — uses public endpoints only.
     """
 
+<<<<<<< HEAD
     SUPPORTED = ["X", "GoogleSuggest", "Web"]
+=======
+    SUPPORTED = ["X", "GoogleSuggest", "Web", "Reddit"]
+>>>>>>> fc97258 (Reddit Source Added)
 
     def supported_platforms(self) -> List[str]:
         return self.SUPPORTED
@@ -49,7 +53,10 @@ class ScrapyCrawler(BaseCrawler):
         platform: str,
         limit: int = 20,
         fetch_comments: bool = False,
+<<<<<<< HEAD
         time_filter: str = "all",
+=======
+>>>>>>> fc97258 (Reddit Source Added)
     ) -> List[CrawlResult]:
         limiter = get_limiter(platform)
         await limiter.acquire()
@@ -60,6 +67,11 @@ class ScrapyCrawler(BaseCrawler):
             return await self._crawl_google_suggest(query, limit)
         elif platform == "Web":
             return await self._crawl_web(query, limit)
+<<<<<<< HEAD
+=======
+        elif platform == "Reddit":
+            return await self._crawl_reddit(query, limit)
+>>>>>>> fc97258 (Reddit Source Added)
         return []
 
     # ── X / Twitter (via Nitter RSS) ────────────────────────────────────────
@@ -239,3 +251,216 @@ class ScrapyCrawler(BaseCrawler):
                 print(f"[ScrapyCrawler] Web crawl error: {e}")
 
         return results[:limit]
+<<<<<<< HEAD
+=======
+
+    # ── Reddit (public JSON API + RSS fallback, no auth) ────────────────────
+
+    # Reddit-like browser headers that avoid 403/redirect-to-login issues
+    _REDDIT_HEADERS = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/124.0.0.0 Safari/537.36"
+        ),
+        "Accept": "application/json, text/html, */*",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "DNT": "1",
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-origin",
+    }
+
+    async def _crawl_reddit(self, query: str, limit: int) -> List[CrawlResult]:
+        """
+        Fetch real Reddit posts using a 3-tier strategy:
+          1. reddit.com/search.json  (main JSON API)
+          2. old.reddit.com/search.json  (older API, less restricted)
+          3. reddit.com/search.rss  (RSS — always public)
+        Extracts full post title + selftext body so results are content-rich.
+        """
+        results = await self._reddit_json(query, limit, base="https://www.reddit.com")
+        if not results:
+            results = await self._reddit_json(query, limit, base="https://old.reddit.com")
+        if not results:
+            results = await self._reddit_rss(query, limit)
+        return results[:limit]
+
+    async def _reddit_json(self, query: str, limit: int, base: str) -> List[CrawlResult]:
+        """
+        Fetch Reddit posts using paginated JSON search API.
+        Reddit allows max 100 per page; we page through using the 'after' cursor
+        until we reach the requested `limit` or run out of results.
+        """
+        encoded    = quote_plus(query)
+        # Reddit max per-page is 100
+        page_size  = min(limit, 100)
+        results: List[CrawlResult] = []
+        after: str = ""   # pagination cursor
+
+        async with httpx.AsyncClient(
+            timeout=25.0,
+            follow_redirects=True,
+            headers=self._REDDIT_HEADERS,
+        ) as client:
+            while len(results) < limit:
+                need       = limit - len(results)
+                fetch_size = min(need, 100)   # never exceed Reddit's per-page cap
+                url = (
+                    f"{base}/search.json"
+                    f"?q={encoded}&sort=new&limit={fetch_size}&type=link&t=day"
+                    + (f"&after={after}" if after else "")
+                )
+
+                try:
+                    resp = await client.get(url)
+                    print(f"[Reddit] {base} page → HTTP {resp.status_code} | fetched={len(results)}/{limit}")
+
+                    # Reddit sometimes returns HTML (login wall) — detect it
+                    ct = resp.headers.get("content-type", "")
+                    if resp.status_code != 200 or "text/html" in ct:
+                        print(f"[Reddit] Non-JSON response from {base}, stopping.")
+                        break
+
+                    data  = resp.json().get("data", {})
+                    posts = data.get("children", [])
+                    after = data.get("after") or ""   # next page cursor
+
+                    print(f"[Reddit] Page returned {len(posts)} posts, next_after={after!r}")
+
+                    if not posts:
+                        break   # no more results
+
+                    for child in posts:
+                        if len(results) >= limit:
+                            break
+                        p = child.get("data", {})
+                        post_id   = p.get("id", uuid.uuid4().hex[:8])
+                        title     = (p.get("title") or "").strip()
+                        selftext  = (p.get("selftext") or "").strip()
+
+                        # Strip "[removed]" / "[deleted]" placeholders
+                        if selftext in ("[removed]", "[deleted]", ""):
+                            selftext = ""
+
+                        # Build rich content: title + body paragraph
+                        if selftext:
+                            content = f"{title}\n\n{selftext}"
+                        else:
+                            domain  = p.get("domain", "")
+                            content = f"{title} [{domain}]" if domain else title
+
+                        author      = p.get("author") or "unknown"
+                        subreddit   = p.get("subreddit") or ""
+                        permalink   = p.get("permalink") or ""
+                        post_url    = f"https://www.reddit.com{permalink}" if permalink else ""
+                        score       = p.get("score") or 0
+                        num_coms    = p.get("num_comments") or 0
+                        created_utc = p.get("created_utc")
+                        created_at  = (
+                            datetime.datetime.utcfromtimestamp(created_utc).isoformat()
+                            if created_utc else datetime.datetime.utcnow().isoformat()
+                        )
+                        flair    = p.get("link_flair_text") or ""
+                        hashtags = re.findall(r"#(\w+)", content)
+
+                        results.append(CrawlResult(
+                            id=f"reddit-{post_id}",
+                            platform="Reddit",
+                            author_username=f"u/{author}",
+                            author_id=f"reddit_{author}",
+                            content=content[:800],
+                            url=post_url,
+                            hashtags=hashtags,
+                            language="en",
+                            engagement=EngagementMetrics(
+                                likes=score,
+                                shares=0,
+                                comments=num_coms,
+                                views=0,
+                            ),
+                            source_type="SCRAPY_REDDIT_JSON",
+                            crawled_at=datetime.datetime.utcnow().isoformat(),
+                            created_at=created_at,
+                            raw_meta={"subreddit": subreddit, "flair": flair},
+                        ))
+
+                    # If Reddit returned fewer than we asked for, there are no more pages
+                    if len(posts) < fetch_size or not after:
+                        break
+
+                except Exception as e:
+                    print(f"[Reddit] JSON crawl error ({base}): {e}")
+                    break
+
+        print(f"[Reddit] Total collected: {len(results)} posts")
+        return results
+
+    async def _reddit_rss(self, query: str, limit: int) -> List[CrawlResult]:
+        """Last-resort: scrape Reddit's public RSS search feed."""
+        encoded = quote_plus(query)
+        url = f"https://www.reddit.com/search.rss?q={encoded}&sort=new&t=day"
+        results: List[CrawlResult] = []
+
+        async with httpx.AsyncClient(
+            timeout=20.0,
+            follow_redirects=True,
+            headers={**self._REDDIT_HEADERS, "Accept": "application/rss+xml, text/xml, */*"},
+        ) as client:
+            try:
+                resp = await client.get(url)
+                print(f"[Reddit RSS] HTTP {resp.status_code}")
+                if resp.status_code == 200:
+                    soup = BeautifulSoup(resp.text, "xml")
+                    entries = soup.find_all("entry")[:limit]
+                    for entry in entries:
+                        title_tag   = entry.find("title")
+                        content_tag = entry.find("content") or entry.find("summary")
+                        link_tag    = entry.find("link")
+                        author_tag  = entry.find("author")
+                        updated_tag = entry.find("updated")
+
+                        title   = title_tag.get_text(strip=True)   if title_tag   else ""
+                        body    = content_tag.get_text(strip=True)  if content_tag  else ""
+                        # Strip HTML tags from RSS body
+                        body    = re.sub(r"<[^>]+>", " ", body).strip()
+                        # Remove boilerplate Reddit RSS text
+                        body    = re.sub(
+                            r"submitted by.*|<!-- SC_OFF -->.*|<!-- SC_ON -->.*", "",
+                            body, flags=re.DOTALL
+                        ).strip()
+
+                        if body and body != title:
+                            content = f"{title}\n\n{body}"
+                        else:
+                            content = title
+
+                        link   = link_tag.get("href", "")  if link_tag   else ""
+                        author = ""
+                        if author_tag:
+                            a_name = author_tag.find("name")
+                            author = a_name.get_text(strip=True) if a_name else ""
+
+                        ts      = updated_tag.get_text(strip=True) if updated_tag else ""
+                        uid     = hashlib.md5((link or title).encode()).hexdigest()[:10]
+                        hashtags = re.findall(r"#(\w+)", content)
+
+                        results.append(CrawlResult(
+                            id=f"reddit-rss-{uid}",
+                            platform="Reddit",
+                            author_username=f"u/{author}" if author else "@reddit_rss",
+                            author_id=f"reddit_{author or uid}",
+                            content=content[:800],
+                            url=link,
+                            hashtags=hashtags,
+                            language="en",
+                            source_type="SCRAPY_REDDIT_RSS",
+                            crawled_at=datetime.datetime.utcnow().isoformat(),
+                            created_at=ts or datetime.datetime.utcnow().isoformat(),
+                        ))
+            except Exception as e:
+                print(f"[Reddit RSS] Error: {e}")
+
+        return results
+>>>>>>> fc97258 (Reddit Source Added)

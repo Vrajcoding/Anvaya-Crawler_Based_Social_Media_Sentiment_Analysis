@@ -8,6 +8,10 @@ const PLATFORMS = [
   { id: 'Instagram', label: 'Instagram', emoji: '📸', color: '#E1306C', badge: '#1a0010' },
   { id: 'GoogleSuggest', label: 'Google Suggest', emoji: '🔍', color: '#4285F4', badge: '#00101a' },
   { id: 'Web', label: 'Web', emoji: '🌐', color: '#00BFA5', badge: '#001a18' },
+<<<<<<< HEAD
+=======
+  { id: 'Reddit', label: 'Reddit', emoji: '🤖', color: '#FF4500', badge: '#1a0a00' },
+>>>>>>> fc97258 (Reddit Source Added)
 ];
 
 // ── Styles ────────────────────────────────────────────────────────────────────
@@ -284,6 +288,125 @@ function SkeletonResults({ platforms }) {
   );
 }
 
+<<<<<<< HEAD
+=======
+// ── Hermes Score Badge (Reddit only) ──────────────────────────────────────────
+function HermesScoreBadge({ post }) {
+  const [showBreakdown, setShowBreakdown] = useState(false);
+  const score    = post.hermes_score ?? null;
+  const severity = post.hermes_severity || 'LOW';
+  const reason   = post.hermes_reason || '';
+  const breakdown = post.hermes_breakdown || {};
+
+  if (score === null) return null;
+
+  const severityColor = {
+    CRITICAL: '#ef4444',
+    HIGH:     '#f97316',
+    MEDIUM:   '#eab308',
+    LOW:      '#22c55e',
+  }[severity] || '#22c55e';
+
+  const severityBg = {
+    CRITICAL: 'rgba(239,68,68,0.12)',
+    HIGH:     'rgba(249,115,22,0.12)',
+    MEDIUM:   'rgba(234,179,8,0.12)',
+    LOW:      'rgba(34,197,94,0.12)',
+  }[severity] || 'rgba(34,197,94,0.12)';
+
+  return (
+    <div style={{ marginTop: '0.65rem' }}>
+      {/* Score bar row */}
+      <div
+        style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer' }}
+        onClick={() => setShowBreakdown(p => !p)}
+        title="Click to see Hermes breakdown"
+      >
+        {/* Icon + label */}
+        <span style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 600, whiteSpace: 'nowrap' }}>
+          🤖 Hermes Score
+        </span>
+
+        {/* Progress bar */}
+        <div style={{ flex: 1, height: '6px', background: 'rgba(255,255,255,0.07)', borderRadius: '50px', overflow: 'hidden' }}>
+          <div style={{
+            width: `${score}%`,
+            height: '100%',
+            background: `linear-gradient(90deg, ${severityColor}88, ${severityColor})`,
+            borderRadius: '50px',
+            transition: 'width 0.6s ease',
+          }} />
+        </div>
+
+        {/* Numeric badge */}
+        <span style={{
+          padding: '0.15rem 0.55rem',
+          borderRadius: '50px',
+          fontSize: '0.72rem',
+          fontWeight: 800,
+          color: severityColor,
+          background: severityBg,
+          border: `1px solid ${severityColor}44`,
+          minWidth: '2.5rem',
+          textAlign: 'center',
+        }}>
+          {score}/100
+        </span>
+
+        {/* Severity chip */}
+        <span style={{
+          padding: '0.1rem 0.45rem',
+          borderRadius: '50px',
+          fontSize: '0.68rem',
+          fontWeight: 700,
+          color: severityColor,
+          border: `1px solid ${severityColor}55`,
+          letterSpacing: '0.04em',
+        }}>
+          {severity}
+        </span>
+
+        <span style={{ color: '#475569', fontSize: '0.7rem' }}>{showBreakdown ? '▲' : '▼'}</span>
+      </div>
+
+      {/* Expandable breakdown panel */}
+      {showBreakdown && (
+        <div style={{
+          marginTop: '0.5rem',
+          padding: '0.65rem 0.85rem',
+          background: 'rgba(255,255,255,0.03)',
+          border: `1px solid ${severityColor}22`,
+          borderRadius: '8px',
+          fontSize: '0.75rem',
+        }}>
+          {reason && (
+            <p style={{ color: '#94a3b8', margin: '0 0 0.5rem', lineHeight: 1.5 }}>
+              <strong style={{ color: '#cbd5e1' }}>AI Reason:</strong> {reason}
+            </p>
+          )}
+          {Object.keys(breakdown).length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+              {Object.entries(breakdown).map(([key, val]) => (
+                <span key={key} style={{
+                  background: 'rgba(255,255,255,0.05)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: '6px',
+                  padding: '0.15rem 0.5rem',
+                  color: '#64748b',
+                  fontSize: '0.68rem',
+                }}>
+                  {key.replace('_component', '')}: <strong style={{ color: '#94a3b8' }}>{val}</strong>
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+>>>>>>> fc97258 (Reddit Source Added)
 // ── Post card ─────────────────────────────────────────────────────────────────
 function PostCard({ post, platformColor }) {
   const [showComments, setShowComments] = useState(false);
@@ -320,6 +443,13 @@ function PostCard({ post, platformColor }) {
           {eng.views > 0 && <span style={S.engChip('#34d399')}>👁 {eng.views.toLocaleString()}</span>}
         </div>
       )}
+<<<<<<< HEAD
+=======
+
+      {/* Hermes Score — shown only for Reddit posts */}
+      <HermesScoreBadge post={post} />
+
+>>>>>>> fc97258 (Reddit Source Added)
       {hasComments && (
         <div style={S.commentsBox}>
           <button
