@@ -49,6 +49,7 @@ class ScrapyCrawler(BaseCrawler):
         platform: str,
         limit: int = 20,
         fetch_comments: bool = False,
+        time_filter: str = "all",
     ) -> List[CrawlResult]:
         limiter = get_limiter(platform)
         await limiter.acquire()
