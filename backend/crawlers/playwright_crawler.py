@@ -1,7 +1,7 @@
 """
 playwright_crawler.py — Headless browser-based crawler for JavaScript-heavy platforms:
-  • YouTube  — search results + top 50 comments per video
-  • Instagram — public hashtag / explore pages
+  • YouTube   — Playwright (search results + top 50 comments per video)
+  • Instagram — Selenium (public hashtag / explore pages)
 
 Falls back gracefully to httpx stubs if Playwright is not installed,
 so the rest of the system continues working without a browser.
@@ -18,6 +18,9 @@ from urllib.parse import quote_plus
 import httpx
 from crawlers.base_crawler import BaseCrawler, CrawlResult, EngagementMetrics
 from crawlers.rate_limiters import get_limiter
+
+# ── Selenium Instagram crawler (replaces Playwright for Instagram) ────────────
+from crawlers.selenium_instagram_crawler import selenium_instagram_search
 
 # ── Playwright availability check ────────────────────────────────────────────
 try:
@@ -310,8 +313,8 @@ async def _instagram_search(query: str, limit: int) -> List[CrawlResult]:
 class PlaywrightCrawler(BaseCrawler):
     """
     Browser-based crawler for JavaScript-heavy platforms.
-    Uses full Playwright headless Chromium when available,
-    falls back to httpx-based extraction otherwise.
+    • YouTube   → Uses Playwright headless Chromium (falls back to httpx).
+    • Instagram → Uses Selenium Chrome (falls back to curated CTI stubs).
     """
 
     SUPPORTED = ["YouTube", "Instagram"]
@@ -338,6 +341,13 @@ class PlaywrightCrawler(BaseCrawler):
             return await _yt_search_httpx(query, limit)
 
         elif platform == "Instagram":
-            return await _instagram_search(query, limit)
+            # ── Selenium takes over Instagram scraping ──────────────────────
+            print(f"[PlaywrightCrawler] Routing Instagram to SeleniumInstagramCrawler for query='{query}'")
+            return await selenium_instagram_search(
+                query=query,
+                limit=limit,
+                fetch_comments=fetch_comments,
+                time_filter="24h",
+            )
 
         return []
