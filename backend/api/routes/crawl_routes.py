@@ -33,23 +33,12 @@ class PromptCrawlRequest(BaseModel):
         default=False,
         description="Fetch top comments from YouTube/X (adds ~30-45s per video)",
     )
-<<<<<<< HEAD
-    time_filter: str = Field(
-        default="all",
-        description="Filter results by time, e.g. '24h' for last 24 hours.",
-    )
-=======
->>>>>>> fc97258 (Reddit Source Added)
 
 
 class SinglePlatformRequest(BaseModel):
     prompt: str = Field(..., min_length=1, max_length=500)
     limit: int = Field(default=20, ge=1, le=100)
     fetch_comments: bool = False
-<<<<<<< HEAD
-    time_filter: str = "all"
-=======
->>>>>>> fc97258 (Reddit Source Added)
 
 
 class WatchlistAddRequest(BaseModel):
@@ -98,17 +87,12 @@ async def crawl_by_prompt(
     """
     **Main endpoint** — crawl all selected platforms in parallel with one prompt
     and process all harvested posts through the 6-agent Hermes pipeline.
-<<<<<<< HEAD
-    """
-    from agents.orchestrator import orchestrator
-=======
     Reddit posts are scored by the Hermes multi-signal engine (0-100) and
     returned sorted by score descending.
     """
     from agents.orchestrator import orchestrator
     import re, datetime as _dt
 
->>>>>>> fc97258 (Reddit Source Added)
     platforms = request.platforms or ALL_PLATFORMS
     crawler = get_hybrid_crawler()
 
@@ -117,18 +101,11 @@ async def crawl_by_prompt(
         platforms=platforms,
         limit=request.limit,
         fetch_comments=request.fetch_comments,
-<<<<<<< HEAD
-        time_filter=request.time_filter,
-=======
->>>>>>> fc97258 (Reddit Source Added)
     )
 
     if "error" in result:
         raise HTTPException(status_code=400, detail=result["error"])
 
-<<<<<<< HEAD
-    # Run all harvested posts through 6-agent Hermes pipeline
-=======
     # ── Hermes multi-signal scorer for Reddit ────────────────────────────────
     if "Reddit" in result.get("results", {}):
         reddit_result = result["results"]["Reddit"]
@@ -153,23 +130,10 @@ async def crawl_by_prompt(
             result["results"]["Reddit"]["hermes_scored"] = True
 
     # Run all harvested posts through full 6-agent pipeline (background store)
->>>>>>> fc97258 (Reddit Source Added)
     flattened_posts = []
     for platform_res in result.get("results", {}).values():
         if isinstance(platform_res, dict) and "posts" in platform_res:
             flattened_posts.extend(platform_res.get("posts", []))
-<<<<<<< HEAD
-            
-    if flattened_posts:
-        orchestrator.process_crawled_posts(flattened_posts)
-
-    # Publish to Kafka asynchronously (non-blocking)
-    background_tasks.add_task(_publish_to_kafka, result)
-
-    return result
-
-
-=======
 
     if flattened_posts:
         orchestrator.process_crawled_posts(flattened_posts)
@@ -369,7 +333,6 @@ def _hermes_score_reddit_post(post: Dict[str, Any], query: str) -> Dict[str, Any
 
 
 
->>>>>>> fc97258 (Reddit Source Added)
 @router.post("/single/{platform}", summary="Single-platform test crawl")
 async def crawl_single_platform(
     platform: str,
@@ -393,10 +356,6 @@ async def crawl_single_platform(
         platform=platform,
         limit=request.limit,
         fetch_comments=request.fetch_comments,
-<<<<<<< HEAD
-        time_filter=request.time_filter,
-=======
->>>>>>> fc97258 (Reddit Source Added)
     )
 
     # Wrap in same shape as multi-platform for UI consistency

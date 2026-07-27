@@ -29,11 +29,9 @@ PLATFORM_ROUTING: Dict[str, str] = {
     "Web":           "fast",
     "YouTube":       "js",
     "Instagram":     "js",
-<<<<<<< HEAD
-=======
     "Reddit":        "fast",
->>>>>>> fc97258 (Reddit Source Added)
 }
+
 
 ALL_PLATFORMS = list(PLATFORM_ROUTING.keys())
 
@@ -80,10 +78,6 @@ class HybridCrawler:
         platform: str,
         limit: int = 20,
         fetch_comments: bool = False,
-<<<<<<< HEAD
-        time_filter: str = "all",
-=======
->>>>>>> fc97258 (Reddit Source Added)
     ) -> Dict[str, Any]:
         """Crawl a single platform and return a result summary dict."""
         crawler = self._get_crawler(platform)
@@ -94,10 +88,6 @@ class HybridCrawler:
                 platform=platform,
                 limit=limit,
                 fetch_comments=fetch_comments,
-<<<<<<< HEAD
-                time_filter=time_filter,
-=======
->>>>>>> fc97258 (Reddit Source Added)
             )
         except Exception as e:
             print(f"[HybridCrawler] {platform} crawl failed: {e}")
@@ -122,10 +112,6 @@ class HybridCrawler:
         platforms: Optional[List[str]] = None,
         limit: int = 20,
         fetch_comments: bool = False,
-<<<<<<< HEAD
-        time_filter: str = "all",
-=======
->>>>>>> fc97258 (Reddit Source Added)
     ) -> Dict[str, Any]:
         """
         Crawl all specified platforms IN PARALLEL using asyncio.gather().
@@ -152,11 +138,7 @@ class HybridCrawler:
 
         # Fire all platform crawls in parallel
         tasks = [
-<<<<<<< HEAD
-            self.crawl_platform(query, platform, limit, fetch_comments, time_filter)
-=======
             self.crawl_platform(query, platform, limit, fetch_comments)
->>>>>>> fc97258 (Reddit Source Added)
             for platform in valid_platforms
         ]
         platform_results = await asyncio.gather(*tasks, return_exceptions=True)

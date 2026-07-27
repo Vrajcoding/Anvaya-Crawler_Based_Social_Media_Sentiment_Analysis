@@ -8,10 +8,7 @@ const PLATFORMS = [
   { id: 'Instagram', label: 'Instagram', emoji: '📸', color: '#E1306C', badge: '#1a0010' },
   { id: 'GoogleSuggest', label: 'Google Suggest', emoji: '🔍', color: '#4285F4', badge: '#00101a' },
   { id: 'Web', label: 'Web', emoji: '🌐', color: '#00BFA5', badge: '#001a18' },
-<<<<<<< HEAD
-=======
   { id: 'Reddit', label: 'Reddit', emoji: '🤖', color: '#FF4500', badge: '#1a0a00' },
->>>>>>> fc97258 (Reddit Source Added)
 ];
 
 // ── Styles ────────────────────────────────────────────────────────────────────
@@ -288,8 +285,7 @@ function SkeletonResults({ platforms }) {
   );
 }
 
-<<<<<<< HEAD
-=======
+
 // ── Hermes Score Badge (Reddit only) ──────────────────────────────────────────
 function HermesScoreBadge({ post }) {
   const [showBreakdown, setShowBreakdown] = useState(false);
@@ -443,13 +439,10 @@ function PostCard({ post, platformColor }) {
           {eng.views > 0 && <span style={S.engChip('#34d399')}>👁 {eng.views.toLocaleString()}</span>}
         </div>
       )}
-<<<<<<< HEAD
-=======
 
       {/* Hermes Score — shown only for Reddit posts */}
       <HermesScoreBadge post={post} />
 
->>>>>>> fc97258 (Reddit Source Added)
       {hasComments && (
         <div style={S.commentsBox}>
           <button

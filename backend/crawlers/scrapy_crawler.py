@@ -36,11 +36,7 @@ class ScrapyCrawler(BaseCrawler):
     No API tokens required — uses public endpoints only.
     """
 
-<<<<<<< HEAD
-    SUPPORTED = ["X", "GoogleSuggest", "Web"]
-=======
     SUPPORTED = ["X", "GoogleSuggest", "Web", "Reddit"]
->>>>>>> fc97258 (Reddit Source Added)
 
     def supported_platforms(self) -> List[str]:
         return self.SUPPORTED
@@ -53,10 +49,6 @@ class ScrapyCrawler(BaseCrawler):
         platform: str,
         limit: int = 20,
         fetch_comments: bool = False,
-<<<<<<< HEAD
-        time_filter: str = "all",
-=======
->>>>>>> fc97258 (Reddit Source Added)
     ) -> List[CrawlResult]:
         limiter = get_limiter(platform)
         await limiter.acquire()
@@ -67,11 +59,8 @@ class ScrapyCrawler(BaseCrawler):
             return await self._crawl_google_suggest(query, limit)
         elif platform == "Web":
             return await self._crawl_web(query, limit)
-<<<<<<< HEAD
-=======
         elif platform == "Reddit":
             return await self._crawl_reddit(query, limit)
->>>>>>> fc97258 (Reddit Source Added)
         return []
 
     # ── X / Twitter (via Nitter RSS) ────────────────────────────────────────
@@ -251,8 +240,7 @@ class ScrapyCrawler(BaseCrawler):
                 print(f"[ScrapyCrawler] Web crawl error: {e}")
 
         return results[:limit]
-<<<<<<< HEAD
-=======
+
 
     # ── Reddit (public JSON API + RSS fallback, no auth) ────────────────────
 
@@ -463,4 +451,3 @@ class ScrapyCrawler(BaseCrawler):
                 print(f"[Reddit RSS] Error: {e}")
 
         return results
->>>>>>> fc97258 (Reddit Source Added)
