@@ -40,7 +40,7 @@ try:
     from nlp.video_ocr import video_ocr
     print("[SeleniumInstagram] OCR Engine loaded successfully.")
 except Exception as e:
-    print(f"[SeleniumInstagram] ⚠️ OCR Engine could not be loaded: {e}")
+    print(f"[SeleniumInstagram] WARNING: OCR Engine could not be loaded: {e}")
     video_ocr = None
 
 # Load .env so INSTAGRAM_USERNAME / INSTAGRAM_PASSWORD are available

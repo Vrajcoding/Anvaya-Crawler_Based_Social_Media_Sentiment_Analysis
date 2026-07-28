@@ -9,6 +9,7 @@ const PLATFORMS = [
   { id: 'GoogleSuggest', label: 'Google Suggest', emoji: '🔍', color: '#4285F4', badge: '#00101a' },
   { id: 'Web', label: 'Web', emoji: '🌐', color: '#00BFA5', badge: '#001a18' },
   { id: 'Reddit', label: 'Reddit', emoji: '🤖', color: '#FF4500', badge: '#1a0a00' },
+  { id: 'Telegram', label: 'Telegram', emoji: '✈️', color: '#2AABEE', badge: '#001520' },
 ];
 
 // ── Styles ────────────────────────────────────────────────────────────────────

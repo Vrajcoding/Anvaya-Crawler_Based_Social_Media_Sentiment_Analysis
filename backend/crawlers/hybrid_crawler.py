@@ -18,6 +18,7 @@ from typing import Any, Dict, List, Optional
 from crawlers.base_crawler import CrawlResult
 from crawlers.scrapy_crawler import ScrapyCrawler
 from crawlers.playwright_crawler import PlaywrightCrawler
+from crawlers.telegram_crawler import TelegramCrawler
 
 # ── Platform → Crawler routing map ──────────────────────────────────────────
 #   "fast"  → ScrapyCrawler (httpx-based, no browser)
@@ -30,6 +31,7 @@ PLATFORM_ROUTING: Dict[str, str] = {
     "YouTube":       "js",
     "Instagram":     "js",
     "Reddit":        "fast",
+    "Telegram":      "telegram",
 }
 
 
@@ -64,10 +66,13 @@ class HybridCrawler:
     def __init__(self):
         self._scrapy = ScrapyCrawler()
         self._playwright = PlaywrightCrawler()
+        self._telegram = TelegramCrawler()
 
     def _get_crawler(self, platform: str):
         """Return the correct crawler instance for the given platform."""
         mode = PLATFORM_ROUTING.get(platform, "fast")
+        if mode == "telegram":
+            return self._telegram
         return self._scrapy if mode == "fast" else self._playwright
 
     # ── Single platform ──────────────────────────────────────────────────────
