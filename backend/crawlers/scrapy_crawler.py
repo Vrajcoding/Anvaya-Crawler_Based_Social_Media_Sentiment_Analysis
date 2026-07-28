@@ -96,16 +96,33 @@ class ScrapyCrawler(BaseCrawler):
         soup = BeautifulSoup(xml_text, "xml")
         items = soup.find_all("item")[:limit]
         results = []
-        for item in items:
+        for item in soup.find_all("item"):
+            if len(results) >= limit:
+                break
+            
             title = item.find("title")
             link = item.find("link")
             pub_date = item.find("pubDate")
             creator = item.find("dc:creator") or item.find("creator")
 
+            ts = pub_date.text if pub_date else datetime.datetime.utcnow().isoformat()
+            
+            # ---- 24 Hour Filter ----
+            try:
+                import email.utils
+                import time
+                parsed_ts = email.utils.parsedate_tz(ts)
+                if parsed_ts:
+                    ts_timestamp = email.utils.mktime_tz(parsed_ts)
+                    age_hours = (time.time() - ts_timestamp) / 3600
+                    if age_hours > 24:
+                        continue
+            except Exception:
+                pass
+
             text = title.text if title else ""
             post_url = link.text if link else ""
             author = creator.text.strip() if creator else "@unknown"
-            ts = pub_date.text if pub_date else datetime.datetime.utcnow().isoformat()
 
             hashtags = re.findall(r"#(\w+)", text)
             post_id = hashlib.md5(post_url.encode()).hexdigest()[:12]
@@ -204,7 +221,8 @@ class ScrapyCrawler(BaseCrawler):
             },
         ) as client:
             try:
-                resp = await client.post(url, data={"q": query, "b": ""})
+                # Add 'df': 'd' to restrict search to the past 24 hours (day)
+                resp = await client.post(url, data={"q": query, "b": "", "df": "d"})
                 if resp.status_code == 200:
                     soup = BeautifulSoup(resp.text, "html.parser")
                     for result_div in soup.select(".result")[:limit]:

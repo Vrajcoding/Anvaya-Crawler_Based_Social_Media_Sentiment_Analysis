@@ -37,7 +37,8 @@ async def _yt_search_playwright(query: str, limit: int, fetch_comments: bool) ->
     """Full browser YouTube search extraction."""
     results: List[CrawlResult] = []
     encoded = quote_plus(query)
-    search_url = f"https://www.youtube.com/results?search_query={encoded}"
+    # sp=EgIIAg%253D%253D filters YouTube search results to the last 24 hours (Today)
+    search_url = f"https://www.youtube.com/results?search_query={encoded}&sp=EgIIAg%253D%253D"
 
     async with async_playwright() as pw:
         browser: Browser = await pw.chromium.launch(headless=True)
@@ -147,7 +148,8 @@ async def _yt_search_httpx(query: str, limit: int) -> List[CrawlResult]:
     JSON data embedded in the search results page. No browser needed.
     """
     encoded = quote_plus(query)
-    url = f"https://www.youtube.com/results?search_query={encoded}"
+    # sp=EgIIAg%253D%253D filters YouTube search results to the last 24 hours (Today)
+    url = f"https://www.youtube.com/results?search_query={encoded}&sp=EgIIAg%253D%253D"
     results: List[CrawlResult] = []
     try:
         async with httpx.AsyncClient(
