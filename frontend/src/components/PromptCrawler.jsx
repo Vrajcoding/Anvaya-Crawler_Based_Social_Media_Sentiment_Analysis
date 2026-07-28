@@ -401,8 +401,6 @@ function HermesScoreBadge({ post }) {
     </div>
   );
 }
-
->>>>>>> fc97258 (Reddit Source Added)
 // ── Post card ─────────────────────────────────────────────────────────────────
 function PostCard({ post, platformColor }) {
   const [showComments, setShowComments] = useState(false);

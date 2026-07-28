@@ -33,6 +33,16 @@ from urllib.parse import quote_plus
 
 from crawlers.base_crawler import CrawlResult, EngagementMetrics
 
+# Import the new Video OCR engine
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+try:
+    from nlp.video_ocr import video_ocr
+    print("[SeleniumInstagram] OCR Engine loaded successfully.")
+except Exception as e:
+    print(f"[SeleniumInstagram] ⚠️ OCR Engine could not be loaded: {e}")
+    video_ocr = None
+
 # Load .env so INSTAGRAM_USERNAME / INSTAGRAM_PASSWORD are available
 try:
     from dotenv import load_dotenv
@@ -193,6 +203,11 @@ def _login_instagram(driver: "webdriver.Chrome", username: str, password: str) -
 
         print(f"[SeleniumInstagram] Login page title: {driver.title}")
         print(f"[SeleniumInstagram] Login page URL: {driver.current_url}")
+
+        # Check if already logged in from a previous cached session
+        if "login" not in driver.current_url:
+            print("[SeleniumInstagram] ✅ Already logged in (session restored)! Skipping login form.")
+            return True
 
         # Accept cookie / GDPR dialogs (try many button texts)
         cookie_xpaths = [
@@ -425,7 +440,7 @@ def _scrape_instagram_sync(
                 time.sleep(random.uniform(0.7, 1.2))
 
             # ── Step 3: Collect post + reel links ─────────────────────────────
-            for sel in ["a[href*='/p/']", "a[href*='/reel/']"]:
+            for sel in ["a[href*='/p/']", "a[href*='/reel/']","a[href*='/reels/']"]:
                 try:
                     for a in driver.find_elements(By.CSS_SELECTOR, sel):
                         href = a.get_attribute("href") or ""
@@ -459,6 +474,16 @@ def _scrape_instagram_sync(
                 post_date = None
 
                 try:
+                    # 1. Date extraction independent of title regex
+                    try:
+                        time_el = driver.find_element(By.CSS_SELECTOR, "time[datetime]")
+                        dt_str = time_el.get_attribute("datetime")
+                        if dt_str:
+                            import dateutil.parser
+                            post_date = dateutil.parser.isoparse(dt_str).replace(tzinfo=None)
+                    except Exception:
+                        pass
+                        
                     title = driver.title or ""
                     # Instagram titles often look like:
                     # "390K likes, 1,223 comments - username on July 22, 2026: 'Caption text...'"
@@ -486,11 +511,12 @@ def _scrape_instagram_sync(
                         likes = parse_num(likes_str)
                         comments_count = parse_num(comments_str)
                         
-                        # Parse date
-                        try:
-                            post_date = datetime.datetime.strptime(date_str, "%B %d, %Y")
-                        except Exception:
-                            pass
+                        # Fallback date parsing from title
+                        if not post_date and date_str:
+                            try:
+                                post_date = datetime.datetime.strptime(date_str, "%B %d, %Y")
+                            except Exception:
+                                pass
                     else:
                         # Fallback if title regex fails
                         caption = driver.title
@@ -509,14 +535,37 @@ def _scrape_instagram_sync(
                 # ---- Comments extraction (real DOM parsing) ----
                 post_comments: List[Dict[str, str]] = []
                 try:
+                    spans = driver.find_elements(By.CSS_SELECTOR,"span[dir='auto']")
+
                     seen: set = set()
-                    for cel in driver.find_elements(By.CSS_SELECTOR, "ul > li > div > div > div span")[:15]:
-                        txt = cel.text.strip()
-                        if txt and txt != caption and txt not in seen and len(txt) > 2:
-                            post_comments.append({"author": "user", "text": txt[:300]})
-                            seen.add(txt)
-                except Exception:
-                    pass
+                    for span in spans:
+                        txt = span.text.strip()
+                        if txt and len(txt) > 2 and txt not in seen:
+                            lower_txt = txt.lower()
+                            # Skip common Instagram UI elements
+                            if lower_txt in ["reply", "hide replies", "see translation"] or " likes" in lower_txt or (lower_txt.startswith("view all") and "replies" in lower_txt):
+                                continue
+
+                            if not caption or caption == driver.title:
+                                if len(txt) > 20:
+                                    caption=txt
+                                    seen.add(txt)
+                                    continue
+                            if txt != caption:
+                                # Check if comment contains the search keyword (using 'words' or 'raw_query' defined above)
+                                match = False
+                                for w in words:
+                                    if w in lower_txt:
+                                        match = True
+                                        break
+                                
+                                if match or raw_query in lower_txt:
+                                    post_comments.append({"author": "user", "text": txt[:300]})
+                                    seen.add(txt)
+                            if len(post_comments)>= 15:
+                                break
+                except Exception as e:
+                    print(f"[SeleniumInstagram] Comment extraction failed: {e}")
 
                 # ---- Build result ----
                 sc_match = re.search(r"/(?:p|reel)/([A-Za-z0-9_-]+)/?", post_url)
@@ -525,7 +574,36 @@ def _scrape_instagram_sync(
                 hashtags = re.findall(r"#(\w+)", caption) or [tag]
                 ctype = "REEL" if is_reel else "POST"
 
+                # ---- OCR Extraction for Reels ----
+                if is_reel and video_ocr:
+                    try:
+                        import tempfile
+                        # Wait a moment to ensure video is fully rendered
+                        time.sleep(1.0)
+                        ss_path = os.path.join(tempfile.gettempdir(), f"reel_ocr_{shortcode}.png")
+                        try:
+                            # Attempt to screenshot only the video element if found
+                            video_el = driver.find_element(By.TAG_NAME, "video")
+                            video_el.screenshot(ss_path)
+                        except Exception:
+                            # Fallback: screenshot the entire page
+                            driver.save_screenshot(ss_path)
+                        
+                        ocr_text = video_ocr.extract_text_from_image(ss_path)
+                        
+                        if ocr_text:
+                            caption += f" [OCR_TEXT: {ocr_text}]"
+                            print(f"[SeleniumInstagram] OCR Extracted: {ocr_text[:60]}...")
+                            
+                        try:
+                            os.remove(ss_path)
+                        except Exception:
+                            pass
+                    except Exception as e:
+                        print(f"[SeleniumInstagram] Reel OCR failed: {e}")
+
                 print(f"[SeleniumInstagram] {ctype} | {author} | {likes} L, {comments_count} C | {caption[:60]!r}")
+
 
                 results.append({
                     "id": f"ig-{uid}",

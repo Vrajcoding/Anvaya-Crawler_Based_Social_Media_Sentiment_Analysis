@@ -106,28 +106,29 @@ async def crawl_by_prompt(
     if "error" in result:
         raise HTTPException(status_code=400, detail=result["error"])
 
-    # ── Hermes multi-signal scorer for Reddit ────────────────────────────────
-    if "Reddit" in result.get("results", {}):
-        reddit_result = result["results"]["Reddit"]
-        reddit_posts  = reddit_result.get("posts", [])
+    # ── Hermes multi-signal scorer for Reddit & Instagram ────────────────────
+    for plat in ["Reddit", "Instagram"]:
+        if plat in result.get("results", {}):
+            plat_result = result["results"][plat]
+            plat_posts  = plat_result.get("posts", [])
 
-        if reddit_posts:
-            scored_posts = []
-            for post in reddit_posts:
-                try:
-                    score_data = _hermes_score_reddit_post(post, request.prompt)
-                    post.update(score_data)
-                    scored_posts.append(post)
-                except Exception as e:
-                    print(f"[HermesReddit] Scoring error for {post.get('id')}: {e}")
-                    post["hermes_score"] = 0
-                    post["hermes_severity"] = "LOW"
-                    scored_posts.append(post)
+            if plat_posts:
+                scored_posts = []
+                for post in plat_posts:
+                    try:
+                        score_data = _hermes_score_post(post, request.prompt)
+                        post.update(score_data)
+                        scored_posts.append(post)
+                    except Exception as e:
+                        print(f"[Hermes{plat}] Scoring error for {post.get('id')}: {e}")
+                        post["hermes_score"] = 0
+                        post["hermes_severity"] = "LOW"
+                        scored_posts.append(post)
 
-            # Sort highest score first
-            scored_posts.sort(key=lambda p: p.get("hermes_score", 0), reverse=True)
-            result["results"]["Reddit"]["posts"] = scored_posts
-            result["results"]["Reddit"]["hermes_scored"] = True
+                # Sort highest score first
+                scored_posts.sort(key=lambda p: p.get("hermes_score", 0), reverse=True)
+                result["results"][plat]["posts"] = scored_posts
+                result["results"][plat]["hermes_scored"] = True
 
     # Run all harvested posts through full 6-agent pipeline (background store)
     flattened_posts = []
@@ -142,9 +143,9 @@ async def crawl_by_prompt(
     return result
 
 
-def _hermes_score_reddit_post(post: Dict[str, Any], query: str) -> Dict[str, Any]:
+def _hermes_score_post(post: Dict[str, Any], query: str) -> Dict[str, Any]:
     """
-    Proper multi-signal Hermes scoring for a Reddit post (0-100).
+    Proper multi-signal Hermes scoring for a post (0-100).
 
     Six independent signals, each scored 0.0–1.0, then weighted:
       Signal 1 – Negative Sentiment     (weight 0.20)
