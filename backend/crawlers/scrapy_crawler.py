@@ -22,6 +22,15 @@ from bs4 import BeautifulSoup
 from crawlers.base_crawler import BaseCrawler, CrawlResult, EngagementMetrics
 from crawlers.rate_limiters import get_limiter
 
+# ── Selenium X crawler (primary source for real tweets) ──────────────────────
+try:
+    from crawlers.selenium_x_crawler import selenium_x_search as _x_search
+    _X_CRAWLER_AVAILABLE = True
+    print("[ScrapyCrawler] Selenium X crawler loaded.")
+except ImportError:
+    _X_CRAWLER_AVAILABLE = False
+    print("[ScrapyCrawler] selenium_x_crawler not found — will use Nitter/stubs for X.")
+
 # ── Nitter instances (public X mirrors, no API key) ─────────────────────────
 NITTER_INSTANCES = [
     "https://nitter.net",
@@ -66,10 +75,29 @@ class ScrapyCrawler(BaseCrawler):
     # ── X / Twitter (via Nitter RSS) ────────────────────────────────────────
 
     async def _crawl_x(self, query: str, limit: int) -> List[CrawlResult]:
-        """Fetch tweets via nitter's RSS search endpoint."""
+        """
+        Fetch real tweets using a 3-tier strategy:
+          1. Playwright browser login on x.com (real data, requires X credentials in .env)
+          2. Nitter RSS mirrors (public, no auth — but often rate-limited / dead)
+          3. Synthetic stubs (dashboard never empty fallback)
+        """
         results: List[CrawlResult] = []
-        encoded = quote_plus(query)
 
+        # ── Tier 1: Selenium browser login (real tweets) ──────────────────
+        if _X_CRAWLER_AVAILABLE:
+            try:
+                print(f"[ScrapyCrawler] Trying Selenium X browser for query='{query}'")
+                results = await _x_search(query=query, limit=limit)
+                if results:
+                    print(f"[ScrapyCrawler] Selenium X returned {len(results)} real tweets.")
+                    return results[:limit]
+                else:
+                    print("[ScrapyCrawler] Selenium X returned 0 results — falling back to Nitter.")
+            except Exception as e:
+                print(f"[ScrapyCrawler] Selenium X error: {e} — falling back to Nitter.")
+
+        # ── Tier 2: Nitter RSS mirrors ────────────────────────────────────
+        encoded = quote_plus(query)
         async with httpx.AsyncClient(
             timeout=15.0,
             follow_redirects=True,
@@ -82,14 +110,14 @@ class ScrapyCrawler(BaseCrawler):
                     if resp.status_code == 200 and "<rss" in resp.text:
                         results = self._parse_nitter_rss(resp.text, limit)
                         if results:
-                            break
+                            print(f"[ScrapyCrawler] Nitter mirror {base} returned {len(results)} tweets.")
+                            return results[:limit]
                 except Exception:
                     continue  # try next mirror
 
-        # Fallback: return synthetic-style stubs so dashboard is never empty
-        if not results:
-            results = self._synthetic_x_stubs(query, limit)
-
+        # ── Tier 3: Synthetic stubs (last resort) ─────────────────────────
+        print("[ScrapyCrawler] All X sources failed — using synthetic stubs.")
+        results = self._synthetic_x_stubs(query, limit)
         return results[:limit]
 
     def _parse_nitter_rss(self, xml_text: str, limit: int) -> List[CrawlResult]:
