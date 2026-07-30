@@ -25,11 +25,10 @@ _model_loaded = False
 _load_error = None
 
 # Model configuration
-# NOTE: MuRIL model (950MB) is too large for constrained disk environments.
-# We use the comprehensive 80+ term keyword ensemble which achieves >90% on CTI content.
-# To enable transformer: set HATE_MODEL_INDIC to a small model like
-# "Hate-speech-CNERG/bert-base-hatexplain" and ensure sufficient disk space.
-HATE_MODEL_INDIC = None  # Disabled: using keyword ensemble for hate speech
+# HateXplain model (~440MB) — much lighter than MuRIL (950MB) and effective
+# for hate speech classification. Falls back to 80+ term keyword ensemble
+# if disk/memory is insufficient.
+HATE_MODEL_INDIC = "Hate-speech-CNERG/bert-base-uncased-hatexplain"
 CACHE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "models")
 
 # ── Expanded hate speech lexicon (80+ terms) ─────────────────────────────────

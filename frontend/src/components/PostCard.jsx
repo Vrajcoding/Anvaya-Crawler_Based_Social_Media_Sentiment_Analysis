@@ -22,10 +22,33 @@ export default function PostCard({ post }) {
     switch (code) {
       case 'gu': return 'ગુજરાતી (Gujarati)';
       case 'hi': return 'हिंदी (Hindi)';
-      case 'hinglish': return 'Hinglish (Code-Mixed)';
+      case 'hinglish': case 'hi-en-mixed': return 'Hinglish (Code-Mixed)';
+      case 'gu-en-mixed': return 'Gujarati-English Mix';
       default: return 'English';
     }
   };
+
+  // Extract sentiment from either top-level or nested nlp_analysis
+  const getSentiment = () => {
+    const s = post.sentiment;
+    if (typeof s === 'object' && s?.label) return s;
+    const nlp = post.nlp_analysis?.sentiment;
+    if (nlp) return nlp;
+    return { label: s || 'neutral', confidence: 0 };
+  };
+
+  const sentiment = getSentiment();
+  const sentimentLabel = (sentiment.label || 'neutral').toLowerCase();
+  const sentimentConf = sentiment.confidence || sentiment.score || 0;
+
+  const getSentimentStyle = () => {
+    switch (sentimentLabel) {
+      case 'positive': return { bg: '#dcfce7', color: '#166534', border: '#86efac', icon: '✅', text: 'Positive' };
+      case 'negative': return { bg: '#fee2e2', color: '#991b1b', border: '#fca5a5', icon: '⛔', text: 'Negative' };
+      default:         return { bg: '#e0e7ff', color: '#3730a3', border: '#a5b4fc', icon: '▫️', text: 'Neutral' };
+    }
+  };
+  const sentStyle = getSentimentStyle();
 
   const scoreBreakdown = post.scoring_breakdown || {
     sentiment: 0.1,
@@ -65,6 +88,23 @@ export default function PostCard({ post }) {
         </div>
 
         <ThreatBadge level={post.threat_level} />
+
+        {/* SENTIMENT BADGE */}
+        <span style={{
+          background: sentStyle.bg,
+          color: sentStyle.color,
+          border: `1.5px solid ${sentStyle.border}`,
+          padding: '0.25rem 0.7rem',
+          borderRadius: '6px',
+          fontSize: '0.82rem',
+          fontWeight: 800,
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '4px',
+          letterSpacing: '0.02em'
+        }}>
+          {sentStyle.icon} {sentStyle.text} ({(sentimentConf * 100).toFixed(0)}%)
+        </span>
       </div>
 
       {/* POST BODY CONTENT */}
@@ -102,13 +142,101 @@ export default function PostCard({ post }) {
 
         {showAnalysis && (
           <div className="p-4 bg-white space-y-3.5 text-xs animate-fadeIn">
-            <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-              <span className="font-bold text-slate-500 uppercase tracking-wider block text-[10px]">
-                {lang === 'hi' ? 'એઆઈ થ્રેટ અને સેન્ટિમેન્ટ ગણતરી (MultiTask Classifier):' : 'MultiTask Threat & Sentiment Assessment:'}
+
+            {/* SENTIMENT ANALYSIS RESULT */}
+            <div className="p-3 rounded-lg border" style={{ background: sentStyle.bg, borderColor: sentStyle.border }}>
+              <span className="font-bold uppercase tracking-wider block text-[10px]" style={{ color: sentStyle.color }}>
+                Sentiment Analysis Result ({sentiment.model || post.nlp_analysis?.sentiment?.model || 'transformer'}):
               </span>
-              <p className="text-slate-800 font-semibold mt-1 text-sm leading-relaxed">{aiReason}</p>
+              <div className="mt-1.5 flex items-center gap-3 flex-wrap">
+                <span className="text-sm font-black" style={{ color: sentStyle.color }}>
+                  {sentStyle.icon} {sentStyle.text}
+                </span>
+                <span className="px-2 py-0.5 bg-white rounded font-mono font-bold text-[11px]" style={{ color: sentStyle.color }}>
+                  Confidence: {(sentimentConf * 100).toFixed(1)}%
+                </span>
+              </div>
+              {/* Probability bars */}
+              {(sentiment.probabilities || post.nlp_analysis?.sentiment?.probabilities) && (
+                <div className="mt-2 space-y-1">
+                  {Object.entries(sentiment.probabilities || post.nlp_analysis?.sentiment?.probabilities || {}).map(([label, prob]) => (
+                    <div key={label} className="flex items-center gap-2">
+                      <span className="w-16 text-[10px] font-semibold text-gray-600 capitalize">{label}</span>
+                      <div className="flex-1 bg-gray-200 h-1.5 rounded-full overflow-hidden">
+                        <div
+                          className="h-full rounded-full"
+                          style={{
+                            width: `${(prob * 100).toFixed(0)}%`,
+                            background: label === 'positive' ? '#16a34a' : label === 'negative' ? '#dc2626' : '#6366f1',
+                          }}
+                        />
+                      </div>
+                      <span className="font-mono font-bold text-[10px] text-gray-700 w-10 text-right">{(prob * 100).toFixed(1)}%</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
+            {/* THREAT CLASSIFICATION */}
+            <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
+              <span className="font-bold text-slate-500 uppercase tracking-wider block text-[10px]">
+                Threat Classification ({post.nlp_analysis?.threat_category?.model || 'zero-shot NLI'}):
+              </span>
+              <p className="text-slate-800 font-semibold mt-1 text-sm leading-relaxed">{aiReason}</p>
+              {/* Threat score bars */}
+              {(post.nlp_analysis?.threat_category?.all_scores) && (
+                <div className="mt-2 space-y-1">
+                  {Object.entries(post.nlp_analysis.threat_category.all_scores).map(([label, score]) => (
+                    <div key={label} className="flex items-center gap-2">
+                      <span className="w-28 text-[10px] font-semibold text-gray-600">{label}</span>
+                      <div className="flex-1 bg-gray-200 h-1.5 rounded-full overflow-hidden">
+                        <div
+                          className="h-full rounded-full"
+                          style={{
+                            width: `${(score * 100).toFixed(0)}%`,
+                            background: label === 'Neutral' ? '#16a34a' : label === 'Inflammatory' ? '#d97706' : label === 'Incitement to Violence' ? '#dc2626' : '#9333ea',
+                          }}
+                        />
+                      </div>
+                      <span className="font-mono font-bold text-[10px] text-gray-700 w-10 text-right">{(score * 100).toFixed(1)}%</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* HATE SPEECH DETECTION */}
+            {(post.nlp_analysis?.hate_speech || post.is_hate_speech) && (
+              <div className={`p-3 rounded-lg border ${
+                (post.nlp_analysis?.hate_speech?.flag || post.is_hate_speech)
+                  ? 'bg-red-50 border-red-200'
+                  : 'bg-green-50 border-green-200'
+              }`}>
+                <span className={`font-bold uppercase tracking-wider block text-[10px] ${
+                  (post.nlp_analysis?.hate_speech?.flag || post.is_hate_speech) ? 'text-red-700' : 'text-green-700'
+                }`}>
+                  Hate Speech Detection ({post.nlp_analysis?.hate_speech?.model || 'ensemble'}):
+                </span>
+                <div className="mt-1 flex items-center gap-2">
+                  {(post.nlp_analysis?.hate_speech?.flag || post.is_hate_speech) ? (
+                    <span className="text-red-800 font-bold flex items-center gap-1">
+                      <AlertTriangle size={14} /> HATE SPEECH DETECTED
+                      <span className="ml-1 font-mono">({((post.nlp_analysis?.hate_speech?.confidence || 0) * 100).toFixed(0)}%)</span>
+                    </span>
+                  ) : (
+                    <span className="text-green-800 font-bold flex items-center gap-1">
+                      <ShieldCheck size={14} /> No hate speech detected
+                    </span>
+                  )}
+                </div>
+                {post.nlp_analysis?.hate_speech?.target_group_hint && (
+                  <span className="text-[10px] text-red-600 mt-1 block">Target: {post.nlp_analysis.hate_speech.target_group_hint}</span>
+                )}
+              </div>
+            )}
+
+            {/* 6-FACTOR COMPOSITE SCORE */}
             <div>
               <span className="font-bold text-gray-700 block mb-2 text-xs">
                 {lang === 'hi' ? '6-कारक खतरा स्कोर गणना (Threat Scoring Breakdown):' : '6-Factor Composite Threat Scoring Formula:'}

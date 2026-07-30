@@ -9,6 +9,7 @@ import { useLanguage } from '../services/LanguageContext';
 
 const GOV_COLORS = ['#1e3a8a', '#d97706', '#2563eb', '#dc2626'];
 const THREAT_COLORS = ['#16a34a', '#d97706', '#dc2626', '#9333ea'];
+const SENTIMENT_COLORS = ['#16a34a', '#dc2626', '#6366f1'];
 
 export default function Dashboard({ setActiveTab }) {
   const { t } = useLanguage();
@@ -52,6 +53,16 @@ export default function Dashboard({ setActiveTab }) {
     { name: 'Inflammatory', count: 5 },
     { name: 'Fake News', count: 4 },
     { name: 'Incitement', count: 3 }
+  ];
+
+  const sentimentPieData = stats?.sentiment_distribution ? [
+    { name: 'Positive', value: stats.sentiment_distribution.positive || 0 },
+    { name: 'Negative', value: stats.sentiment_distribution.negative || 0 },
+    { name: 'Neutral', value: stats.sentiment_distribution.neutral || 0 },
+  ] : [
+    { name: 'Positive', value: 0 },
+    { name: 'Negative', value: 0 },
+    { name: 'Neutral', value: 0 },
   ];
 
   const langBarData = stats?.language_distribution ? [
@@ -236,6 +247,40 @@ export default function Dashboard({ setActiveTab }) {
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* SENTIMENT ANALYSIS DISTRIBUTION CHART */}
+          <div className="gov-card" style={{ borderColor: '#6366f1' }}>
+            <div className="gov-card-title">
+              <span>🧠 Sentiment Analysis Distribution</span>
+            </div>
+
+            <div style={{ height: '200px', width: '100%' }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={sentimentPieData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={45}
+                    outerRadius={75}
+                    paddingAngle={4}
+                    dataKey="value"
+                  >
+                    {sentimentPieData.map((entry, index) => (
+                      <Cell key={`sent-${index}`} fill={SENTIMENT_COLORS[index % SENTIMENT_COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'space-around', fontSize: '0.85rem', fontWeight: 700, marginTop: '-0.5rem' }}>
+              <span style={{ color: '#16a34a' }}>✅ Positive ({sentimentPieData[0]?.value || 0})</span>
+              <span style={{ color: '#dc2626' }}>⛔ Negative ({sentimentPieData[1]?.value || 0})</span>
+              <span style={{ color: '#6366f1' }}>⬜ Neutral ({sentimentPieData[2]?.value || 0})</span>
             </div>
           </div>
 
