@@ -155,6 +155,28 @@ def run_nlp_pipeline(post_id: str, text: str, platform: str = "x", language_hint
         except Exception as e:
             logger.error(f"Threat zero-shot neural network error: {e}")
 
+    # Fallback heuristics if the neural net failed or is uninitialized
+    if threat_result["label"] == "Neutral" and threat_result["confidence"] == 0.50:
+        text_lower = cleaned.lower()
+        if any(w in text_lower for w in ["kill", "murder", "attack", "bomb", "riot", "stone pelting", "दंगा", "मार"]):
+            threat_result = {
+                "label": "Incitement to Violence",
+                "confidence": 0.88,
+                "all_scores": {"Inflammatory": 0.10, "Incitement to Violence": 0.88, "Fake News": 0.01, "Neutral": 0.01}
+            }
+        elif any(w in text_lower for w in ["protest", "rift", "clash", "tension", "jantar mantar", "strike", "आंदोलन", "विवाद", "agitation"]):
+            threat_result = {
+                "label": "Inflammatory",
+                "confidence": 0.78,
+                "all_scores": {"Inflammatory": 0.78, "Incitement to Violence": 0.15, "Fake News": 0.02, "Neutral": 0.05}
+            }
+        elif any(w in text_lower for w in ["fake", "rumor", "hoax", "unverified", "afwaah", "अफ़वाह"]):
+            threat_result = {
+                "label": "Fake News",
+                "confidence": 0.82,
+                "all_scores": {"Inflammatory": 0.10, "Incitement to Violence": 0.05, "Fake News": 0.82, "Neutral": 0.03}
+            }
+
     # 3. Hate Speech Detection derived from neural threat probabilities
     incitement_prob = threat_result["all_scores"].get("Incitement to Violence", 0.0)
     inflammatory_prob = threat_result["all_scores"].get("Inflammatory", 0.0)

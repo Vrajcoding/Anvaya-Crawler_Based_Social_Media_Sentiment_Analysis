@@ -287,13 +287,41 @@ function SkeletonResults({ platforms }) {
 }
 
 
-// ── Hermes Score Badge (Reddit only) ──────────────────────────────────────────
+// ── NLP Threat Score Badge (All platforms) ──────────────────────────────────────────
 function HermesScoreBadge({ post }) {
   const [showBreakdown, setShowBreakdown] = useState(false);
-  const score    = post.hermes_score ?? null;
-  const severity = post.hermes_severity || 'LOW';
-  const reason   = post.hermes_reason || '';
-  const breakdown = post.hermes_breakdown || {};
+  let score    = post.hermes_score ?? null;
+  let severity = post.hermes_severity || 'LOW';
+  let reason   = post.hermes_reason || '';
+  let breakdown = post.hermes_breakdown || {};
+
+  if (score === null && post.nlp_analysis) {
+    const nlp = post.nlp_analysis;
+    const cat = nlp.threat_category || {};
+    const label = cat.label || 'Neutral';
+
+    if (label === 'Neutral') {
+      const allScores = cat.all_scores || {};
+      const nonNeutral = Object.entries(allScores)
+        .filter(([k]) => k !== 'Neutral')
+        .map(([_, v]) => v);
+      if (nonNeutral.length > 0) {
+        score = Math.round(Math.max(...nonNeutral) * 100);
+      } else {
+        score = Math.round((1 - (cat.confidence || 0.5)) * 100);
+      }
+    } else {
+      score = Math.round((cat.confidence || 0) * 100);
+    }
+    
+    if (label === 'Incitement to Violence') severity = 'CRITICAL';
+    else if (label === 'Fake News') severity = 'HIGH';
+    else if (label === 'Inflammatory') severity = 'MEDIUM';
+    else severity = 'LOW';
+    
+    reason = `Detected ${label}. Sentiment: ${nlp.sentiment?.label || 'neutral'}.`;
+    breakdown = cat.all_scores || {};
+  }
 
   if (score === null) return null;
 
