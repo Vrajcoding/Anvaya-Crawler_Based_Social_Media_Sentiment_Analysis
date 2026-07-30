@@ -1,10 +1,13 @@
 import json
+import os
 import uuid
 from datetime import datetime, timedelta
 from typing import List, Dict, Any, Optional
 
+DATA_STORE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "crawled_posts_store.json")
+
 class InMemoryDatabase:
-    """High-performance thread-safe storage engine for SentinelAI CTI Platform."""
+    """High-performance thread-safe storage engine for SentinelAI CTI Platform with JSON disk persistence."""
     
     def __init__(self):
         self.posts: Dict[str, Dict[str, Any]] = {}
@@ -13,14 +16,38 @@ class InMemoryDatabase:
         self.feedback: Dict[str, Dict[str, Any]] = {}
         self.incidents: Dict[str, Dict[str, Any]] = {}
         self.logs: List[Dict[str, Any]] = []
+        self._load_from_disk()
         
+    def _load_from_disk(self):
+        try:
+            if os.path.exists(DATA_STORE_PATH):
+                with open(DATA_STORE_PATH, "r", encoding="utf-8") as f:
+                    stored_posts = json.load(f)
+                    for post in stored_posts:
+                        p_id = str(post.get("id") or post.get("post_id") or uuid.uuid4())
+                        self.posts[p_id] = post
+        except Exception as e:
+            print(f"[db_client] Load from disk warning: {e}")
+
+    def _persist_to_disk(self):
+        try:
+            os.makedirs(os.path.dirname(DATA_STORE_PATH), exist_ok=True)
+            with open(DATA_STORE_PATH, "w", encoding="utf-8") as f:
+                json.dump(list(self.posts.values()), f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f"[db_client] Persist to disk error: {e}")
+
     def add_post(self, post: Dict[str, Any]) -> Dict[str, Any]:
-        post_id = post.get("id") or str(uuid.uuid4())
+        post_id = str(post.get("id") or post.get("post_id") or uuid.uuid4())
         post["id"] = post_id
         if "crawled_at" not in post:
             post["crawled_at"] = datetime.utcnow().isoformat()
         self.posts[post_id] = post
+        self._persist_to_disk()
         return post
+
+    def save_post(self, post: Dict[str, Any]) -> Dict[str, Any]:
+        return self.add_post(post)
 
     def get_posts(
         self,
@@ -133,12 +160,13 @@ class InMemoryDatabase:
     def add_incident(self, incident: Dict[str, Any]) -> Dict[str, Any]:
         inc_id = incident.get("id") or str(uuid.uuid4())
         incident["id"] = inc_id
-        incident["created_at"] = datetime.utcnow().isoformat()
+        incident["created_at"] = datetime.datetime.utcnow().isoformat() if hasattr(datetime, "datetime") else datetime.utcnow().isoformat()
         self.incidents[inc_id] = incident
         return incident
 
     def get_incidents(self) -> List[Dict[str, Any]]:
         return list(self.incidents.values())
 
-# Global db instance
+# Global db & db_client singletons
 db = InMemoryDatabase()
+db_client = db

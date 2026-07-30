@@ -98,7 +98,7 @@ export default function NetworkView() {
           <div className="gov-card-title flex justify-between items-center">
             <span>🌐 {activeView === 'graph' ? (lang === 'hi' ? 'सक्रिय संदिग्ध नोड कनेक्शन (SVG Force Layout)' : 'Active Threat Graph Mapping') : (lang === 'hi' ? 'पहचाने गए संदिग्ध नोड्स ग्रिड' : 'Identified Threat Nodes Grid')} ({graphData.nodes.length} Nodes)</span>
             <span className="text-xs font-mono bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-full border border-indigo-200">
-              ⚡ Hermes NetworkAgent Analysis Active
+              ⚡ Neural Graph Threat Engine Active
             </span>
           </div>
 

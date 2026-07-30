@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import PostCard from '../components/PostCard';
-import ThreatBadge from '../components/ThreatBadge';
-import AgentStatusPanel from '../components/AgentStatusPanel';
+
 import { fetchStatsOverview, fetchPosts, fetchAlerts } from '../services/api';
 import { ShieldAlert, AlertTriangle, Radio, Cpu, ArrowRight, Printer, CheckCircle, BarChart2 } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
@@ -126,8 +125,7 @@ export default function Dashboard({ setActiveTab }) {
         </div>
       </div>
 
-      {/* HERMES MULTI-AGENT STATUS TELEMETRY PANEL (HACKATHON WINNING FEATURE) */}
-      <AgentStatusPanel />
+
 
       {/* TWO COLUMN CONTENT AREA */}
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem' }}>

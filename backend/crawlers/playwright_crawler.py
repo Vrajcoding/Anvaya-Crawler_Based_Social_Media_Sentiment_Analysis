@@ -216,22 +216,6 @@ async def _yt_search_httpx(query: str, limit: int) -> List[CrawlResult]:
     except Exception as e:
         print(f"[PlaywrightCrawler] YT httpx fallback error: {e}")
 
-    # Final fallback: stubs
-    if not results:
-        for i in range(min(limit, 5)):
-            uid = uuid.uuid4().hex[:8]
-            results.append(CrawlResult(
-                id=f"yt-stub-{uid}",
-                platform="YouTube",
-                author_username="@yt_monitor",
-                author_id=f"yt_{uid}",
-                content=f"[Simulated] YouTube result for: {query} — video #{i+1}",
-                url=f"https://www.youtube.com/results?search_query={encoded}",
-                source_type="SCRAPY_YT_STUB",
-                crawled_at=datetime.datetime.utcnow().isoformat(),
-                created_at=datetime.datetime.utcnow().isoformat(),
-            ))
-
     return results[:limit]
 
 
@@ -289,23 +273,6 @@ async def _instagram_search(query: str, limit: int) -> List[CrawlResult]:
                     ))
     except Exception as e:
         print(f"[PlaywrightCrawler] Instagram error: {e}")
-
-    # Fallback stubs if blocked
-    if not results:
-        for i in range(min(limit, 4)):
-            uid = uuid.uuid4().hex[:8]
-            results.append(CrawlResult(
-                id=f"ig-stub-{uid}",
-                platform="Instagram",
-                author_username=f"@ig_user_{uid[:5]}",
-                author_id=f"ig_{uid}",
-                content=f"[Simulated] Instagram post about #{tag} — #{i+1}",
-                url=f"https://www.instagram.com/explore/tags/{tag}/",
-                hashtags=[tag],
-                source_type="PLAYWRIGHT_IG_STUB",
-                crawled_at=datetime.datetime.utcnow().isoformat(),
-                created_at=datetime.datetime.utcnow().isoformat(),
-            ))
 
     return results[:limit]
 

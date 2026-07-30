@@ -321,7 +321,7 @@ function HermesScoreBadge({ post }) {
       >
         {/* Icon + label */}
         <span style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 600, whiteSpace: 'nowrap' }}>
-          🤖 Hermes Score
+          🛡️ NLP Threat Score
         </span>
 
         {/* Progress bar */}

@@ -1,13 +1,15 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 import asyncio
+import datetime
 from storage.seed_data import initialize_seed_data
 from utils.config import settings
 from api.routes import posts, alerts, trends, network, watchlist, feedback, reports, stats, settings_router, agent_status
 from api.routes.crawl_routes import router as crawl_router
 from api.websocket import ws_manager
-from agents.orchestrator import orchestrator
 from crawlers.spiders.real_social_spider import RealSocialCrawler
+from nlp_service.models.inference import run_nlp_pipeline
+from storage.db_client import db_client
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -46,33 +48,28 @@ async def startup_event():
     asyncio.create_task(background_crawler_loop())
 
 async def background_crawler_loop():
-    """Background task running continuous live social media harvesting, Scapy packet capture, and multi-agent processing."""
+    """Background task running continuous live social media harvesting and buildspec NLP analysis."""
     cycle = 0
-    platforms = ["x", "instagram", "facebook", "youtube"]
     while True:
-        await asyncio.sleep(10)  # Crawl new post every 10 seconds
+        await asyncio.sleep(15)
         cycle += 1
         try:
-            if settings.USE_REAL_CRAWLER and cycle % 4 == 1:
-                # Refresh live RSS/web feeds every 40 seconds
-                await RealSocialCrawler.fetch_live_web_posts()
-                
-            platform = platforms[cycle % len(platforms)]
-            res = orchestrator.trigger_live_crawl_step(platform=platform)
-            post = res.get("post")
-            alert = res.get("alert")
-            
-            # Broadcast to WebSocket clients
-            await ws_manager.broadcast({
-                "type": "NEW_POST",
-                "data": post
-            })
-            
-            if alert:
-                await ws_manager.broadcast({
-                    "type": "NEW_ALERT",
-                    "data": alert
-                })
+            if settings.USE_REAL_CRAWLER:
+                crawled_list = await RealSocialCrawler.fetch_live_web_posts()
+                for post in (crawled_list or [])[:3]:
+                    post_id = str(post.get("id") or f"bg_post_{cycle}")
+                    content = post.get("content") or ""
+                    if content:
+                        nlp_res = run_nlp_pipeline(post_id=post_id, text=content)
+                        post["nlp_analysis"] = nlp_res
+                        post["threat_level"] = nlp_res.get("threat_category", {}).get("label", "Neutral")
+                        post["sentiment"] = nlp_res.get("sentiment", {}).get("label", "neutral")
+                        post["is_hate_speech"] = nlp_res.get("hate_speech", {}).get("flag", False)
+                        db_client.save_post(post)
+                        await ws_manager.broadcast({
+                            "type": "NEW_POST",
+                            "data": post
+                        })
         except Exception as e:
             print(f"Error in background crawler loop: {e}")
 

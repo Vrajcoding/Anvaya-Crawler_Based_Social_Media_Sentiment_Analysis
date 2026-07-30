@@ -19,3 +19,5 @@ backend/*.db
 .vscode/
 .idea/
 *.log
+*.ps1
+backend/models/*.pt

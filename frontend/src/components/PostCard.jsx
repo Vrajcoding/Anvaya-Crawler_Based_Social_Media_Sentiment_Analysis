@@ -90,7 +90,7 @@ export default function PostCard({ post }) {
         >
           <div className="flex items-center gap-2">
             <Cpu className="w-4 h-4 text-indigo-600" />
-            <span>{lang === 'hi' ? 'हर्मिस एआई विश्लेषण व खतरा स्कोर विवरण' : 'Hermes AI Analysis & 6-Factor Threat Score Breakdown'}</span>
+            <span>{lang === 'hi' ? 'न्यूरल एआई विश्लेषण व खतरा स्कोर विवरण' : 'Neural AI Threat & Sentiment Score Breakdown'}</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="px-2 py-0.5 bg-indigo-200 text-indigo-900 rounded font-mono font-black">
@@ -104,7 +104,7 @@ export default function PostCard({ post }) {
           <div className="p-4 bg-white space-y-3.5 text-xs animate-fadeIn">
             <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
               <span className="font-bold text-slate-500 uppercase tracking-wider block text-[10px]">
-                {lang === 'hi' ? 'एआई इंटेलिजेंस मूल्यांकन (OpenRouter Multi-Agent):' : 'Hermes AI Intelligence Assessment:'}
+                {lang === 'hi' ? 'એઆઈ થ્રેટ અને સેન્ટિમેન્ટ ગણતરી (MultiTask Classifier):' : 'MultiTask Threat & Sentiment Assessment:'}
               </span>
               <p className="text-slate-800 font-semibold mt-1 text-sm leading-relaxed">{aiReason}</p>
             </div>

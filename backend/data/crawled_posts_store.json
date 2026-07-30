@@ -1,0 +1,1250 @@
+[
+  {
+    "platform": "x",
+    "author_username": "@tester",
+    "content": "sample post",
+    "url": "https://example.com/post/1",
+    "hashtags": [],
+    "sentiment": {
+      "label": "neutral",
+      "confidence": 0.9
+    },
+    "threat_category": {
+      "label": "Neutral",
+      "confidence": 0.9,
+      "all_scores": {}
+    },
+    "threat_level": "Neutral",
+    "threat_score": 0.9,
+    "hate_speech": {
+      "flag": false,
+      "confidence": 0.1
+    },
+    "fake_news_signal": {
+      "status": "not_flagged",
+      "matched_claim_id": null,
+      "similarity": 0.0
+    },
+    "requires_human_review": false,
+    "language": "en",
+    "id": "efd3ce74-ad5a-42d5-8dcf-291ec9776714",
+    "crawled_at": "2026-07-28T06:38:28.563127"
+  },
+  {
+    "id": "post-gu-001",
+    "platform": "x",
+    "author_username": "@surat_cyber_watch",
+    "author_id": "usr_99812",
+    "content": "સુરતમાં અમુક જૂથો દ્વારા ખોટી અફવાઓ ફેલાવવામાં આવી રહી છે. કૃપા કરીને કોઈ પણ ચકાસણી વગરના મેસેજ ફોરવર્ડ ના કરો. #SuratSafety #GujaratPolice #NoMisinformation",
+    "url": "https://x.com/surat_cyber_watch/status/18928371",
+    "hashtags": [
+      "SuratSafety",
+      "GujaratPolice",
+      "NoMisinformation"
+    ],
+    "language": "gu",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 342,
+      "shares": 89,
+      "comments": 45
+    },
+    "sentiment": {
+      "label": "positive",
+      "score": 0.88
+    },
+    "threat_level": "Neutral",
+    "threat_score": 0.12,
+    "is_hate_speech": false,
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-07-30T06:34:16.280411",
+    "created_at": "2026-07-30T06:31:16.280436"
+  },
+  {
+    "id": "post-gu-002",
+    "platform": "facebook",
+    "author_username": "deshi_rebel_99",
+    "author_id": "fb_usr_4401",
+    "content": "કાલે સુરત ચોક બજારમાં બધા ભેગા થાઓ! આ નેતાઓને સબક શીખવવો પડશે, ઈંટ પથ્થર લઈને આવજો! 😡🔥 #SuratProtest #Riots2026",
+    "url": "https://facebook.com/posts/99182371",
+    "hashtags": [
+      "SuratProtest",
+      "Riots2026"
+    ],
+    "language": "gu",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 1205,
+      "shares": 450,
+      "comments": 312
+    },
+    "sentiment": {
+      "label": "negative",
+      "score": 0.96
+    },
+    "threat_level": "Incitement to Violence",
+    "threat_score": 0.92,
+    "is_hate_speech": true,
+    "is_bot": false,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-07-30T06:41:16.280447",
+    "created_at": "2026-07-30T06:38:16.280452"
+  },
+  {
+    "id": "post-hi-001",
+    "platform": "youtube",
+    "author_username": "TruthUnmasked_HI",
+    "author_id": "yt_ch_881",
+    "content": "ब्रेकिंग न्यूज़: शहर के मुख्य पानी के स्रोत में जहर मिला दिया गया है! तुरंत पानी पीना बंद करें और घर से बाहर निकलें! ⚠️🚫 #FakeNewsAlert #Panic",
+    "url": "https://youtube.com/watch?v=threat9912",
+    "hashtags": [
+      "FakeNewsAlert",
+      "Panic"
+    ],
+    "language": "hi",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 4500,
+      "shares": 2300,
+      "comments": 1200
+    },
+    "sentiment": {
+      "label": "negative",
+      "score": 0.91
+    },
+    "threat_level": "Fake News",
+    "threat_score": 0.86,
+    "is_hate_speech": false,
+    "is_bot": true,
+    "coordination_group": "coord_group_beta",
+    "crawled_at": "2026-07-30T06:44:16.280460",
+    "created_at": "2026-07-30T06:42:16.280466"
+  },
+  {
+    "id": "post-hinglish-001",
+    "platform": "instagram",
+    "author_username": "@hinglish_trolls_bot1",
+    "author_id": "ig_usr_551",
+    "content": "Aaj raat ko 10 baje local minister ke residence pe attack hone wala hai. Sabhi log lathi aur petrol bomb ke saath tayar raho!! 🔥💥 #TargetMinister #HinglishRiot",
+    "url": "https://instagram.com/p/C9912381",
+    "hashtags": [
+      "TargetMinister",
+      "HinglishRiot"
+    ],
+    "language": "hinglish",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 890,
+      "shares": 410,
+      "comments": 190
+    },
+    "sentiment": {
+      "label": "negative",
+      "score": 0.98
+    },
+    "threat_level": "Incitement to Violence",
+    "threat_score": 0.95,
+    "is_hate_speech": true,
+    "is_bot": true,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-07-30T06:45:16.280474",
+    "created_at": "2026-07-30T06:43:16.280480"
+  },
+  {
+    "id": "post-hi-002",
+    "platform": "x",
+    "author_username": "@samajik_shanti",
+    "author_id": "usr_7721",
+    "content": "इन विशेष समुदाय के लोगों को भारत से खदेड़ देना चाहिए, ये सब गद्दार हैं! इनका बहिष्कार करो। #CommunalTension #HateSpeech",
+    "url": "https://x.com/samajik_shanti/status/771823",
+    "hashtags": [
+      "CommunalTension",
+      "HateSpeech"
+    ],
+    "language": "hi",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 1500,
+      "shares": 670,
+      "comments": 400
+    },
+    "sentiment": {
+      "label": "negative",
+      "score": 0.95
+    },
+    "threat_level": "Inflammatory",
+    "threat_score": 0.78,
+    "is_hate_speech": true,
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-07-30T06:28:16.280488",
+    "created_at": "2026-07-30T06:24:16.280495"
+  },
+  {
+    "id": "post-en-001",
+    "platform": "x",
+    "author_username": "@FactCheckGujarat",
+    "author_id": "usr_1002",
+    "content": "ALERT: The viral message regarding water contamination in Ahmedabad is completely FALSE. Municipal authorities confirm water supply is 100% safe. #FactCheck #Ahmedabad",
+    "url": "https://x.com/FactCheckGujarat/status/991203",
+    "hashtags": [
+      "FactCheck",
+      "Ahmedabad"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 2800,
+      "shares": 1400,
+      "comments": 210
+    },
+    "sentiment": {
+      "label": "positive",
+      "score": 0.92
+    },
+    "threat_level": "Neutral",
+    "threat_score": 0.05,
+    "is_hate_speech": false,
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-07-30T06:21:16.280503",
+    "created_at": "2026-07-30T06:16:16.280510"
+  },
+  {
+    "id": "post-gu-003",
+    "platform": "instagram",
+    "author_username": "@surat_memes_hq",
+    "author_id": "ig_usr_882",
+    "content": "સુરતમાં કાલે વરસાદની આગાહી! સુરતીઓ લોચા અને ખમણ ખાવા તૈયાર થાવ 😋☔ #SuratWeather #SuratFoodie",
+    "url": "https://instagram.com/p/C7712399",
+    "hashtags": [
+      "SuratWeather",
+      "SuratFoodie"
+    ],
+    "language": "gu",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 5400,
+      "shares": 890,
+      "comments": 150
+    },
+    "sentiment": {
+      "label": "positive",
+      "score": 0.95
+    },
+    "threat_level": "Neutral",
+    "threat_score": 0.02,
+    "is_hate_speech": false,
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-07-30T06:06:16.280519",
+    "created_at": "2026-07-30T06:01:16.280536"
+  },
+  {
+    "id": "post-hinglish-002",
+    "platform": "facebook",
+    "author_username": "troll_army_bot99",
+    "author_id": "fb_usr_9912",
+    "content": "Yeh Neta chor hai! Kal iske office ke bahar pathrav karke building ko aag laga do! 🔥🔥 #AagLagado #ProtestNow",
+    "url": "https://facebook.com/posts/7781293",
+    "hashtags": [
+      "AagLagado",
+      "ProtestNow"
+    ],
+    "language": "hinglish",
+    "geo_location": {
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "lat": 19.076,
+      "lng": 72.8777
+    },
+    "engagement": {
+      "likes": 750,
+      "shares": 380,
+      "comments": 190
+    },
+    "sentiment": {
+      "label": "negative",
+      "score": 0.97
+    },
+    "threat_level": "Incitement to Violence",
+    "threat_score": 0.94,
+    "is_hate_speech": true,
+    "is_bot": true,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-07-30T06:36:16.280546",
+    "created_at": "2026-07-30T06:32:16.280554"
+  },
+  {
+    "id": "live-rss-0379d505",
+    "platform": "facebook",
+    "author_username": "@rajeev_singh",
+    "author_id": "usr_25125",
+    "content": "'Pellet guns can be used in exceptional situations': SC seeks RAF ammunition log from Jantar Mantar protest. The Supreme Court observed that when in extreme violent situations police are permitted to use bullets if violence does not get controlled by lathicharge and tear gas, how can they be barred from using pellet guns if a protest, which has turned violent after being hijacked by miscreants for",
+    "url": "https://timesofindia.indiatimes.com/india/police-empowered-to-use-pellet-guns-in-exceptional-situations-supreme-court/articleshow/132729208.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "hi",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 282,
+      "shares": 9,
+      "comments": 38
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-07-30T06:46:44.059410",
+    "created_at": "2026-07-30T06:46:44.059424",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-0379d505",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9254,
+        "probabilities": {
+          "negative": 0.9254,
+          "neutral": 0.0598,
+          "positive": 0.0147
+        }
+      },
+      "threat_category": {
+        "label": "Incitement to Violence",
+        "confidence": 0.5111,
+        "all_scores": {
+          "Incitement to Violence": 0.5111,
+          "Inflammatory": 0.3213,
+          "Neutral": 0.1479,
+          "Fake News": 0.0198
+        }
+      },
+      "hate_speech": {
+        "flag": true,
+        "confidence": 0.6478,
+        "target_group_hint": "community"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1363
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:47:53Z",
+      "inference_time_ms": 22638.62
+    },
+    "threat_level": "Incitement to Violence",
+    "sentiment": "negative",
+    "is_hate_speech": true
+  },
+  {
+    "id": "live-rss-8673a0f6",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_73308",
+    "content": "'Students deserve justice': Rahul Gandhi shares video claiming police brutality during NEET protest.",
+    "url": "https://timesofindia.indiatimes.com/india/students-deserve-justice-rahul-gandhi-shares-video-on-police-brutality-during-neet-protest/articleshow/132728472.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 1056,
+      "shares": 194,
+      "comments": 8
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-07-30T06:46:44.059692",
+    "created_at": "2026-07-30T06:46:44.059706",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-8673a0f6",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.7949,
+        "probabilities": {
+          "negative": 0.7949,
+          "neutral": 0.188,
+          "positive": 0.017
+        }
+      },
+      "threat_category": {
+        "label": "Incitement to Violence",
+        "confidence": 0.8314,
+        "all_scores": {
+          "Incitement to Violence": 0.8314,
+          "Inflammatory": 0.1192,
+          "Fake News": 0.0374,
+          "Neutral": 0.0119
+        }
+      },
+      "hate_speech": {
+        "flag": true,
+        "confidence": 0.8314,
+        "target_group_hint": "community"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.2349
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:47:57Z",
+      "inference_time_ms": 4197.66
+    },
+    "threat_level": "Incitement to Violence",
+    "sentiment": "negative",
+    "is_hate_speech": true
+  },
+  {
+    "id": "live-rss-82304257",
+    "platform": "youtube",
+    "author_username": "@manash_pratim_g",
+    "author_id": "usr_98552",
+    "content": "850 exhibitors to take part in Delhi gifting, stationery expo. Paperworld Delhi, being held in the Capital for the first time after five editions in Mumbai, will focus on stationery, writing instruments, school and office supplies, art materials, paper products, packaging, educational solutions and workplace essentials. The exhibitions will also have dedicated spaces for start-ups, product innovat",
+    "url": "https://timesofindia.indiatimes.com/india/850-exhibitors-to-take-part-in-delhi-gifting-stationery-expo/articleshow/132727960.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "hinglish",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 1108,
+      "shares": 51,
+      "comments": 51
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-07-30T06:46:44.059940",
+    "created_at": "2026-07-30T06:46:44.059947",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-82304257",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5607,
+        "probabilities": {
+          "neutral": 0.5607,
+          "positive": 0.3946,
+          "negative": 0.0447
+        }
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.832,
+        "all_scores": {
+          "Neutral": 0.832,
+          "Inflammatory": 0.0942,
+          "Fake News": 0.0571,
+          "Incitement to Violence": 0.0168
+        }
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.0754,
+        "target_group_hint": null
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1228
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:48:04Z",
+      "inference_time_ms": 7182.22
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-54a0084e",
+    "platform": "facebook",
+    "author_username": "@rajeev_singh",
+    "author_id": "usr_72955",
+    "content": "'Pellet guns can be used in exceptional situations': SC seeks RAF ammunition log from Jantar Mantar protest. The Supreme Court observed that when in extreme violent situations police are permitted to use bullets if violence does not get controlled by lathicharge and tear gas, how can they be barred from using pellet guns if a protest, which has turned violent after being hijacked by miscreants for",
+    "url": "https://timesofindia.indiatimes.com/india/police-empowered-to-use-pellet-guns-in-exceptional-situations-supreme-court/articleshow/132729208.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "hinglish",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 104,
+      "shares": 293,
+      "comments": 69
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-07-30T06:48:51.004776",
+    "created_at": "2026-07-30T06:48:51.004798",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-54a0084e",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9254,
+        "probabilities": {
+          "negative": 0.9254,
+          "neutral": 0.0598,
+          "positive": 0.0147
+        }
+      },
+      "threat_category": {
+        "label": "Incitement to Violence",
+        "confidence": 0.5111,
+        "all_scores": {
+          "Incitement to Violence": 0.5111,
+          "Inflammatory": 0.3213,
+          "Neutral": 0.1479,
+          "Fake News": 0.0198
+        }
+      },
+      "hate_speech": {
+        "flag": true,
+        "confidence": 0.6478,
+        "target_group_hint": "community"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1363
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:49:38Z",
+      "inference_time_ms": 21651.01
+    },
+    "threat_level": "Incitement to Violence",
+    "sentiment": "negative",
+    "is_hate_speech": true
+  },
+  {
+    "id": "live-rss-0dfa6be3",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_99738",
+    "content": "'Students deserve justice': Rahul Gandhi shares video claiming police brutality during NEET protest.",
+    "url": "https://timesofindia.indiatimes.com/india/students-deserve-justice-rahul-gandhi-shares-video-on-police-brutality-during-neet-protest/articleshow/132728472.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "hi",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 185,
+      "shares": 117,
+      "comments": 80
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-07-30T06:48:51.005165",
+    "created_at": "2026-07-30T06:48:51.005183",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-0dfa6be3",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.7949,
+        "probabilities": {
+          "negative": 0.7949,
+          "neutral": 0.188,
+          "positive": 0.017
+        }
+      },
+      "threat_category": {
+        "label": "Incitement to Violence",
+        "confidence": 0.8314,
+        "all_scores": {
+          "Incitement to Violence": 0.8314,
+          "Inflammatory": 0.1192,
+          "Fake News": 0.0374,
+          "Neutral": 0.0119
+        }
+      },
+      "hate_speech": {
+        "flag": true,
+        "confidence": 0.8314,
+        "target_group_hint": "community"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.2349
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:49:44Z",
+      "inference_time_ms": 6027.06
+    },
+    "threat_level": "Incitement to Violence",
+    "sentiment": "negative",
+    "is_hate_speech": true
+  },
+  {
+    "id": "live-rss-078c4e93",
+    "platform": "youtube",
+    "author_username": "@manash_pratim_g",
+    "author_id": "usr_11965",
+    "content": "850 exhibitors to take part in Delhi gifting, stationery expo. Paperworld Delhi, being held in the Capital for the first time after five editions in Mumbai, will focus on stationery, writing instruments, school and office supplies, art materials, paper products, packaging, educational solutions and workplace essentials. The exhibitions will also have dedicated spaces for start-ups, product innovat",
+    "url": "https://timesofindia.indiatimes.com/india/850-exhibitors-to-take-part-in-delhi-gifting-stationery-expo/articleshow/132727960.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 536,
+      "shares": 18,
+      "comments": 39
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-07-30T06:48:51.005674",
+    "created_at": "2026-07-30T06:48:51.005691",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-078c4e93",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5607,
+        "probabilities": {
+          "neutral": 0.5607,
+          "positive": 0.3946,
+          "negative": 0.0447
+        }
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.832,
+        "all_scores": {
+          "Neutral": 0.832,
+          "Inflammatory": 0.0942,
+          "Fake News": 0.0571,
+          "Incitement to Violence": 0.0168
+        }
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.0754,
+        "target_group_hint": null
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1228
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:49:54Z",
+      "inference_time_ms": 10296.39
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "gs-27ec6493d7",
+    "platform": "googlesuggest",
+    "author_username": "@google_suggest",
+    "author_id": "google_autocomplete",
+    "content": "cjp news",
+    "url": "https://www.google.com/search?q=cjp+news",
+    "hashtags": [],
+    "language": "en",
+    "geo_location": null,
+    "engagement": {
+      "likes": 0,
+      "shares": 0,
+      "comments": 0,
+      "views": 0
+    },
+    "comments": [],
+    "thumbnail_url": "",
+    "source_type": "SCRAPY_GOOGLE_SUGGEST",
+    "crawled_at": "2026-07-30T06:49:55.590054",
+    "created_at": "2026-07-30T06:49:55.590075",
+    "nlp_analysis": {
+      "post_id": "gs-27ec6493d7",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.6128,
+        "probabilities": {
+          "neutral": 0.6128,
+          "positive": 0.2067,
+          "negative": 0.1805
+        }
+      },
+      "threat_category": {
+        "label": "Fake News",
+        "confidence": 0.4016,
+        "all_scores": {
+          "Fake News": 0.4016,
+          "Neutral": 0.2811,
+          "Incitement to Violence": 0.1811,
+          "Inflammatory": 0.1362
+        }
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1811,
+        "target_group_hint": null
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.2237
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:50:00Z",
+      "inference_time_ms": 4485.67
+    },
+    "threat_level": "Fake News",
+    "sentiment": "neutral",
+    "is_hate_speech": false,
+    "requires_review": true
+  },
+  {
+    "id": "gs-b2264025cd",
+    "platform": "googlesuggest",
+    "author_username": "@google_suggest",
+    "author_id": "google_autocomplete",
+    "content": "cjp news today",
+    "url": "https://www.google.com/search?q=cjp+news+today",
+    "hashtags": [],
+    "language": "en",
+    "geo_location": null,
+    "engagement": {
+      "likes": 0,
+      "shares": 0,
+      "comments": 0,
+      "views": 0
+    },
+    "comments": [],
+    "thumbnail_url": "",
+    "source_type": "SCRAPY_GOOGLE_SUGGEST",
+    "crawled_at": "2026-07-30T06:49:55.590141",
+    "created_at": "2026-07-30T06:49:55.590154",
+    "nlp_analysis": {
+      "post_id": "gs-b2264025cd",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.568,
+        "probabilities": {
+          "neutral": 0.568,
+          "positive": 0.3016,
+          "negative": 0.1303
+        }
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.3307,
+        "all_scores": {
+          "Neutral": 0.3307,
+          "Fake News": 0.266,
+          "Incitement to Violence": 0.2417,
+          "Inflammatory": 0.1616
+        }
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.2417,
+        "target_group_hint": null
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1971
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:50:04Z",
+      "inference_time_ms": 4688.33
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false,
+    "requires_review": false
+  },
+  {
+    "id": "gs-5d38d33b6c",
+    "platform": "googlesuggest",
+    "author_username": "@google_suggest",
+    "author_id": "google_autocomplete",
+    "content": "cjp news latest",
+    "url": "https://www.google.com/search?q=cjp+news+latest",
+    "hashtags": [],
+    "language": "en",
+    "geo_location": null,
+    "engagement": {
+      "likes": 0,
+      "shares": 0,
+      "comments": 0,
+      "views": 0
+    },
+    "comments": [],
+    "thumbnail_url": "",
+    "source_type": "SCRAPY_GOOGLE_SUGGEST",
+    "crawled_at": "2026-07-30T06:49:55.590191",
+    "created_at": "2026-07-30T06:49:55.590202",
+    "nlp_analysis": {
+      "post_id": "gs-5d38d33b6c",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.6528,
+        "probabilities": {
+          "neutral": 0.6528,
+          "positive": 0.2163,
+          "negative": 0.131
+        }
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.3558,
+        "all_scores": {
+          "Neutral": 0.3558,
+          "Incitement to Violence": 0.2504,
+          "Fake News": 0.2035,
+          "Inflammatory": 0.1903
+        }
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.2504,
+        "target_group_hint": null
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1828
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:50:09Z",
+      "inference_time_ms": 4312.72
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false,
+    "requires_review": false
+  },
+  {
+    "id": "gs-45e23a2558",
+    "platform": "googlesuggest",
+    "author_username": "@google_suggest",
+    "author_id": "google_autocomplete",
+    "content": "cjp news in hindi",
+    "url": "https://www.google.com/search?q=cjp+news+in+hindi",
+    "hashtags": [],
+    "language": "en",
+    "geo_location": null,
+    "engagement": {
+      "likes": 0,
+      "shares": 0,
+      "comments": 0,
+      "views": 0
+    },
+    "comments": [],
+    "thumbnail_url": "",
+    "source_type": "SCRAPY_GOOGLE_SUGGEST",
+    "crawled_at": "2026-07-30T06:49:55.590229",
+    "created_at": "2026-07-30T06:49:55.590239",
+    "nlp_analysis": {
+      "post_id": "gs-45e23a2558",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.7484,
+        "probabilities": {
+          "neutral": 0.7484,
+          "positive": 0.1652,
+          "negative": 0.0865
+        }
+      },
+      "threat_category": {
+        "label": "Fake News",
+        "confidence": 0.4995,
+        "all_scores": {
+          "Fake News": 0.4995,
+          "Neutral": 0.1926,
+          "Incitement to Violence": 0.1752,
+          "Inflammatory": 0.1326
+        }
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1752,
+        "target_group_hint": null
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.249
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:50:13Z",
+      "inference_time_ms": 4443.59
+    },
+    "threat_level": "Fake News",
+    "sentiment": "neutral",
+    "is_hate_speech": false,
+    "requires_review": true
+  },
+  {
+    "id": "gs-fc4fec7f60",
+    "platform": "googlesuggest",
+    "author_username": "@google_suggest",
+    "author_id": "google_autocomplete",
+    "content": "cjp news update",
+    "url": "https://www.google.com/search?q=cjp+news+update",
+    "hashtags": [],
+    "language": "en",
+    "geo_location": null,
+    "engagement": {
+      "likes": 0,
+      "shares": 0,
+      "comments": 0,
+      "views": 0
+    },
+    "comments": [],
+    "thumbnail_url": "",
+    "source_type": "SCRAPY_GOOGLE_SUGGEST",
+    "crawled_at": "2026-07-30T06:49:55.590264",
+    "created_at": "2026-07-30T06:49:55.590275",
+    "nlp_analysis": {
+      "post_id": "gs-fc4fec7f60",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.8001,
+        "probabilities": {
+          "neutral": 0.8001,
+          "positive": 0.1275,
+          "negative": 0.0724
+        }
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.3444,
+        "all_scores": {
+          "Neutral": 0.3444,
+          "Incitement to Violence": 0.2555,
+          "Fake News": 0.2145,
+          "Inflammatory": 0.1856
+        }
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.2555,
+        "target_group_hint": null
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.168
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:50:18Z",
+      "inference_time_ms": 4641.42
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false,
+    "requires_review": false
+  },
+  {
+    "id": "live-rss-e3c55720",
+    "platform": "youtube",
+    "author_username": "@rajeev_singh",
+    "author_id": "usr_98394",
+    "content": "'Pellet guns can be used in exceptional situations': SC seeks RAF ammunition log from Jantar Mantar protest. The Supreme Court observed that when in extreme violent situations police are permitted to use bullets if violence does not get controlled by lathicharge and tear gas, how can they be barred from using pellet guns if a protest, which has turned violent after being hijacked by miscreants for",
+    "url": "https://timesofindia.indiatimes.com/india/police-empowered-to-use-pellet-guns-in-exceptional-situations-supreme-court/articleshow/132729208.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "hinglish",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 591,
+      "shares": 245,
+      "comments": 74
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-07-30T06:50:52.995479",
+    "created_at": "2026-07-30T06:50:52.995497",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-e3c55720",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9254,
+        "probabilities": {
+          "negative": 0.9254,
+          "neutral": 0.0598,
+          "positive": 0.0147
+        }
+      },
+      "threat_category": {
+        "label": "Incitement to Violence",
+        "confidence": 0.5111,
+        "all_scores": {
+          "Incitement to Violence": 0.5111,
+          "Inflammatory": 0.3213,
+          "Neutral": 0.1479,
+          "Fake News": 0.0198
+        }
+      },
+      "hate_speech": {
+        "flag": true,
+        "confidence": 0.6478,
+        "target_group_hint": "community"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1363
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:51:35Z",
+      "inference_time_ms": 17608.27
+    },
+    "threat_level": "Incitement to Violence",
+    "sentiment": "negative",
+    "is_hate_speech": true
+  },
+  {
+    "id": "live-rss-320736cc",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_36224",
+    "content": "'Students deserve justice': Rahul Gandhi shares video claiming police brutality during NEET protest.",
+    "url": "https://timesofindia.indiatimes.com/india/students-deserve-justice-rahul-gandhi-shares-video-on-police-brutality-during-neet-protest/articleshow/132728472.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "hinglish",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 152,
+      "shares": 250,
+      "comments": 37
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-07-30T06:50:52.995755",
+    "created_at": "2026-07-30T06:50:52.995764",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-320736cc",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.7949,
+        "probabilities": {
+          "negative": 0.7949,
+          "neutral": 0.188,
+          "positive": 0.017
+        }
+      },
+      "threat_category": {
+        "label": "Incitement to Violence",
+        "confidence": 0.8314,
+        "all_scores": {
+          "Incitement to Violence": 0.8314,
+          "Inflammatory": 0.1192,
+          "Fake News": 0.0374,
+          "Neutral": 0.0119
+        }
+      },
+      "hate_speech": {
+        "flag": true,
+        "confidence": 0.8314,
+        "target_group_hint": "community"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.2349
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:51:39Z",
+      "inference_time_ms": 4625.64
+    },
+    "threat_level": "Incitement to Violence",
+    "sentiment": "negative",
+    "is_hate_speech": true
+  },
+  {
+    "id": "live-rss-bf5f0e66",
+    "platform": "instagram",
+    "author_username": "@manash_pratim_g",
+    "author_id": "usr_23055",
+    "content": "850 exhibitors to take part in Delhi gifting, stationery expo. Paperworld Delhi, being held in the Capital for the first time after five editions in Mumbai, will focus on stationery, writing instruments, school and office supplies, art materials, paper products, packaging, educational solutions and workplace essentials. The exhibitions will also have dedicated spaces for start-ups, product innovat",
+    "url": "https://timesofindia.indiatimes.com/india/850-exhibitors-to-take-part-in-delhi-gifting-stationery-expo/articleshow/132727960.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 196,
+      "shares": 241,
+      "comments": 37
+    },
+    "is_bot": false,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-07-30T06:50:52.996076",
+    "created_at": "2026-07-30T06:50:52.996087",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-bf5f0e66",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5607,
+        "probabilities": {
+          "neutral": 0.5607,
+          "positive": 0.3946,
+          "negative": 0.0447
+        }
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.832,
+        "all_scores": {
+          "Neutral": 0.832,
+          "Inflammatory": 0.0942,
+          "Fake News": 0.0571,
+          "Incitement to Violence": 0.0168
+        }
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.0754,
+        "target_group_hint": null
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1228
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "muril-xlm-roberta-v1",
+      "processed_at": "2026-07-30T06:51:47Z",
+      "inference_time_ms": 7393.3
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  }
+]

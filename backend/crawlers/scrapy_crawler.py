@@ -115,10 +115,13 @@ class ScrapyCrawler(BaseCrawler):
                 except Exception:
                     continue  # try next mirror
 
-        # ── Tier 3: Synthetic stubs (last resort) ─────────────────────────
-        print("[ScrapyCrawler] All X sources failed — using synthetic stubs.")
-        results = self._synthetic_x_stubs(query, limit)
-        return results[:limit]
+        # ── Tier 3: Real Web search fallback for X ────────────────────────
+        print("[ScrapyCrawler] Nitter/Selenium unavailable — fetching real web results for query.")
+        web_results = await self._crawl_web(f"{query} twitter", limit)
+        for r in web_results:
+            r.platform = "X"
+            r.source_type = "SCRAPY_X_WEB"
+        return web_results[:limit]
 
     def _parse_nitter_rss(self, xml_text: str, limit: int) -> List[CrawlResult]:
         soup = BeautifulSoup(xml_text, "xml")
