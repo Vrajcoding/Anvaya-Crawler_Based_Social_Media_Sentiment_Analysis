@@ -84,7 +84,7 @@ class InMemoryDatabase:
                     stored_posts = json.load(f)
                     for post in stored_posts:
                         p_id = str(post.get("id") or post.get("post_id") or uuid.uuid4())
-                        self.posts[p_id] = self._ensure_nlp_analysis(post)
+                        self.posts[p_id] = post
         except Exception as e:
             print(f"[db_client] Load from disk warning: {e}")
 
