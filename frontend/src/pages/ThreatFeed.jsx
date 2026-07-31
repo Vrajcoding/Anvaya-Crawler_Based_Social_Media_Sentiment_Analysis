@@ -62,8 +62,8 @@ export default function ThreatFeed() {
       </div>
 
       {/* QUICK PRESET SEARCH BUTTONS FOR POLICE OFFICERS */}
-      <div className="gov-card" style={{ background: '#f8fafc', borderLeft: '6px solid var(--gov-gold)' }}>
-        <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--gov-navy-dark)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+      <div className="gov-card" style={{ background: 'var(--bg-card-alt)', borderLeft: '6px solid var(--gov-gold)' }}>
+        <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
           <Search size={18} color="var(--gov-gold)" /> {t('preset_quick_search')}
         </h4>
 
@@ -87,9 +87,9 @@ export default function ThreatFeed() {
       </div>
 
       {/* CUSTOM SUSPICIOUS TEXT TESTER */}
-      <div className="gov-card" style={{ border: '2px solid var(--gov-navy)' }}>
-        <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--gov-navy-dark)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Sparkles color="var(--gov-navy)" size={20} /> {t('test_text_title')}
+      <div className="gov-card" style={{ border: '2px solid var(--gov-navy-light)' }}>
+        <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Sparkles color="var(--gov-navy-light)" size={20} /> {t('test_text_title')}
         </h3>
         <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
           {t('test_text_desc')}
@@ -110,8 +110,8 @@ export default function ThreatFeed() {
         </form>
 
         {analysisResult && (
-          <div style={{ marginTop: '1rem', padding: '1rem', background: '#f0fdf4', borderRadius: '8px', border: '2px solid #4ade80' }}>
-            <h4 style={{ color: '#166534', marginBottom: '0.5rem' }}>✅ {t('analysis_complete')}</h4>
+          <div style={{ marginTop: '1rem', padding: '1rem', background: 'rgba(34, 197, 94, 0.15)', borderRadius: '8px', border: '2px solid #22c55e' }}>
+            <h4 style={{ color: '#4ade80', marginBottom: '0.5rem' }}>✅ {t('analysis_complete')}</h4>
             <PostCard post={analysisResult} />
           </div>
         )}
@@ -120,7 +120,7 @@ export default function ThreatFeed() {
       {/* FILTERS CONTROL BAR */}
       <div className="gov-card" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Filter size={18} color="var(--gov-navy)" />
+          <Filter size={18} color="var(--gov-navy-light)" />
           <strong style={{ fontSize: '0.95rem' }}>{t('label_platform')}</strong>
           <select value={platform} onChange={(e) => setPlatform(e.target.value)} style={{ padding: '0.5rem', borderRadius: '6px', border: '1px solid var(--border-gov)', fontSize: '0.95rem', fontWeight: 600 }}>
             <option value="all">{t('all_platforms')}</option>

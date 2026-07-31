@@ -62,7 +62,7 @@ export default function App() {
   };
 
   return (
-    <div style={{ background: '#f8fafc', minHeight: '100vh' }}>
+    <div style={{ background: 'var(--bg-main)', color: 'var(--text-dark)', minHeight: '100vh', transition: 'background-color 0.3s ease, color 0.3s ease' }}>
       <Header activeTab={activeTab} setActiveTab={setActiveTab} onRefresh={() => window.location.reload()} />
       
       {/* HIGH VISIBILITY EMERGENCY ALERT BANNER FOR POLICE OFFICERS */}

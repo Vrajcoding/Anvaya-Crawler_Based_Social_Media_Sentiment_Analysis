@@ -55,9 +55,9 @@ export default function Watchlist() {
       </div>
 
       {/* ADD NEW FORM */}
-      <div className="gov-card" style={{ border: '2px solid var(--gov-navy)' }}>
-        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--gov-navy-dark)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Plus size={20} color="var(--gov-navy)" /> {t('wl_add_target')}
+      <div className="gov-card" style={{ border: '2px solid var(--gov-navy-light)' }}>
+        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Plus size={20} color="var(--gov-navy-light)" /> {t('wl_add_target')}
         </h3>
 
         <form onSubmit={handleAdd} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr auto', gap: '0.85rem', alignItems: 'center' }}>
@@ -104,30 +104,30 @@ export default function Watchlist() {
 
       {/* WATCHLIST LIST */}
       <div className="gov-card">
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--gov-navy-dark)', marginBottom: '1rem' }}>
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '1rem' }}>
           {t('wl_active_targets')} ({items.length})
         </h3>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
           {items.map((item) => (
-            <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#f8fafc', padding: '1.25rem', borderRadius: '8px', borderLeft: '6px solid var(--gov-navy)', border: '1px solid var(--border-gov)', flexWrap: 'wrap', gap: '1rem' }}>
+            <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-card-alt)', padding: '1.25rem', borderRadius: '8px', borderLeft: '6px solid var(--gov-navy-light)', border: '1px solid var(--border-gov)', flexWrap: 'wrap', gap: '1rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
-                <span style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--gov-navy-dark)' }}>{item.value}</span>
-                <span style={{ background: '#e2e8f0', color: '#1e293b', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 800 }}>{item.type.toUpperCase()}</span>
+                <span style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--text-dark)' }}>{item.value}</span>
+                <span style={{ background: 'var(--bg-card)', color: 'var(--text-dark)', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 800, border: '1px solid var(--border-gov)' }}>{item.type.toUpperCase()}</span>
                 <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 600 }}>{t('wl_platform')}: {item.platform.toUpperCase()}</span>
                 {item.geo_target && (
-                  <span style={{ fontSize: '0.9rem', color: 'var(--gov-navy)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <span style={{ fontSize: '0.9rem', color: 'var(--gov-navy-light)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
                     <MapPin size={16} /> {item.geo_target}
                   </span>
                 )}
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <span style={{ background: item.priority === 'high' ? '#fef2f2' : '#eff6ff', color: item.priority === 'high' ? '#dc2626' : '#1e3a8a', padding: '0.3rem 0.8rem', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 800, border: `1px solid ${item.priority === 'high' ? '#f87171' : '#93c5fd'}` }}>
+                <span style={{ background: item.priority === 'high' ? 'rgba(239, 68, 68, 0.2)' : 'rgba(59, 130, 246, 0.2)', color: item.priority === 'high' ? '#fca5a5' : '#93c5fd', padding: '0.3rem 0.8rem', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 800, border: `1px solid ${item.priority === 'high' ? '#ef4444' : '#3b82f6'}` }}>
                   {item.priority.toUpperCase()} PRIORITY
                 </span>
 
-                <button className="btn-gov-secondary" style={{ color: '#dc2626', borderColor: '#f87171', padding: '0.4rem 0.8rem' }} onClick={() => handleDelete(item.id)}>
+                <button className="btn-gov-secondary" style={{ color: '#ef4444', borderColor: '#ef4444', padding: '0.4rem 0.8rem' }} onClick={() => handleDelete(item.id)}>
                   <Trash2 size={16} /> {t('wl_btn_remove')}
                 </button>
               </div>

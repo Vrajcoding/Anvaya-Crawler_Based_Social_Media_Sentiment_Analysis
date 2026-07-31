@@ -78,13 +78,13 @@ export default function NetworkView() {
         <div className="flex gap-2">
           <button
             onClick={() => setActiveView('graph')}
-            className={`px-4 py-2 rounded-lg font-bold text-sm flex items-center gap-2 transition-all ${activeView === 'graph' ? 'bg-indigo-700 text-white shadow-md' : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'}`}
+            className={`px-4 py-2 rounded-lg font-bold text-sm flex items-center gap-2 transition-all ${activeView === 'graph' ? 'bg-indigo-600 text-white shadow-md' : 'bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700'}`}
           >
             <Share2 size={16} /> {lang === 'hi' ? 'इंटरेक्टिव ग्राफ़ व्यू' : 'Interactive Graph View'}
           </button>
           <button
             onClick={() => setActiveView('grid')}
-            className={`px-4 py-2 rounded-lg font-bold text-sm flex items-center gap-2 transition-all ${activeView === 'grid' ? 'bg-indigo-700 text-white shadow-md' : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'}`}
+            className={`px-4 py-2 rounded-lg font-bold text-sm flex items-center gap-2 transition-all ${activeView === 'grid' ? 'bg-indigo-600 text-white shadow-md' : 'bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700'}`}
           >
             <Network size={16} /> {lang === 'hi' ? 'कार्ड ग्रिड व्यू' : 'Card Grid View'}
           </button>
@@ -97,17 +97,17 @@ export default function NetworkView() {
         <div className="gov-card">
           <div className="gov-card-title flex justify-between items-center">
             <span>🌐 {activeView === 'graph' ? (lang === 'hi' ? 'सक्रिय संदिग्ध नोड कनेक्शन (SVG Force Layout)' : 'Active Threat Graph Mapping') : (lang === 'hi' ? 'पहचाने गए संदिग्ध नोड्स ग्रिड' : 'Identified Threat Nodes Grid')} ({graphData.nodes.length} Nodes)</span>
-            <span className="text-xs font-mono bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-full border border-indigo-200">
+            <span className="text-xs font-mono bg-indigo-950 text-indigo-300 px-2.5 py-1 rounded-full border border-indigo-700">
               ⚡ Neural Graph Threat Engine Active
             </span>
           </div>
 
-          <div style={{ background: '#f8fafc', padding: '0.8rem 1rem', borderRadius: '8px', border: '1px solid var(--border-gov)', marginBottom: '1rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            🟢 <strong>{lang === 'hi' ? 'लीजेंड:' : 'Legend:'}</strong> 🔴 <span className="text-red-600 font-bold">Bot Accounts</span> | 🟠 <span className="text-amber-600 font-bold">Viral Posts</span> | 🔵 <span className="text-blue-600 font-bold">Verified/Standard Accounts</span> | ⚡ Click any node to inspect telemetry
+          <div style={{ background: 'var(--bg-card-alt)', padding: '0.8rem 1rem', borderRadius: '8px', border: '1px solid var(--border-gov)', marginBottom: '1rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+            🟢 <strong>{lang === 'hi' ? 'लीजेंड:' : 'Legend:'}</strong> 🔴 <span className="text-red-400 font-bold">Bot Accounts</span> | 🟠 <span className="text-amber-400 font-bold">Viral Posts</span> | 🔵 <span className="text-blue-400 font-bold">Verified/Standard Accounts</span> | ⚡ Click any node to inspect telemetry
           </div>
 
           {activeView === 'graph' ? (
-            <div className="bg-slate-900 rounded-xl p-4 border-2 border-slate-700 relative overflow-hidden shadow-inner flex items-center justify-center">
+            <div className="bg-slate-950 rounded-xl p-4 border-2 border-slate-800 relative overflow-hidden shadow-inner flex items-center justify-center">
               <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-[450px] max-w-full">
                 {/* Background grid lines */}
                 <defs>
@@ -166,13 +166,13 @@ export default function NetworkView() {
                   onClick={() => setSelectedNode(n)}
                   className="cursor-pointer transition-all hover:shadow-md"
                   style={{
-                    background: selectedNode?.id === n.id ? '#eff6ff' : (n.is_bot ? '#fef2f2' : (n.type === 'post' ? '#fff7ed' : '#ffffff')),
-                    border: `2px solid ${selectedNode?.id === n.id ? '#2563eb' : (n.is_bot ? '#f87171' : (n.type === 'post' ? '#fb923c' : 'var(--border-gov)'))}`,
+                    background: selectedNode?.id === n.id ? 'rgba(59, 130, 246, 0.2)' : (n.is_bot ? 'rgba(239, 68, 68, 0.15)' : (n.type === 'post' ? 'rgba(249, 115, 22, 0.15)' : 'var(--bg-card)')),
+                    border: `2px solid ${selectedNode?.id === n.id ? '#3b82f6' : (n.is_bot ? '#ef4444' : (n.type === 'post' ? '#f97316' : 'var(--border-gov)'))}`,
                     padding: '1rem',
                     borderRadius: '8px'
                   }}
                 >
-                  <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--gov-navy-dark)', wordBreak: 'break-all' }}>
+                  <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--text-dark)', wordBreak: 'break-all' }}>
                     {n.is_bot ? '🤖 ' : (n.type === 'post' ? '📝 ' : '👤 ')}
                     {n.label}
                   </div>
@@ -190,72 +190,72 @@ export default function NetworkView() {
           
           {/* NODE INSPECTOR PANEL */}
           {selectedNode ? (
-            <div className="gov-card border-2 border-indigo-200 bg-indigo-50/40">
-              <div className="gov-card-title flex items-center gap-2 text-indigo-900">
-                <Info className="w-5 h-5 text-indigo-600" />
+            <div className="gov-card border-2 border-indigo-800 bg-slate-900/60">
+              <div className="gov-card-title flex items-center gap-2 text-indigo-300">
+                <Info className="w-5 h-5 text-indigo-400" />
                 <span>{lang === 'hi' ? 'नोड विस्तृत विवरण' : 'Selected Node Inspector'}</span>
               </div>
 
               <div className="space-y-3 pt-2 text-sm">
-                <div className="bg-white p-3 rounded-lg border border-gray-200 shadow-xs">
-                  <span className="text-xs text-gray-500 font-bold uppercase block">{lang === 'hi' ? 'पहचानकर्ता' : 'Entity Identifier'}</span>
-                  <span className="text-base font-bold text-gray-900 break-all">{selectedNode.label}</span>
+                <div className="bg-slate-800/80 p-3 rounded-lg border border-slate-700 shadow-xs">
+                  <span className="text-xs text-slate-400 font-bold uppercase block">{lang === 'hi' ? 'पहचानकर्ता' : 'Entity Identifier'}</span>
+                  <span className="text-base font-bold text-slate-100 break-all">{selectedNode.label}</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="bg-white p-2.5 rounded-lg border border-gray-200">
-                    <span className="text-xs text-gray-500 block">{lang === 'hi' ? 'प्रकार' : 'Node Type'}</span>
-                    <span className="font-bold text-indigo-700 capitalize">{selectedNode.type}</span>
+                  <div className="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700">
+                    <span className="text-xs text-slate-400 block">{lang === 'hi' ? 'प्रकार' : 'Node Type'}</span>
+                    <span className="font-bold text-indigo-300 capitalize">{selectedNode.type}</span>
                   </div>
-                  <div className="bg-white p-2.5 rounded-lg border border-gray-200">
-                    <span className="text-xs text-gray-500 block">{lang === 'hi' ? 'प्लेटफ़ॉर्म' : 'Platform'}</span>
-                    <span className="font-bold text-gray-800 uppercase">{selectedNode.platform || 'General'}</span>
+                  <div className="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700">
+                    <span className="text-xs text-slate-400 block">{lang === 'hi' ? 'प्लेटफ़ॉर्म' : 'Platform'}</span>
+                    <span className="font-bold text-slate-200 uppercase">{selectedNode.platform || 'General'}</span>
                   </div>
                 </div>
 
-                <div className={`p-3 rounded-lg border flex items-center justify-between ${selectedNode.is_bot ? 'bg-red-50 border-red-300 text-red-900' : 'bg-emerald-50 border-emerald-300 text-emerald-900'}`}>
+                <div className={`p-3 rounded-lg border flex items-center justify-between ${selectedNode.is_bot ? 'bg-red-950/40 border-red-800 text-red-200' : 'bg-emerald-950/40 border-emerald-800 text-emerald-200'}`}>
                   <span className="font-bold">{lang === 'hi' ? 'बॉट वर्गीकरण:' : 'Bot Assessment:'}</span>
-                  <span className="px-2.5 py-0.5 rounded font-extrabold text-xs bg-white shadow-xs">
+                  <span className="px-2.5 py-0.5 rounded font-extrabold text-xs bg-slate-900 shadow-xs">
                     {selectedNode.is_bot ? '🚨 IDENTIFIED BOTNET ACCOUNT' : '✅ HUMAN / LEGITIMATE'}
                   </span>
                 </div>
 
                 {selectedNode.threat_level && (
-                  <div className="bg-white p-3 rounded-lg border border-gray-200">
-                    <span className="text-xs text-gray-500 block">{lang === 'hi' ? 'थ्रेट स्तर' : 'Threat Level'}</span>
-                    <span className="font-bold text-red-600">{selectedNode.threat_level}</span>
+                  <div className="bg-slate-800/80 p-3 rounded-lg border border-slate-700">
+                    <span className="text-xs text-slate-400 block">{lang === 'hi' ? 'थ्रेट स्तर' : 'Threat Level'}</span>
+                    <span className="font-bold text-red-400">{selectedNode.threat_level}</span>
                   </div>
                 )}
               </div>
             </div>
           ) : (
-            <div className="gov-card p-6 text-center text-gray-500">
+            <div className="gov-card p-6 text-center text-slate-400">
               {lang === 'hi' ? 'विस्तृत जानकारी देखने के लिए ग्राफ़ में किसी नोड पर क्लिक करें।' : 'Click any node on the graph or grid to inspect intelligence telemetry.'}
             </div>
           )}
 
           {/* DETECTED BOT CLUSTERS */}
           <div className="gov-card">
-            <div className="gov-card-title" style={{ color: '#7e22ce' }}>
+            <div className="gov-card-title" style={{ color: '#c084fc' }}>
               <span>🤖 {lang === 'hi' ? 'सक्रिय बॉट क्लस्टर्स' : 'Detected Bot Clusters'} ({botClusters.length})</span>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '0.5rem' }}>
               {botClusters.length === 0 ? (
-                <div style={{ color: '#64748b', textAlign: 'center', padding: '1.5rem', fontWeight: 600 }}>
+                <div style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '1.5rem', fontWeight: 600 }}>
                   {t('alert_status_resolved')}
                 </div>
               ) : (
                 botClusters.map((cluster, idx) => (
-                  <div key={idx} style={{ background: '#f3e8ff', border: '2px solid #c084fc', borderRadius: '8px', padding: '1rem' }}>
+                  <div key={idx} style={{ background: 'rgba(168, 85, 247, 0.15)', border: '2px solid #a855f7', borderRadius: '8px', padding: '1rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontWeight: 800, color: '#6b21a8', fontSize: '1rem' }}>{cluster.cluster_id}</span>
-                      <span style={{ background: '#7e22ce', color: '#fff', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 800 }}>
+                      <span style={{ fontWeight: 800, color: '#e9d5ff', fontSize: '1rem' }}>{cluster.cluster_id}</span>
+                      <span style={{ background: '#9333ea', color: '#fff', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 800 }}>
                         {cluster.account_count} बॉट्स जुड़े हैं
                       </span>
                     </div>
 
-                    <div style={{ fontSize: '0.9rem', color: '#4c1d95', marginTop: '0.5rem', fontWeight: 600 }}>
+                    <div style={{ fontSize: '0.9rem', color: '#d8b4fe', marginTop: '0.5rem', fontWeight: 600 }}>
                       शामिल यूजर एकाउंट्स: {cluster.accounts.join(', ')}
                     </div>
                   </div>

@@ -46,11 +46,11 @@ export default function TrendAnalysis() {
         <div style={{ height: '280px', width: '100%' }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={hashtags}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis dataKey="hashtag" stroke="#1e293b" />
-              <YAxis stroke="#1e293b" />
-              <Tooltip />
-              <Bar dataKey="count" fill="var(--gov-navy)" radius={[6, 6, 0, 0]} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border-gov)" />
+              <XAxis dataKey="hashtag" stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+              <YAxis stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+              <Tooltip contentStyle={{ background: 'var(--bg-card)', borderColor: 'var(--border-gov)', color: 'var(--text-dark)' }} />
+              <Bar dataKey="count" fill="var(--gov-navy-light)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -61,20 +61,20 @@ export default function TrendAnalysis() {
         
         {/* HASHTAGS SPIKE LIST */}
         <div className="gov-card">
-          <div className="gov-card-title" style={{ color: '#c2410c' }}>
+          <div className="gov-card-title" style={{ color: '#fb923c' }}>
             <span>{t('trends_spiking_tags')}</span>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
             {hashtags.map((h, i) => (
-              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#f8fafc', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-gov)' }}>
+              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-card-alt)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-gov)' }}>
                 <div>
-                  <div style={{ fontWeight: 800, fontSize: '1.05rem', color: 'var(--gov-navy)' }}>{h.hashtag}</div>
+                  <div style={{ fontWeight: 800, fontSize: '1.05rem', color: 'var(--gov-navy-light)' }}>{h.hashtag}</div>
                   <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>कुल पोस्ट संख्या: {h.count}</div>
                 </div>
 
                 <div>
-                  <span style={{ padding: '0.3rem 0.8rem', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 800, background: h.is_spiking ? '#fef2f2' : '#f0fdf4', color: h.is_spiking ? '#dc2626' : '#166534', border: `1px solid ${h.is_spiking ? '#f87171' : '#4ade80'}` }}>
+                  <span style={{ padding: '0.3rem 0.8rem', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 800, background: h.is_spiking ? 'rgba(239, 68, 68, 0.2)' : 'rgba(34, 197, 94, 0.2)', color: h.is_spiking ? '#fca5a5' : '#86efac', border: `1px solid ${h.is_spiking ? '#ef4444' : '#22c55e'}` }}>
                     SPIKE score: {h.z_score} {h.is_spiking && '🔥 तेजी से फैला'}
                   </span>
                 </div>
@@ -85,20 +85,20 @@ export default function TrendAnalysis() {
 
         {/* KEYWORDS SPIKE LIST */}
         <div className="gov-card">
-          <div className="gov-card-title" style={{ color: 'var(--gov-navy-dark)' }}>
+          <div className="gov-card-title" style={{ color: '#fde047' }}>
             <span>{t('trends_sensitive_keywords')}</span>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
             {keywords.map((k, i) => (
-              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#f8fafc', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-gov)' }}>
+              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-card-alt)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-gov)' }}>
                 <div>
-                  <div style={{ fontWeight: 800, fontSize: '1.05rem', color: '#b45309' }}>{k.keyword}</div>
+                  <div style={{ fontWeight: 800, fontSize: '1.05rem', color: '#f59e0b' }}>{k.keyword}</div>
                   <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>पहचाने गए संदेश: {k.count}</div>
                 </div>
 
                 <div>
-                  <span style={{ padding: '0.3rem 0.8rem', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 800, background: '#fefce8', color: '#a16207', border: '1px solid #facc15' }}>
+                  <span style={{ padding: '0.3rem 0.8rem', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 800, background: 'rgba(234, 179, 8, 0.2)', color: '#fde047', border: '1px solid #eab308' }}>
                     गंभीरता (Anomaly Rating): {k.z_score}
                   </span>
                 </div>

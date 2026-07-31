@@ -78,32 +78,32 @@ export default function Settings() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
         
         {/* OPENROUTER AI MULTI-AGENT SETTINGS */}
-        <div className="gov-card" style={{ border: '2px solid #2563eb', background: '#eff6ff' }}>
-          <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#1e3a8a', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Sparkles size={22} color="#2563eb" /> {t('settings_title')}
+        <div className="gov-card" style={{ border: '2px solid var(--gov-navy-light)', background: 'var(--bg-card-alt)' }}>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Sparkles size={22} color="var(--gov-gold)" /> {t('settings_title')}
           </h3>
 
           <form onSubmit={handleSaveOpenRouter} style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
             <div>
-              <label style={{ fontSize: '0.9rem', fontWeight: 800, color: '#1e3a8a', display: 'block', marginBottom: '0.25rem' }}>
+              <label style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-dark)', display: 'block', marginBottom: '0.25rem' }}>
                 🔑 {t('api_key_label')}
               </label>
               <input 
                 type="password" 
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
-                style={{ width: '100%', border: '2px solid #93c5fd', padding: '0.6rem', borderRadius: '6px', fontSize: '0.95rem', background: '#fff' }}
+                style={{ width: '100%', border: '2px solid var(--border-gov)', padding: '0.6rem', borderRadius: '6px', fontSize: '0.95rem', background: 'var(--bg-card)', color: 'var(--text-dark)' }}
               />
             </div>
 
             <div>
-              <label style={{ fontSize: '0.9rem', fontWeight: 800, color: '#1e3a8a', display: 'block', marginBottom: '0.25rem' }}>
+              <label style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-dark)', display: 'block', marginBottom: '0.25rem' }}>
                 🧠 {t('nlp_model_label')}
               </label>
               <select 
                 value={nlpModel}
                 onChange={(e) => setNlpModel(e.target.value)}
-                style={{ width: '100%', border: '2px solid #93c5fd', padding: '0.6rem', borderRadius: '6px', fontSize: '0.95rem', fontWeight: 700, background: '#fff' }}
+                style={{ width: '100%', border: '2px solid var(--border-gov)', padding: '0.6rem', borderRadius: '6px', fontSize: '0.95rem', fontWeight: 700, background: 'var(--bg-card)', color: 'var(--text-dark)' }}
               >
                 <option value="google/gemini-2.0-flash-exp:free">google/gemini-2.0-flash-exp:free (Fast Multilingual JSON)</option>
                 <option value="meta-llama/llama-3.3-70b-instruct:free">meta-llama/llama-3.3-70b-instruct:free (High Reasoning)</option>
@@ -113,13 +113,13 @@ export default function Settings() {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.9rem', fontWeight: 800, color: '#1e3a8a', display: 'block', marginBottom: '0.25rem' }}>
+              <label style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-dark)', display: 'block', marginBottom: '0.25rem' }}>
                 🛡️ {t('threat_model_label')}
               </label>
               <select 
                 value={threatModel}
                 onChange={(e) => setThreatModel(e.target.value)}
-                style={{ width: '100%', border: '2px solid #93c5fd', padding: '0.6rem', borderRadius: '6px', fontSize: '0.95rem', fontWeight: 700, background: '#fff' }}
+                style={{ width: '100%', border: '2px solid var(--border-gov)', padding: '0.6rem', borderRadius: '6px', fontSize: '0.95rem', fontWeight: 700, background: 'var(--bg-card)', color: 'var(--text-dark)' }}
               >
                 <option value="meta-llama/llama-3.3-70b-instruct:free">meta-llama/llama-3.3-70b-instruct:free (Deep Threat Analysis)</option>
                 <option value="google/gemini-2.0-flash-exp:free">google/gemini-2.0-flash-exp:free</option>
@@ -128,13 +128,13 @@ export default function Settings() {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.9rem', fontWeight: 800, color: '#1e3a8a', display: 'block', marginBottom: '0.25rem' }}>
+              <label style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-dark)', display: 'block', marginBottom: '0.25rem' }}>
                 📄 {t('report_model_label')}
               </label>
               <select 
                 value={reportModel}
                 onChange={(e) => setReportModel(e.target.value)}
-                style={{ width: '100%', border: '2px solid #93c5fd', padding: '0.6rem', borderRadius: '6px', fontSize: '0.95rem', fontWeight: 700, background: '#fff' }}
+                style={{ width: '100%', border: '2px solid var(--border-gov)', padding: '0.6rem', borderRadius: '6px', fontSize: '0.95rem', fontWeight: 700, background: 'var(--bg-card)', color: 'var(--text-dark)' }}
               >
                 <option value="deepseek/deepseek-chat:free">deepseek/deepseek-chat:free (Professional CTI Brief Synthesis)</option>
                 <option value="google/gemini-2.0-flash-exp:free">google/gemini-2.0-flash-exp:free</option>
@@ -143,25 +143,25 @@ export default function Settings() {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.9rem', fontWeight: 800, color: '#1e3a8a', display: 'block', marginBottom: '0.25rem' }}>
+              <label style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-dark)', display: 'block', marginBottom: '0.25rem' }}>
                 ⚡ {t('alert_model_label')}
               </label>
               <select 
                 value={alertModel}
                 onChange={(e) => setAlertModel(e.target.value)}
-                style={{ width: '100%', border: '2px solid #93c5fd', padding: '0.6rem', borderRadius: '6px', fontSize: '0.95rem', fontWeight: 700, background: '#fff' }}
+                style={{ width: '100%', border: '2px solid var(--border-gov)', padding: '0.6rem', borderRadius: '6px', fontSize: '0.95rem', fontWeight: 700, background: 'var(--bg-card)', color: 'var(--text-dark)' }}
               >
                 <option value="qwen/qwen-2.5-7b-instruct:free">qwen/qwen-2.5-7b-instruct:free (Sub-second Alert Dispatch)</option>
                 <option value="google/gemini-2.0-flash-exp:free">google/gemini-2.0-flash-exp:free</option>
               </select>
             </div>
 
-            <button type="submit" className="btn-gov-primary" style={{ width: 'fit-content', background: '#2563eb' }}>
+            <button type="submit" className="btn-gov-primary" style={{ width: 'fit-content' }}>
               <Save size={18} /> {t('btn_save_settings')}
             </button>
 
             {openRouterSaved && (
-              <div style={{ background: '#dcfce7', color: '#166534', padding: '0.75rem', borderRadius: '6px', fontWeight: 800 }}>
+              <div style={{ background: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', padding: '0.75rem', borderRadius: '6px', fontWeight: 800, border: '1px solid #22c55e' }}>
                 {t('settings_saved_msg')}
               </div>
             )}
@@ -169,9 +169,9 @@ export default function Settings() {
         </div>
 
         {/* HUMAN IN THE LOOP FORM */}
-        <div className="gov-card" style={{ border: '2px solid var(--gov-navy)' }}>
-          <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--gov-navy-dark)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Sliders size={20} color="var(--gov-navy)" /> AI वर्गीकरण में सुधार दर्ज करें (Submit AI Correction)
+        <div className="gov-card" style={{ border: '2px solid var(--gov-navy-light)' }}>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Sliders size={20} color="var(--gov-navy-light)" /> AI वर्गीकरण में सुधार दर्ज करें (Submit AI Correction)
           </h3>
 
           <form onSubmit={handleSubmitFeedback} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
@@ -214,7 +214,7 @@ export default function Settings() {
             </button>
 
             {submitted && (
-              <div style={{ background: '#dcfce7', color: '#166534', padding: '0.75rem', borderRadius: '6px', fontWeight: 800 }}>
+              <div style={{ background: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', padding: '0.75rem', borderRadius: '6px', fontWeight: 800, border: '1px solid #22c55e' }}>
                 ✅ सुधार दर्ज किया गया! मॉडल retraining चक्र में नया भार अपडेट कर दिया गया है।
               </div>
             )}

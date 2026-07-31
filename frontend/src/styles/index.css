@@ -1,5 +1,46 @@
-/* Official Indian Government Police Portal Theme - Clean & High Contrast */
-:root {
+/* Official Indian Government Police Portal Theme - Dark & High Contrast Command Center */
+:root, [data-theme="dark"] {
+  --gov-navy-dark: #0a192f;
+  --gov-navy: #1e3a8a;
+  --gov-navy-light: #3b82f6;
+  --gov-gold: #d97706;
+  --gov-gold-light: #fef3c7;
+  
+  --bg-main: #0b1329;
+  --bg-card: #131c35;
+  --bg-card-alt: #182442;
+  
+  --text-dark: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-light: #ffffff;
+  
+  --border-gov: #233358;
+  --border-strong: #384c7e;
+  
+  --input-bg: #182442;
+  --input-border: #2e416d;
+  --input-text: #f8fafc;
+  
+  --threat-critical-bg: rgba(220, 38, 38, 0.2);
+  --threat-critical-text: #fca5a5;
+  --threat-critical-border: #ef4444;
+  
+  --threat-high-bg: rgba(234, 88, 12, 0.2);
+  --threat-high-text: #fdba74;
+  --threat-high-border: #f97316;
+  
+  --threat-medium-bg: rgba(202, 138, 4, 0.2);
+  --threat-medium-text: #fde047;
+  --threat-medium-border: #eab308;
+  
+  --threat-low-bg: rgba(22, 101, 52, 0.25);
+  --threat-low-text: #86efac;
+  --threat-low-border: #22c55e;
+
+  --font-size-multiplier: 1;
+}
+
+[data-theme="light"] {
   --gov-navy-dark: #0a192f;
   --gov-navy: #1e3a8a;
   --gov-navy-light: #2563eb;
@@ -12,10 +53,14 @@
   
   --text-dark: #0f172a;
   --text-muted: #475569;
-  --text-light: #f8fafc;
+  --text-light: #ffffff;
   
   --border-gov: #cbd5e1;
   --border-strong: #94a3b8;
+  
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --input-text: #0f172a;
   
   --threat-critical-bg: #fef2f2;
   --threat-critical-text: #991b1b;
@@ -32,8 +77,6 @@
   --threat-low-bg: #f0fdf4;
   --threat-low-text: #166534;
   --threat-low-border: #4ade80;
-
-  --font-size-multiplier: 1;
 }
 
 * {
@@ -108,7 +151,7 @@ body {
 .emblem-title h1 {
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--gov-navy-dark);
+  color: var(--text-dark);
   letter-spacing: -0.3px;
 }
 
@@ -147,9 +190,29 @@ body {
 }
 
 .gov-nav-item.active {
-  background: #ffffff;
-  color: var(--gov-navy-dark);
+  background: var(--bg-main);
+  color: var(--gov-gold);
   border-bottom: 4px solid var(--gov-gold);
+}
+
+/* Global Form Elements Dark Theme Support */
+input, select, textarea {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border: 1.5px solid var(--input-border);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gov-navy-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+select option {
+  background-color: var(--bg-card);
+  color: var(--text-dark);
 }
 
 /* Page Layout */
@@ -163,9 +226,11 @@ body {
   background: var(--bg-card);
   padding: 1.25rem 1.75rem;
   border-radius: 8px;
-  border-left: 6px solid var(--gov-navy);
+  border-left: 6px solid var(--gov-navy-light);
+  border: 1px solid var(--border-gov);
+  border-left: 6px solid var(--gov-gold);
   margin-bottom: 1.75rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -174,7 +239,7 @@ body {
 .page-title-banner h2 {
   font-size: 1.6rem;
   font-weight: 800;
-  color: var(--gov-navy-dark);
+  color: var(--text-dark);
 }
 
 .page-title-banner p {
@@ -189,13 +254,13 @@ body {
   border-radius: 10px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .gov-card-title {
   font-size: 1.25rem;
   font-weight: 800;
-  color: var(--gov-navy-dark);
+  color: var(--text-dark);
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid var(--bg-card-alt);
@@ -208,7 +273,7 @@ body {
 .btn-gov-primary {
   background: var(--gov-navy);
   color: #ffffff;
-  border: 2px solid var(--gov-navy);
+  border: 2px solid var(--gov-navy-light);
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   font-weight: 700;
@@ -217,12 +282,12 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  box-shadow: 0 2px 6px rgba(30, 58, 138, 0.2);
+  box-shadow: 0 2px 6px rgba(30, 58, 138, 0.3);
   transition: all 0.2s ease;
 }
 
 .btn-gov-primary:hover {
-  background: var(--gov-navy-dark);
+  background: #1d4ed8;
   transform: translateY(-1px);
 }
 
@@ -242,8 +307,8 @@ body {
 }
 
 .btn-gov-secondary {
-  background: #ffffff;
-  color: var(--gov-navy-dark);
+  background: var(--bg-card-alt);
+  color: var(--text-dark);
   border: 2px solid var(--border-strong);
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
@@ -253,10 +318,12 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
+  transition: all 0.2s ease;
 }
 
 .btn-gov-secondary:hover {
-  background: var(--bg-card-alt);
+  background: var(--border-gov);
+  color: var(--text-light);
 }
 
 /* Stat Grid for Police Dashboard */
@@ -268,14 +335,14 @@ body {
 }
 
 .gov-stat-card {
-  background: #ffffff;
+  background: var(--bg-card);
   border: 2px solid var(--border-gov);
   border-radius: 10px;
   padding: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .gov-stat-icon {
@@ -291,7 +358,7 @@ body {
 .gov-stat-number {
   font-size: 2.2rem;
   font-weight: 800;
-  color: var(--gov-navy-dark);
+  color: var(--text-dark);
   line-height: 1;
 }
 
@@ -340,16 +407,16 @@ body {
 
 /* High Legibility Feed Item */
 .gov-post-card {
-  background: #ffffff;
+  background: var(--bg-card);
   border: 2px solid var(--border-gov);
   border-radius: 10px;
   padding: 1.5rem;
   margin-bottom: 1.25rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .gov-post-card:hover {
-  border-color: var(--gov-navy);
+  border-color: var(--gov-navy-light);
 }
 
 .gov-post-header {
@@ -357,20 +424,20 @@ body {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border-gov);
   margin-bottom: 1rem;
 }
 
 .gov-post-body {
   font-size: 1.15rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-dark);
   line-height: 1.6;
   margin-bottom: 1.25rem;
-  background: #f8fafc;
+  background: var(--bg-card-alt);
   padding: 1rem;
   border-radius: 6px;
-  border-left: 4px solid var(--gov-navy);
+  border-left: 4px solid var(--gov-navy-light);
 }
 
 .gov-post-footer {

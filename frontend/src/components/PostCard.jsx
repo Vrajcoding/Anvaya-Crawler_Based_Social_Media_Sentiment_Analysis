@@ -43,9 +43,9 @@ export default function PostCard({ post }) {
 
   const getSentimentStyle = () => {
     switch (sentimentLabel) {
-      case 'positive': return { bg: '#dcfce7', color: '#166534', border: '#86efac', icon: '✅', text: 'Positive' };
-      case 'negative': return { bg: '#fee2e2', color: '#991b1b', border: '#fca5a5', icon: '⛔', text: 'Negative' };
-      default:         return { bg: '#e0e7ff', color: '#3730a3', border: '#a5b4fc', icon: '▫️', text: 'Neutral' };
+      case 'positive': return { bg: 'rgba(34, 197, 94, 0.18)', color: '#4ade80', border: '#22c55e', icon: '✅', text: 'Positive' };
+      case 'negative': return { bg: 'rgba(239, 68, 68, 0.18)', color: '#fca5a5', border: '#ef4444', icon: '⛔', text: 'Negative' };
+      default:         return { bg: 'rgba(99, 102, 241, 0.18)', color: '#a5b4fc', border: '#6366f1', icon: '▫️', text: 'Neutral' };
     }
   };
   const sentStyle = getSentimentStyle();
@@ -65,24 +65,24 @@ export default function PostCard({ post }) {
      'Standard social interaction / general civic discussion.');
 
   return (
-    <div className="gov-post-card transition-all hover:shadow-lg hover:border-indigo-300">
+    <div className="gov-post-card transition-all hover:shadow-lg">
       <div className="gov-post-header">
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-          <span style={{ background: 'var(--gov-navy)', color: '#fff', padding: '0.3rem 0.8rem', borderRadius: '6px', fontWeight: 700, fontSize: '0.9rem', display: 'flex', itemsCenter: true, gap: '6px' }}>
+          <span style={{ background: 'var(--gov-navy)', color: '#fff', padding: '0.3rem 0.8rem', borderRadius: '6px', fontWeight: 700, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
             {getPlatformLabel(post.platform)}
           </span>
 
-          <span style={{ fontWeight: 800, fontSize: '1.05rem', color: 'var(--gov-navy-dark)' }}>
+          <span style={{ fontWeight: 800, fontSize: '1.05rem', color: 'var(--text-dark)' }}>
             {post.author_username}
           </span>
 
           {post.is_bot && (
-            <span style={{ background: '#fee2e2', color: '#991b1b', border: '1px solid #f87171', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: '4px' }} className="animate-pulse">
+            <span style={{ background: 'rgba(239, 68, 68, 0.2)', color: '#fca5a5', border: '1px solid #ef4444', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 800, display: 'inline-flex', alignItems: 'center', gap: '4px' }} className="animate-pulse">
               🤖 Bot Network Account
             </span>
           )}
 
-          <span style={{ background: '#e2e8f0', color: '#334155', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 700 }}>
+          <span style={{ background: 'var(--bg-card-alt)', color: 'var(--text-muted)', border: '1px solid var(--border-gov)', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 700 }}>
             {t('label_language')} {getLangBadge(post.language)}
           </span>
         </div>
@@ -113,27 +113,27 @@ export default function PostCard({ post }) {
       </div>
 
       {post.ocr_result && (
-        <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', padding: '0.75rem', borderRadius: '6px', fontSize: '0.95rem', color: '#1e40af', marginBottom: '1rem', display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <Sparkles size={18} className="shrink-0 mt-0.5 text-blue-600" />
+        <div style={{ background: 'rgba(59, 130, 246, 0.15)', border: '1px solid #3b82f6', padding: '0.75rem', borderRadius: '6px', fontSize: '0.95rem', color: '#93c5fd', marginBottom: '1rem', display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+          <Sparkles size={18} className="shrink-0 mt-0.5 text-blue-400" />
           <div>
-            <strong className="block text-xs uppercase tracking-wider text-blue-800">OCR Embedded Infographic / Reel Text:</strong>
-            <span className="font-semibold text-blue-950 mt-0.5 block">{post.ocr_result.ocr_text}</span>
+            <strong className="block text-xs uppercase tracking-wider text-blue-300">OCR Embedded Infographic / Reel Text:</strong>
+            <span className="font-semibold text-blue-100 mt-0.5 block">{post.ocr_result.ocr_text}</span>
           </div>
         </div>
       )}
 
       {/* EXPANDABLE AI ANALYSIS ACCORDION (HERMES AGENT REASONING & 6-FACTOR SCORE BREAKDOWN) */}
-      <div className="mb-4 border border-indigo-100 rounded-lg overflow-hidden bg-indigo-50/30">
+      <div className="mb-4 border border-indigo-900/60 rounded-lg overflow-hidden bg-slate-900/40">
         <button
           onClick={() => setShowAnalysis(!showAnalysis)}
-          className="w-full px-4 py-2.5 bg-indigo-50 hover:bg-indigo-100/80 text-indigo-900 font-bold text-xs flex items-center justify-between transition-colors border-b border-indigo-100/60"
+          className="w-full px-4 py-2.5 bg-indigo-950/40 hover:bg-indigo-900/60 text-indigo-200 font-bold text-xs flex items-center justify-between transition-colors border-b border-indigo-900/60"
         >
           <div className="flex items-center gap-2">
-            <Cpu className="w-4 h-4 text-indigo-600" />
+            <Cpu className="w-4 h-4 text-indigo-400" />
             <span>{lang === 'hi' ? 'न्यूरल एआई विश्लेषण व खतरा स्कोर विवरण' : 'Neural AI Threat & Sentiment Score Breakdown'}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 bg-indigo-200 text-indigo-900 rounded font-mono font-black">
+            <span className="px-2 py-0.5 bg-indigo-900 text-indigo-200 border border-indigo-700 rounded font-mono font-black">
               {post.threat_score} / 1.0
             </span>
             {showAnalysis ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
@@ -141,7 +141,7 @@ export default function PostCard({ post }) {
         </button>
 
         {showAnalysis && (
-          <div className="p-4 bg-white space-y-3.5 text-xs animate-fadeIn">
+          <div className="p-4 bg-slate-900/80 space-y-3.5 text-xs animate-fadeIn text-slate-200">
 
             {/* SENTIMENT ANALYSIS RESULT */}
             <div className="p-3 rounded-lg border" style={{ background: sentStyle.bg, borderColor: sentStyle.border }}>
@@ -152,7 +152,7 @@ export default function PostCard({ post }) {
                 <span className="text-sm font-black" style={{ color: sentStyle.color }}>
                   {sentStyle.icon} {sentStyle.text}
                 </span>
-                <span className="px-2 py-0.5 bg-white rounded font-mono font-bold text-[11px]" style={{ color: sentStyle.color }}>
+                <span className="px-2 py-0.5 bg-slate-950/60 rounded font-mono font-bold text-[11px]" style={{ color: sentStyle.color }}>
                   Confidence: {(sentimentConf * 100).toFixed(1)}%
                 </span>
               </div>
@@ -161,17 +161,17 @@ export default function PostCard({ post }) {
                 <div className="mt-2 space-y-1">
                   {Object.entries(sentiment.probabilities || post.nlp_analysis?.sentiment?.probabilities || {}).map(([label, prob]) => (
                     <div key={label} className="flex items-center gap-2">
-                      <span className="w-16 text-[10px] font-semibold text-gray-600 capitalize">{label}</span>
-                      <div className="flex-1 bg-gray-200 h-1.5 rounded-full overflow-hidden">
+                      <span className="w-16 text-[10px] font-semibold text-slate-400 capitalize">{label}</span>
+                      <div className="flex-1 bg-slate-800 h-1.5 rounded-full overflow-hidden">
                         <div
                           className="h-full rounded-full"
                           style={{
                             width: `${(prob * 100).toFixed(0)}%`,
-                            background: label === 'positive' ? '#16a34a' : label === 'negative' ? '#dc2626' : '#6366f1',
+                            background: label === 'positive' ? '#22c55e' : label === 'negative' ? '#ef4444' : '#818cf8',
                           }}
                         />
                       </div>
-                      <span className="font-mono font-bold text-[10px] text-gray-700 w-10 text-right">{(prob * 100).toFixed(1)}%</span>
+                      <span className="font-mono font-bold text-[10px] text-slate-300 w-10 text-right">{(prob * 100).toFixed(1)}%</span>
                     </div>
                   ))}
                 </div>
@@ -179,27 +179,27 @@ export default function PostCard({ post }) {
             </div>
 
             {/* THREAT CLASSIFICATION */}
-            <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-              <span className="font-bold text-slate-500 uppercase tracking-wider block text-[10px]">
+            <div className="p-3 bg-slate-800/80 rounded-lg border border-slate-700">
+              <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">
                 Threat Classification ({post.nlp_analysis?.threat_category?.model || 'zero-shot NLI'}):
               </span>
-              <p className="text-slate-800 font-semibold mt-1 text-sm leading-relaxed">{aiReason}</p>
+              <p className="text-slate-200 font-semibold mt-1 text-sm leading-relaxed">{aiReason}</p>
               {/* Threat score bars */}
               {(post.nlp_analysis?.threat_category?.all_scores) && (
                 <div className="mt-2 space-y-1">
                   {Object.entries(post.nlp_analysis.threat_category.all_scores).map(([label, score]) => (
                     <div key={label} className="flex items-center gap-2">
-                      <span className="w-28 text-[10px] font-semibold text-gray-600">{label}</span>
-                      <div className="flex-1 bg-gray-200 h-1.5 rounded-full overflow-hidden">
+                      <span className="w-28 text-[10px] font-semibold text-slate-400">{label}</span>
+                      <div className="flex-1 bg-slate-800 h-1.5 rounded-full overflow-hidden">
                         <div
                           className="h-full rounded-full"
                           style={{
                             width: `${(score * 100).toFixed(0)}%`,
-                            background: label === 'Neutral' ? '#16a34a' : label === 'Inflammatory' ? '#d97706' : label === 'Incitement to Violence' ? '#dc2626' : '#9333ea',
+                            background: label === 'Neutral' ? '#22c55e' : label === 'Inflammatory' ? '#f59e0b' : label === 'Incitement to Violence' ? '#ef4444' : '#a855f7',
                           }}
                         />
                       </div>
-                      <span className="font-mono font-bold text-[10px] text-gray-700 w-10 text-right">{(score * 100).toFixed(1)}%</span>
+                      <span className="font-mono font-bold text-[10px] text-slate-300 w-10 text-right">{(score * 100).toFixed(1)}%</span>
                     </div>
                   ))}
                 </div>
@@ -210,95 +210,95 @@ export default function PostCard({ post }) {
             {(post.nlp_analysis?.hate_speech || post.is_hate_speech) && (
               <div className={`p-3 rounded-lg border ${
                 (post.nlp_analysis?.hate_speech?.flag || post.is_hate_speech)
-                  ? 'bg-red-50 border-red-200'
-                  : 'bg-green-50 border-green-200'
+                  ? 'bg-red-950/40 border-red-800'
+                  : 'bg-emerald-950/40 border-emerald-800'
               }`}>
                 <span className={`font-bold uppercase tracking-wider block text-[10px] ${
-                  (post.nlp_analysis?.hate_speech?.flag || post.is_hate_speech) ? 'text-red-700' : 'text-green-700'
+                  (post.nlp_analysis?.hate_speech?.flag || post.is_hate_speech) ? 'text-red-400' : 'text-emerald-400'
                 }`}>
                   Hate Speech Detection ({post.nlp_analysis?.hate_speech?.model || 'ensemble'}):
                 </span>
                 <div className="mt-1 flex items-center gap-2">
                   {(post.nlp_analysis?.hate_speech?.flag || post.is_hate_speech) ? (
-                    <span className="text-red-800 font-bold flex items-center gap-1">
+                    <span className="text-red-300 font-bold flex items-center gap-1">
                       <AlertTriangle size={14} /> HATE SPEECH DETECTED
                       <span className="ml-1 font-mono">({((post.nlp_analysis?.hate_speech?.confidence || 0) * 100).toFixed(0)}%)</span>
                     </span>
                   ) : (
-                    <span className="text-green-800 font-bold flex items-center gap-1">
+                    <span className="text-emerald-300 font-bold flex items-center gap-1">
                       <ShieldCheck size={14} /> No hate speech detected
                     </span>
                   )}
                 </div>
                 {post.nlp_analysis?.hate_speech?.target_group_hint && (
-                  <span className="text-[10px] text-red-600 mt-1 block">Target: {post.nlp_analysis.hate_speech.target_group_hint}</span>
+                  <span className="text-[10px] text-red-400 mt-1 block">Target: {post.nlp_analysis.hate_speech.target_group_hint}</span>
                 )}
               </div>
             )}
 
             {/* 6-FACTOR COMPOSITE SCORE */}
             <div>
-              <span className="font-bold text-gray-700 block mb-2 text-xs">
+              <span className="font-bold text-slate-300 block mb-2 text-xs">
                 {lang === 'hi' ? '6-कारक खतरा स्कोर गणना (Threat Scoring Breakdown):' : '6-Factor Composite Threat Scoring Formula:'}
               </span>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                <div className="bg-gray-50 p-2 rounded border">
-                  <div className="flex justify-between text-[11px] text-gray-600 font-semibold mb-1">
+                <div className="bg-slate-800/80 p-2 rounded border border-slate-700">
+                  <div className="flex justify-between text-[11px] text-slate-400 font-semibold mb-1">
                     <span>Threat Lexicon (30%)</span>
                     <span>{Math.round((scoreBreakdown.classification || 0) * 100)}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-red-600 h-full" style={{ width: `${(scoreBreakdown.classification || 0) * 100}%` }}></div>
+                  <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                    <div className="bg-red-500 h-full" style={{ width: `${(scoreBreakdown.classification || 0) * 100}%` }}></div>
                   </div>
                 </div>
 
-                <div className="bg-gray-50 p-2 rounded border">
-                  <div className="flex justify-between text-[11px] text-gray-600 font-semibold mb-1">
+                <div className="bg-slate-800/80 p-2 rounded border border-slate-700">
+                  <div className="flex justify-between text-[11px] text-slate-400 font-semibold mb-1">
                     <span>Negative Sentiment (20%)</span>
                     <span>{Math.round((scoreBreakdown.sentiment || 0) * 100)}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-amber-600 h-full" style={{ width: `${(scoreBreakdown.sentiment || 0) * 100}%` }}></div>
+                  <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                    <div className="bg-amber-500 h-full" style={{ width: `${(scoreBreakdown.sentiment || 0) * 100}%` }}></div>
                   </div>
                 </div>
 
-                <div className="bg-gray-50 p-2 rounded border">
-                  <div className="flex justify-between text-[11px] text-gray-600 font-semibold mb-1">
+                <div className="bg-slate-800/80 p-2 rounded border border-slate-700">
+                  <div className="flex justify-between text-[11px] text-slate-400 font-semibold mb-1">
                     <span>Hate Speech (15%)</span>
                     <span>{Math.round((scoreBreakdown.hate_speech || 0) * 100)}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-purple-600 h-full" style={{ width: `${(scoreBreakdown.hate_speech || 0) * 100}%` }}></div>
+                  <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                    <div className="bg-purple-500 h-full" style={{ width: `${(scoreBreakdown.hate_speech || 0) * 100}%` }}></div>
                   </div>
                 </div>
 
-                <div className="bg-gray-50 p-2 rounded border">
-                  <div className="flex justify-between text-[11px] text-gray-600 font-semibold mb-1">
+                <div className="bg-slate-800/80 p-2 rounded border border-slate-700">
+                  <div className="flex justify-between text-[11px] text-slate-400 font-semibold mb-1">
                     <span>Viral Velocity (15%)</span>
                     <span>{Math.round((scoreBreakdown.velocity || 0) * 100)}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-blue-600 h-full" style={{ width: `${(scoreBreakdown.velocity || 0) * 100}%` }}></div>
+                  <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                    <div className="bg-blue-500 h-full" style={{ width: `${(scoreBreakdown.velocity || 0) * 100}%` }}></div>
                   </div>
                 </div>
 
-                <div className="bg-gray-50 p-2 rounded border">
-                  <div className="flex justify-between text-[11px] text-gray-600 font-semibold mb-1">
+                <div className="bg-slate-800/80 p-2 rounded border border-slate-700">
+                  <div className="flex justify-between text-[11px] text-slate-400 font-semibold mb-1">
                     <span>Coordination Ring (10%)</span>
                     <span>{Math.round((scoreBreakdown.coordination || 0) * 100)}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-indigo-600 h-full" style={{ width: `${(scoreBreakdown.coordination || 0) * 100}%` }}></div>
+                  <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                    <div className="bg-indigo-500 h-full" style={{ width: `${(scoreBreakdown.coordination || 0) * 100}%` }}></div>
                   </div>
                 </div>
 
-                <div className="bg-gray-50 p-2 rounded border">
-                  <div className="flex justify-between text-[11px] text-gray-600 font-semibold mb-1">
+                <div className="bg-slate-800/80 p-2 rounded border border-slate-700">
+                  <div className="flex justify-between text-[11px] text-slate-400 font-semibold mb-1">
                     <span>Bot Network Likelihood (10%)</span>
                     <span>{Math.round((scoreBreakdown.bot || 0) * 100)}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-rose-600 h-full" style={{ width: `${(scoreBreakdown.bot || 0) * 100}%` }}></div>
+                  <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                    <div className="bg-rose-500 h-full" style={{ width: `${(scoreBreakdown.bot || 0) * 100}%` }}></div>
                   </div>
                 </div>
               </div>

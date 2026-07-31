@@ -74,19 +74,19 @@ export default function Alerts() {
           </div>
         ) : (
           alerts.map((alert) => (
-            <div key={alert.id} className="gov-card" style={{ borderLeft: `8px solid ${alert.severity === 'CRITICAL' ? '#dc2626' : '#c2410c'}`, background: '#ffffff' }}>
+            <div key={alert.id} className="gov-card" style={{ borderLeft: `8px solid ${alert.severity === 'CRITICAL' ? '#ef4444' : '#f97316'}`, background: 'var(--bg-card)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <span style={{ fontWeight: 800, color: alert.severity === 'CRITICAL' ? '#dc2626' : '#c2410c', fontSize: '1.2rem' }}>
+                    <span style={{ fontWeight: 800, color: alert.severity === 'CRITICAL' ? '#ef4444' : '#f97316', fontSize: '1.2rem' }}>
                       🚨 {alert.severity}: {alert.threat_type}
                     </span>
-                    <span style={{ background: '#f1f5f9', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 800, color: '#475569' }}>
+                    <span style={{ background: 'var(--bg-card-alt)', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-muted)', border: '1px solid var(--border-gov)' }}>
                       {alert.status.toUpperCase()}
                     </span>
                   </div>
 
-                  <p style={{ marginTop: '0.6rem', color: '#0f172a', fontSize: '1.1rem', fontWeight: 600 }}>
+                  <p style={{ marginTop: '0.6rem', color: 'var(--text-dark)', fontSize: '1.1rem', fontWeight: 600 }}>
                     {alert.description}
                   </p>
 

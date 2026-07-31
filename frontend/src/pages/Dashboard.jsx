@@ -93,20 +93,20 @@ export default function Dashboard({ setActiveTab }) {
 
       {/* STATS GRID FOR POLICE OFFICERS */}
       <div className="gov-stat-grid">
-        <div className="gov-stat-card" style={{ borderColor: '#f87171' }}>
-          <div className="gov-stat-icon" style={{ background: '#fef2f2', color: '#dc2626' }}>
+        <div className="gov-stat-card" style={{ borderColor: '#ef4444' }}>
+          <div className="gov-stat-icon" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444' }}>
             <AlertTriangle size={32} />
           </div>
           <div>
-            <div className="gov-stat-number" style={{ color: stats?.threat_index_score > 50 ? '#dc2626' : '#166534' }}>
+            <div className="gov-stat-number" style={{ color: stats?.threat_index_score > 50 ? '#ef4444' : '#22c55e' }}>
               {stats?.threat_index_score || '0.0'} / 100
             </div>
             <div className="gov-stat-label">{t('dash_stats_critical')}</div>
           </div>
         </div>
 
-        <div className="gov-stat-card">
-          <div className="gov-stat-icon" style={{ background: '#eff6ff', color: '#1e3a8a' }}>
+        <div className="gov-stat-card" style={{ borderColor: '#3b82f6' }}>
+          <div className="gov-stat-icon" style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa' }}>
             <Radio size={32} />
           </div>
           <div>
@@ -116,21 +116,21 @@ export default function Dashboard({ setActiveTab }) {
         </div>
 
         <div className="gov-stat-card" style={{ borderColor: '#fb923c' }}>
-          <div className="gov-stat-icon" style={{ background: '#fff7ed', color: '#c2410c' }}>
+          <div className="gov-stat-icon" style={{ background: 'rgba(249, 115, 22, 0.15)', color: '#fb923c' }}>
             <ShieldAlert size={32} />
           </div>
           <div>
-            <div className="gov-stat-number" style={{ color: '#c2410c' }}>{stats?.active_alerts || 0}</div>
+            <div className="gov-stat-number" style={{ color: '#fb923c' }}>{stats?.active_alerts || 0}</div>
             <div className="gov-stat-label">{t('nav_alerts')}</div>
           </div>
         </div>
 
-        <div className="gov-stat-card">
-          <div className="gov-stat-icon" style={{ background: '#f3e8ff', color: '#7e22ce' }}>
+        <div className="gov-stat-card" style={{ borderColor: '#c084fc' }}>
+          <div className="gov-stat-icon" style={{ background: 'rgba(168, 85, 247, 0.15)', color: '#c084fc' }}>
             <Cpu size={32} />
           </div>
           <div>
-            <div className="gov-stat-number" style={{ color: '#7e22ce' }}>{stats?.bot_amplification_count || 0}</div>
+            <div className="gov-stat-number" style={{ color: '#c084fc' }}>{stats?.bot_amplification_count || 0}</div>
             <div className="gov-stat-label">{t('dash_stats_bots')}</div>
           </div>
         </div>
@@ -161,23 +161,23 @@ export default function Dashboard({ setActiveTab }) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           
           {/* HIGH PRIORITY ALERTS */}
-          <div className="gov-card" style={{ borderColor: '#f87171' }}>
-            <div className="gov-card-title" style={{ color: '#dc2626' }}>
+          <div className="gov-card" style={{ borderColor: '#ef4444' }}>
+            <div className="gov-card-title" style={{ color: '#ef4444' }}>
               <span>{t('nav_alerts')} ({alerts.length})</span>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               {alerts.length === 0 ? (
-                <div style={{ padding: '1rem', color: '#64748b', textAlign: 'center', fontWeight: 600 }}>
+                <div style={{ padding: '1rem', color: 'var(--text-muted)', textAlign: 'center', fontWeight: 600 }}>
                   {t('alert_status_resolved')}
                 </div>
               ) : (
                 alerts.slice(0, 4).map((alert) => (
-                  <div key={alert.id} style={{ background: '#fef2f2', border: '1px solid #f87171', borderRadius: '8px', padding: '1rem' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 800, color: '#991b1b', fontSize: '0.95rem' }}>
+                  <div key={alert.id} style={{ background: 'var(--threat-critical-bg)', border: '1px solid var(--threat-critical-border)', borderRadius: '8px', padding: '1rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 800, color: 'var(--threat-critical-text)', fontSize: '0.95rem' }}>
                       <span>{alert.severity}: {alert.threat_type}</span>
                     </div>
-                    <p style={{ marginTop: '0.4rem', fontSize: '0.95rem', color: '#1e293b', fontWeight: 600 }}>
+                    <p style={{ marginTop: '0.4rem', fontSize: '0.95rem', color: 'var(--text-dark)', fontWeight: 600 }}>
                       {alert.description}
                     </p>
                     <button 
@@ -215,12 +215,12 @@ export default function Dashboard({ setActiveTab }) {
                       <Cell key={`cell-${index}`} fill={GOV_COLORS[index % GOV_COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip />
+                  <Tooltip contentStyle={{ background: 'var(--bg-card)', borderColor: 'var(--border-gov)', color: 'var(--text-dark)' }} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-around', fontSize: '0.9rem', fontWeight: 700, color: 'var(--gov-navy-dark)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-around', fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-dark)' }}>
               <span>𝕏 X (Twitter)</span>
               <span>📸 IG</span>
               <span>📘 FB</span>
@@ -236,10 +236,10 @@ export default function Dashboard({ setActiveTab }) {
             <div style={{ height: '180px', width: '100%', marginTop: '0.5rem' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={threatBarData} layout="vertical" margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-                  <XAxis type="number" />
-                  <YAxis type="category" dataKey="name" width={85} tick={{ fontSize: 11, fontWeight: 600 }} />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="var(--border-gov)" />
+                  <XAxis type="number" stroke="var(--text-muted)" />
+                  <YAxis type="category" dataKey="name" width={85} tick={{ fontSize: 11, fontWeight: 600, fill: 'var(--text-muted)' }} stroke="var(--text-muted)" />
+                  <Tooltip contentStyle={{ background: 'var(--bg-card)', borderColor: 'var(--border-gov)', color: 'var(--text-dark)' }} />
                   <Bar dataKey="count" radius={[0, 4, 4, 0]}>
                     {threatBarData.map((entry, index) => (
                       <Cell key={`bar-${index}`} fill={THREAT_COLORS[index % THREAT_COLORS.length]} />
@@ -272,15 +272,15 @@ export default function Dashboard({ setActiveTab }) {
                       <Cell key={`sent-${index}`} fill={SENTIMENT_COLORS[index % SENTIMENT_COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip />
+                  <Tooltip contentStyle={{ background: 'var(--bg-card)', borderColor: 'var(--border-gov)', color: 'var(--text-dark)' }} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-around', fontSize: '0.85rem', fontWeight: 700, marginTop: '-0.5rem' }}>
-              <span style={{ color: '#16a34a' }}>✅ Positive ({sentimentPieData[0]?.value || 0})</span>
-              <span style={{ color: '#dc2626' }}>⛔ Negative ({sentimentPieData[1]?.value || 0})</span>
-              <span style={{ color: '#6366f1' }}>⬜ Neutral ({sentimentPieData[2]?.value || 0})</span>
+              <span style={{ color: '#4ade80' }}>✅ Positive ({sentimentPieData[0]?.value || 0})</span>
+              <span style={{ color: '#ef4444' }}>⛔ Negative ({sentimentPieData[1]?.value || 0})</span>
+              <span style={{ color: '#818cf8' }}>⬜ Neutral ({sentimentPieData[2]?.value || 0})</span>
             </div>
           </div>
 
@@ -292,11 +292,11 @@ export default function Dashboard({ setActiveTab }) {
             <div style={{ height: '160px', width: '100%', marginTop: '0.5rem' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={langBarData} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="lang" tick={{ fontSize: 11, fontWeight: 700 }} />
-                  <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
-                  <Tooltip />
-                  <Bar dataKey="posts" fill="#4f46e5" radius={[4, 4, 0, 0]} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border-gov)" />
+                  <XAxis dataKey="lang" tick={{ fontSize: 11, fontWeight: 700, fill: 'var(--text-muted)' }} stroke="var(--text-muted)" />
+                  <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: 'var(--text-muted)' }} stroke="var(--text-muted)" />
+                  <Tooltip contentStyle={{ background: 'var(--bg-card)', borderColor: 'var(--border-gov)', color: 'var(--text-dark)' }} />
+                  <Bar dataKey="posts" fill="#6366f1" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

@@ -33,9 +33,9 @@ export default function Reports() {
         </div>
       </div>
 
-      <div className="gov-card" style={{ border: '2px solid var(--gov-navy)' }}>
-        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--gov-navy-dark)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <FileText size={20} color="var(--gov-navy)" /> {t('report_compile_title')}
+      <div className="gov-card" style={{ border: '2px solid var(--gov-navy-light)' }}>
+        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <FileText size={20} color="var(--gov-navy-light)" /> {t('report_compile_title')}
         </h3>
 
         <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
@@ -82,13 +82,13 @@ export default function Reports() {
       </div>
 
       {reportResult && (
-        <div className="gov-card" style={{ background: '#ffffff', border: '3px solid var(--gov-navy)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '2px solid var(--gov-navy)' }}>
+        <div className="gov-card" style={{ background: 'var(--bg-card)', border: '3px solid var(--gov-navy-light)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '2px solid var(--gov-navy-light)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Shield size={32} color="var(--gov-navy)" />
+              <Shield size={32} color="var(--gov-navy-light)" />
               <div>
-                <h3 style={{ color: 'var(--gov-navy-dark)', fontSize: '1.3rem', fontWeight: 800 }}>आधिकारिक साइबर पुलिस थ्रेट रिपोर्ट (Official Police Intelligence Report)</h3>
-                <span style={{ fontSize: '0.85rem', color: '#64748b' }}>CONFIDENTIAL • GOVERNMENT OF GUJARAT CYBER CELL</span>
+                <h3 style={{ color: 'var(--text-dark)', fontSize: '1.3rem', fontWeight: 800 }}>आधिकारिक साइबर पुलिस थ्रेट रिपोर्ट (Official Police Intelligence Report)</h3>
+                <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>CONFIDENTIAL • GOVERNMENT OF GUJARAT CYBER CELL</span>
               </div>
             </div>
 
@@ -97,19 +97,19 @@ export default function Reports() {
             </button>
           </div>
 
-          <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace', fontSize: '1rem', color: '#0f172a', lineHeight: 1.7, background: '#f8fafc', padding: '1.5rem', borderRadius: '8px', border: '1px solid var(--border-gov)' }}>
+          <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace', fontSize: '1rem', color: 'var(--text-dark)', lineHeight: 1.7, background: 'var(--bg-card-alt)', padding: '1.5rem', borderRadius: '8px', border: '1px solid var(--border-gov)' }}>
             {reportResult.report_md}
           </pre>
 
           <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'space-between', paddingTop: '1.5rem', borderTop: '2px dashed var(--border-gov)' }}>
             <div>
               <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>जांच अधिकारी हस्ताक्षर (Investigating Officer Sign):</div>
-              <div style={{ fontWeight: 800, marginTop: '1.5rem', color: 'var(--gov-navy-dark)' }}>{t('duty_officer_name')}</div>
+              <div style={{ fontWeight: 800, marginTop: '1.5rem', color: 'var(--text-dark)' }}>{t('duty_officer_name')}</div>
             </div>
 
             <div style={{ textAlign: 'right' }}>
               <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>मुहर / Official Stamp Area:</div>
-              <div style={{ border: '2px dashed #94a3b8', width: '120px', height: '60px', borderRadius: '6px', marginTop: '0.5rem', display: 'flex', alignItems: 'center', justifyCenter: 'center', fontSize: '0.75rem', color: '#94a3b8' }}>
+              <div style={{ border: '2px dashed var(--border-gov)', width: '120px', height: '60px', borderRadius: '6px', marginTop: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                 SEAL STAMP
               </div>
             </div>

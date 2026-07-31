@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
-import { Shield, PhoneCall, UserCheck, RefreshCw, ZoomIn, ZoomOut, AlertTriangle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Shield, PhoneCall, UserCheck, RefreshCw, ZoomIn, ZoomOut, AlertTriangle, Moon, Sun } from 'lucide-react';
 import { useLanguage } from '../services/LanguageContext';
 
 export default function Header({ activeTab, setActiveTab, onRefresh }) {
   const { lang, setLang, t } = useLanguage();
   const [fontSize, setFontSize] = useState('normal');
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const toggleFontSize = () => {
     if (fontSize === 'normal') setFontSize('large');
@@ -26,10 +36,41 @@ export default function Header({ activeTab, setActiveTab, onRefresh }) {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          {/* DARK / LIGHT THEME TOGGLE */}
+          <button
+            onClick={toggleTheme}
+            style={{
+              background: theme === 'dark' ? '#1e293b' : '#3b82f6',
+              border: '1px solid #fde047',
+              color: '#fff',
+              padding: '0.3rem 0.75rem',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '0.85rem',
+              fontWeight: 800,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              boxShadow: '0 0 10px rgba(253, 224, 71, 0.25)',
+              transition: 'all 0.2s ease'
+            }}
+            title="Toggle Dark / Light Theme"
+          >
+            {theme === 'dark' ? (
+              <>
+                <Moon size={15} color="#fde047" /> <span>Dark Theme</span>
+              </>
+            ) : (
+              <>
+                <Sun size={15} color="#fde047" /> <span>Light Theme</span>
+              </>
+            )}
+          </button>
+
           {/* ACCESSIBILITY TEXT RESIZER */}
           <button 
             onClick={toggleFontSize} 
-            style={{ background: 'transparent', border: '1px solid #475569', color: '#fff', padding: '0.2rem 0.6rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 700 }}
+            style={{ background: 'transparent', border: '1px solid #475569', color: '#fff', padding: '0.25rem 0.6rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 700 }}
           >
             {fontSize === 'normal' ? t('text_size_large') : t('text_size_normal')}
           </button>
@@ -64,8 +105,8 @@ export default function Header({ activeTab, setActiveTab, onRefresh }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
           <div style={{ textAlign: 'right' }}>
             <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>{t('on_duty_label')}</div>
-            <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--gov-navy-dark)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <UserCheck size={18} color="var(--gov-navy)" /> {t('duty_officer_name')}
+            <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-dark)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <UserCheck size={18} color="var(--gov-navy-light)" /> {t('duty_officer_name')}
             </div>
           </div>
 
