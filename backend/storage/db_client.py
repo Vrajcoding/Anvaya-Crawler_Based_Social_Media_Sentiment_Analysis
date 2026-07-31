@@ -18,6 +18,65 @@ class InMemoryDatabase:
         self.logs: List[Dict[str, Any]] = []
         self._load_from_disk()
         
+    def _ensure_nlp_analysis(self, post: Dict[str, Any]) -> Dict[str, Any]:
+        """Ensure post has real NLP pipeline analysis and valid scoring breakdown."""
+        content = post.get("content") or post.get("text") or ""
+        nlp = post.get("nlp_analysis")
+        
+        is_dummy = (
+            not nlp or
+            not isinstance(nlp, dict) or
+            nlp.get("sentiment", {}).get("confidence") == 0.5 or
+            nlp.get("model_version") == "muril-xlm-roberta-v1" or
+            not nlp.get("sentiment", {}).get("probabilities")
+        )
+        
+        if content and is_dummy:
+            try:
+                from nlp_service.models.inference import run_nlp_pipeline
+                from scoring.threat_scorer import ThreatScorer
+                
+                post_id = str(post.get("id") or post.get("post_id") or uuid.uuid4())
+                nlp_res = run_nlp_pipeline(post_id=post_id, text=content)
+                post["nlp_analysis"] = nlp_res
+                
+                s_dict = nlp_res.get("sentiment", {})
+                t_dict = nlp_res.get("threat_category", {})
+                h_dict = nlp_res.get("hate_speech", {})
+                
+                post["sentiment"] = s_dict.get("label", "neutral")
+                post["threat_level"] = t_dict.get("label", "Neutral")
+                post["is_hate_speech"] = h_dict.get("flag", False)
+                post["requires_human_review"] = nlp_res.get("requires_human_review", False)
+                post["language"] = nlp_res.get("language_detected", post.get("language", "en"))
+                
+                neg_prob = s_dict.get("probabilities", {}).get("negative", 0.8 if s_dict.get("label") == "negative" else 0.05)
+                threat_cls_score = t_dict.get("confidence", 0.2) if t_dict.get("label") != "Neutral" else 0.05
+                hate_score = h_dict.get("confidence", 0.0) if h_dict.get("flag") else 0.0
+                bot_score = 0.8 if post.get("is_bot") else 0.0
+                coord_score = 0.7 if post.get("coordination_group") else 0.0
+                
+                scoring = ThreatScorer.calculate_score(
+                    sentiment_neg=neg_prob,
+                    threat_class_score=threat_cls_score,
+                    hate_speech_score=hate_score,
+                    engagement_velocity=0.3,
+                    coordination_score=coord_score,
+                    bot_likelihood=bot_score
+                )
+                post["threat_score"] = scoring["composite_score"]
+                post["scoring_breakdown"] = {
+                    "sentiment": neg_prob,
+                    "classification": threat_cls_score,
+                    "hate_speech": hate_score,
+                    "velocity": 0.3,
+                    "coordination": coord_score,
+                    "bot": bot_score
+                }
+            except Exception as e:
+                print(f"[db_client] _ensure_nlp_analysis warning: {e}")
+        return post
+
     def _load_from_disk(self):
         try:
             if os.path.exists(DATA_STORE_PATH):
@@ -25,7 +84,7 @@ class InMemoryDatabase:
                     stored_posts = json.load(f)
                     for post in stored_posts:
                         p_id = str(post.get("id") or post.get("post_id") or uuid.uuid4())
-                        self.posts[p_id] = post
+                        self.posts[p_id] = self._ensure_nlp_analysis(post)
         except Exception as e:
             print(f"[db_client] Load from disk warning: {e}")
 
@@ -42,6 +101,7 @@ class InMemoryDatabase:
         post["id"] = post_id
         if "crawled_at" not in post:
             post["crawled_at"] = datetime.utcnow().isoformat()
+        post = self._ensure_nlp_analysis(post)
         self.posts[post_id] = post
         self._persist_to_disk()
         return post

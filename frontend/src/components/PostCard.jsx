@@ -59,10 +59,11 @@ export default function PostCard({ post }) {
     bot: post.is_bot ? 0.2 : 0.0
   };
 
-  const aiReason = post.nlp_breakdown?.threat_classification?.reason || 
-    (post.threat_level === 'Incitement to Violence' ? 'Contains keywords calling for mob assembly and stone pelting.' : 
-     post.threat_level === 'Fake News' ? 'Unverified rumor regarding civic utilities / communal panic.' : 
-     'Standard social interaction / general civic discussion.');
+  const aiReason = post.nlp_analysis?.threat_category?.reason || 
+    (post.threat_level === 'Incitement to Violence' ? 'High severity threat: Call to physical violence, mob action or stone pelting detected.' : 
+     post.threat_level === 'Fake News' ? 'Unverified claim / viral rumor signal detected in social text.' : 
+     post.threat_level === 'Inflammatory' ? 'Provocative or communally charged inflammatory speech detected.' : 
+     'General social interaction / news update analyzed as harmless.');
 
   return (
     <div className="gov-post-card transition-all hover:shadow-lg">
