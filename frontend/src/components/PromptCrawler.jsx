@@ -536,6 +536,7 @@ export default function PromptCrawler() {
   const [prompt, setPrompt] = useState('');
   const [selectedPlatforms, setSelectedPlatforms] = useState(['GoogleSuggest', 'Web', 'X']);
   const [limit, setLimit] = useState(20);
+  const [timeFilter, setTimeFilter] = useState('any');
   const [fetchComments, setFetchComments] = useState(false);
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState(null);
@@ -571,6 +572,7 @@ export default function PromptCrawler() {
           prompt: prompt.trim(),
           platforms: selectedPlatforms,
           limit,
+          time_filter: timeFilter,
           fetch_comments: fetchComments,
         }),
       });
@@ -650,7 +652,7 @@ export default function PromptCrawler() {
                 <input
                   type="range"
                   min={5}
-                  max={100}
+                  max={500}
                   step={5}
                   value={limit}
                   onChange={(e) => setLimit(Number(e.target.value))}
@@ -658,6 +660,28 @@ export default function PromptCrawler() {
                 />
                 <span style={S.rangeVal}>{limit}</span>
               </div>
+            </div>
+            
+            {/* Time Filter */}
+            <div>
+              <label style={S.label}>Time Filter</label>
+              <select
+                value={timeFilter}
+                onChange={(e) => setTimeFilter(e.target.value)}
+                style={{
+                  ...S.input,
+                  padding: '0.5rem 1rem',
+                  fontSize: '0.85rem',
+                  cursor: 'pointer',
+                  width: '120px'
+                }}
+              >
+                <option value="any">Any Time</option>
+                <option value="24h">Past 24h</option>
+                <option value="48h">Past 48h</option>
+                <option value="1week">Past 1 Week</option>
+                <option value="1month">Past 1 Month</option>
+              </select>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
               <button

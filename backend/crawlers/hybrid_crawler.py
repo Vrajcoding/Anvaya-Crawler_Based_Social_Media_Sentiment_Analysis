@@ -83,6 +83,7 @@ class HybridCrawler:
         platform: str,
         limit: int = 20,
         fetch_comments: bool = False,
+        time_filter: str = "any",
     ) -> Dict[str, Any]:
         """Crawl a single platform and return a result summary dict."""
         crawler = self._get_crawler(platform)
@@ -93,6 +94,7 @@ class HybridCrawler:
                 platform=platform,
                 limit=limit,
                 fetch_comments=fetch_comments,
+                time_filter=time_filter,
             )
         except Exception as e:
             print(f"[HybridCrawler] {platform} crawl failed: {e}")
@@ -117,6 +119,7 @@ class HybridCrawler:
         platforms: Optional[List[str]] = None,
         limit: int = 20,
         fetch_comments: bool = False,
+        time_filter: str = "any",
     ) -> Dict[str, Any]:
         """
         Crawl all specified platforms IN PARALLEL using asyncio.gather().
@@ -143,7 +146,7 @@ class HybridCrawler:
 
         # Fire all platform crawls in parallel
         tasks = [
-            self.crawl_platform(query, platform, limit, fetch_comments)
+            self.crawl_platform(query, platform, limit, fetch_comments, time_filter)
             for platform in valid_platforms
         ]
         platform_results = await asyncio.gather(*tasks, return_exceptions=True)

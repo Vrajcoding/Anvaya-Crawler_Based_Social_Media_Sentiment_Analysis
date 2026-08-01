@@ -177,6 +177,7 @@ class TelegramCrawler(BaseCrawler):
         platform: str,
         limit: int = 20,
         fetch_comments: bool = False,
+        time_filter: str = "any",
     ) -> List[CrawlResult]:
         if platform != "Telegram":
             return []

@@ -434,22 +434,33 @@ def _scrape_instagram_sync(
             except Exception:
                 pass
 
-            # Scroll to lazy-load the post grid
-            for _ in range(5):
-                driver.execute_script("window.scrollBy(0, 700);")
-                time.sleep(random.uniform(0.7, 1.2))
-
-            # ── Step 3: Collect post + reel links ─────────────────────────────
-            for sel in ["a[href*='/p/']", "a[href*='/reel/']","a[href*='/reels/']"]:
-                try:
-                    for a in driver.find_elements(By.CSS_SELECTOR, sel):
-                        href = a.get_attribute("href") or ""
-                        if href and href not in post_links:
-                            post_links.append(href)
-                        if len(post_links) >= limit * 2:
-                            break
-                except Exception:
-                    pass
+            # Scroll to lazy-load the post grid and collect links
+            last_count = 0
+            # Scroll up to (limit/10) times, assuming ~10 posts per scroll, plus some buffer
+            for _ in range(max(5, (limit // 8) + 2)):
+                driver.execute_script("window.scrollBy(0, 1000);")
+                time.sleep(random.uniform(1.0, 1.5))
+                
+                # ── Step 3: Collect post + reel links ─────────────────────────────
+                for sel in ["a[href*='/p/']", "a[href*='/reel/']","a[href*='/reels/']"]:
+                    try:
+                        for a in driver.find_elements(By.CSS_SELECTOR, sel):
+                            href = a.get_attribute("href") or ""
+                            if href and href not in post_links:
+                                post_links.append(href)
+                    except Exception:
+                        pass
+                
+                if len(post_links) >= limit:
+                    break
+                    
+                # Break early if no new links are found after scrolling
+                if len(post_links) == last_count and len(post_links) > 0:
+                    time.sleep(1.5)
+                    last_count = len(post_links)
+                    # double check
+                    continue
+                last_count = len(post_links)
 
             print(f"[SeleniumInstagram] Found {len(post_links)} links on {search_url}")
 
@@ -524,12 +535,19 @@ def _scrape_instagram_sync(
                 except Exception as e:
                     print(f"[SeleniumInstagram] Title parse error: {e}")
 
-                # ---- 24 Hour Filter ----
-                if post_date:
-                    # Check if post is older than 24 hours
+                # ---- Time Filter ----
+                if post_date and time_filter != "any":
                     age_hours = (datetime.datetime.now() - post_date).total_seconds() / 3600
-                    if age_hours > 24:
-                        print(f"[SeleniumInstagram] ⚠️ Skipping post - older than 24h ({age_hours:.1f}h old)")
+                    max_hours = 24
+                    if time_filter == "48h":
+                        max_hours = 48
+                    elif time_filter == "1week":
+                        max_hours = 24 * 7
+                    elif time_filter == "1month":
+                        max_hours = 24 * 30
+                        
+                    if age_hours > max_hours:
+                        print(f"[SeleniumInstagram] ⚠️ Skipping post - older than {time_filter} ({age_hours:.1f}h old)")
                         continue
 
                 # ---- Comments extraction (real DOM parsing) ----

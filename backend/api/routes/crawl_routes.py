@@ -32,7 +32,8 @@ class PromptCrawlRequest(BaseModel):
         example=["X", "YouTube", "Telegram", "Instagram"],
         description="Platforms to crawl. Defaults to all available if omitted.",
     )
-    limit: int = Field(default=20, ge=1, le=100, description="Max results per platform")
+    limit: int = Field(default=20, ge=1, le=500, description="Max results per platform")
+    time_filter: str = Field(default="any", description="Time filter: any, 24h, 48h, 1week, 1month")
     fetch_comments: bool = Field(
         default=False,
         description="Fetch top comments from YouTube/X",
@@ -41,14 +42,16 @@ class PromptCrawlRequest(BaseModel):
 
 class SinglePlatformRequest(BaseModel):
     prompt: str = Field(..., min_length=1, max_length=500)
-    limit: int = Field(default=20, ge=1, le=100)
+    limit: int = Field(default=20, ge=1, le=500)
+    time_filter: str = "any"
     fetch_comments: bool = False
 
 
 class AccountCrawlRequest(BaseModel):
     account_handle: str = Field(..., min_length=1, max_length=100, example="@target_user")
     platform: Optional[str] = Field(default="all", example="x")
-    limit: int = Field(default=20, ge=1, le=100)
+    limit: int = Field(default=20, ge=1, le=500)
+    time_filter: str = "any"
 
 
 class WatchlistAddRequest(BaseModel):
@@ -98,6 +101,7 @@ async def crawl_by_prompt(
         platforms=platforms,
         limit=request.limit,
         fetch_comments=request.fetch_comments,
+        time_filter=request.time_filter,
     )
 
     if "error" in result and not result.get("results"):
@@ -135,6 +139,7 @@ async def crawl_single_platform(
         platform=platform,
         limit=request.limit,
         fetch_comments=request.fetch_comments,
+        time_filter=request.time_filter,
     )
 
     if result.get("posts"):
@@ -162,6 +167,7 @@ async def crawl_by_account(request: AccountCrawlRequest) -> Dict[str, Any]:
         query=request.account_handle,
         platform=target_platform,
         limit=request.limit,
+        time_filter=request.time_filter,
     )
 
     if result.get("posts"):

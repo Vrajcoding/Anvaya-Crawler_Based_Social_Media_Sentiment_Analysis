@@ -79,6 +79,7 @@ class BaseCrawler(ABC):
         platform: str,
         limit: int = 20,
         fetch_comments: bool = False,
+        time_filter: str = "any",
     ) -> List[CrawlResult]:
         """
         Execute a crawl for the given query on the specified platform.

@@ -58,12 +58,13 @@ class ScrapyCrawler(BaseCrawler):
         platform: str,
         limit: int = 20,
         fetch_comments: bool = False,
+        time_filter: str = "any",
     ) -> List[CrawlResult]:
         limiter = get_limiter(platform)
         await limiter.acquire()
 
         if platform == "X":
-            return await self._crawl_x(query, limit)
+            return await self._crawl_x(query, limit, time_filter)
         elif platform == "GoogleSuggest":
             return await self._crawl_google_suggest(query, limit)
         elif platform == "Web":
@@ -74,7 +75,7 @@ class ScrapyCrawler(BaseCrawler):
 
     # ── X / Twitter (via Nitter RSS) ────────────────────────────────────────
 
-    async def _crawl_x(self, query: str, limit: int) -> List[CrawlResult]:
+    async def _crawl_x(self, query: str, limit: int, time_filter: str = "any") -> List[CrawlResult]:
         """
         Fetch real tweets using a 3-tier strategy:
           1. Playwright browser login on x.com (real data, requires X credentials in .env)
@@ -108,7 +109,7 @@ class ScrapyCrawler(BaseCrawler):
                     url = f"{base}/search/rss?q={encoded}&f=tweets"
                     resp = await client.get(url)
                     if resp.status_code == 200 and "<rss" in resp.text:
-                        results = self._parse_nitter_rss(resp.text, limit)
+                        results = self._parse_nitter_rss(resp.text, limit, time_filter)
                         if results:
                             print(f"[ScrapyCrawler] Nitter mirror {base} returned {len(results)} tweets.")
                             return results[:limit]
@@ -123,7 +124,7 @@ class ScrapyCrawler(BaseCrawler):
             r.source_type = "SCRAPY_X_WEB"
         return web_results[:limit]
 
-    def _parse_nitter_rss(self, xml_text: str, limit: int) -> List[CrawlResult]:
+    def _parse_nitter_rss(self, xml_text: str, limit: int, time_filter: str = "any") -> List[CrawlResult]:
         soup = BeautifulSoup(xml_text, "xml")
         items = soup.find_all("item")[:limit]
         results = []
@@ -146,7 +147,16 @@ class ScrapyCrawler(BaseCrawler):
                 if parsed_ts:
                     ts_timestamp = email.utils.mktime_tz(parsed_ts)
                     age_hours = (time.time() - ts_timestamp) / 3600
-                    if age_hours > 24:
+                    
+                    max_hours = 24
+                    if time_filter == "48h":
+                        max_hours = 48
+                    elif time_filter == "1week":
+                        max_hours = 24 * 7
+                    elif time_filter == "1month":
+                        max_hours = 24 * 30
+                        
+                    if time_filter != "any" and age_hours > max_hours:
                         continue
             except Exception:
                 pass

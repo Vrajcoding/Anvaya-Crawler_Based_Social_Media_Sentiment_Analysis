@@ -47,9 +47,22 @@ async def _yt_search_playwright(query: str, limit: int, fetch_comments: bool) ->
 
         try:
             await page.goto(search_url, wait_until="networkidle", timeout=30_000)
-            # Scroll to trigger lazy-load
-            await page.evaluate("window.scrollBy(0, 2000)")
-            await asyncio.sleep(1.5)
+            # Scroll to trigger lazy-load until we have enough videos
+            last_count = 0
+            for _ in range(max(1, limit // 10)):
+                videos = await page.query_selector_all("ytd-video-renderer")
+                if len(videos) >= limit:
+                    break
+                await page.evaluate("window.scrollBy(0, 3000)")
+                await asyncio.sleep(1.5)
+                
+                # Check if we are still loading new videos, if not, break early
+                if len(videos) == last_count and len(videos) > 0:
+                    await asyncio.sleep(2.0) # wait a bit more and check once more
+                    videos_check = await page.query_selector_all("ytd-video-renderer")
+                    if len(videos_check) == last_count:
+                        break
+                last_count = len(videos)
 
             videos = await page.query_selector_all("ytd-video-renderer")
             for vid in videos[:limit]:
@@ -297,6 +310,7 @@ class PlaywrightCrawler(BaseCrawler):
         platform: str,
         limit: int = 20,
         fetch_comments: bool = False,
+        time_filter: str = "any",
     ) -> List[CrawlResult]:
         limiter = get_limiter(platform)
         await limiter.acquire()
@@ -316,7 +330,7 @@ class PlaywrightCrawler(BaseCrawler):
                 query=query,
                 limit=limit,
                 fetch_comments=fetch_comments,
-                time_filter="24h",
+                time_filter=time_filter,
             )
 
         return []
