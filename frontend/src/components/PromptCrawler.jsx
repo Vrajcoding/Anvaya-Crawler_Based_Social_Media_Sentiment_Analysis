@@ -652,8 +652,8 @@ export default function PromptCrawler() {
                 <input
                   type="range"
                   min={5}
-                  max={500}
-                  step={5}
+                  max={5000}
+                  step={50}
                   value={limit}
                   onChange={(e) => setLimit(Number(e.target.value))}
                   style={S.range}
