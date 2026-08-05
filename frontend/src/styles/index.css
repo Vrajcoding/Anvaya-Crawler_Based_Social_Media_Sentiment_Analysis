@@ -166,8 +166,10 @@ body {
   background: var(--gov-navy);
   display: flex;
   padding: 0 2rem;
-  overflow-x: auto;
+  overflow: visible;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 100;
 }
 
 .gov-nav-item {
@@ -193,6 +195,58 @@ body {
   background: var(--bg-main);
   color: var(--gov-gold);
   border-bottom: 4px solid var(--gov-gold);
+}
+
+/* Dropdown Nav Groups (Intelligence / Operations) */
+.gov-nav-item.dropdown-active {
+  background: var(--bg-main);
+  color: var(--gov-gold);
+  border-bottom: 4px solid var(--gov-gold);
+}
+
+.gov-nav-item.has-dropdown {
+  position: relative;
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background: #0f2040;
+  border: 1px solid var(--border-strong);
+  border-top: 3px solid var(--gov-gold);
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  animation: fadeIn 0.18s ease-out forwards;
+  overflow: hidden;
+}
+
+.nav-dropdown > div {
+  padding: 0.85rem 1.25rem;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.nav-dropdown > div:last-child {
+  border-bottom: none;
+}
+
+.nav-dropdown > div:hover {
+  background: rgba(59, 130, 246, 0.2);
+  color: #ffffff;
+}
+
+.nav-dropdown > div.active {
+  background: rgba(253, 224, 71, 0.12);
+  color: #fde047;
+  font-weight: 700;
 }
 
 /* Global Form Elements Dark Theme Support */

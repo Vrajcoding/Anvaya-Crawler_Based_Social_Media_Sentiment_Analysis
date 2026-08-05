@@ -37,16 +37,6 @@ export const fetchTrendingKeywords = async () => {
   return res.data;
 };
 
-export const fetchNetworkGraph = async () => {
-  const res = await axios.get(`${API_BASE_URL}/network/graph`);
-  return res.data;
-};
-
-export const fetchBotClusters = async () => {
-  const res = await axios.get(`${API_BASE_URL}/network/bots`);
-  return res.data;
-};
-
 export const fetchWatchlist = async () => {
   const res = await axios.get(`${API_BASE_URL}/watchlist`);
   return res.data;

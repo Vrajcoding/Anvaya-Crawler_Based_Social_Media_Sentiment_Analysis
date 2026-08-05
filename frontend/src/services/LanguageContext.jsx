@@ -21,11 +21,12 @@ export const translations = {
     nav_alerts: "🚨 आपातकालीन अलर्ट",
     nav_feed: "📰 सोशल मीडिया लाइव फीड",
     nav_trends: "📈 अफवाहें और ट्रेंड",
-    nav_network: "🕸️ संदिग्ध बॉट नेटवर्क",
     nav_watchlist: "🎯 निगरानी सूची",
     nav_reports: "📄 सरकारी पुलिस रिपोर्ट",
     nav_settings: "⚙️ एआई नियंत्रण व सेटिंग्स",
     nav_crawl: "⚡ प्रॉम्प्ट क्रॉलर",
+    nav_intelligence: "📡 इंटेलिजेंस",
+    nav_operations: "🔴 ऑपरेशन्स",
     
     // Emergency Banner
     emergency_banner_title: "🚨 आपातकालीन अलर्ट (गंभीर खतरा):",
@@ -112,15 +113,6 @@ export const translations = {
     viral_velocity: "वायरल गति",
     sentiment_index: "जनभावना सूचकांक",
     
-    // Network View Page
-    network_page_title: "🕸️ संदिग्ध गैंग व बॉट नेटवर्क विश्लेषक",
-    network_page_subtitle: "एक साथ अफवाह फैलाने वाले फेक अकाउंट्स एवं संगठित साइबर गिरोहों का नेटवर्क ग्राफ",
-    net_nodes_title: "संदिग्ध खातों का नेटवर्क मानचित्र",
-    net_legend: "सामान्य यूजर | उच्च-खतरा पोस्ट | ऑटोमेटेड बॉट खाता | संगठित शेयर नेटवर्क",
-    net_bot_clusters: "स्वचालित बॉट गैंग्स",
-    bot_cluster: "बॉट नेटवर्क क्लस्टर",
-    mastermind_node: "मुख्य स्रोत / मास्टरमाइंड",
-    
     // Settings & OpenRouter Page
     settings_title: "⚙️ ओपनराउटर एआई मल्टी-एजेंट एवं सिस्टम सेटिंग्स",
     settings_subtitle: "रीयल-टाइम LLM इन्फरेंस के लिए ओपनराउटर API कुंजी, फ्री मॉडल्स एवं लाइव क्रॉलर नियंत्रण",
@@ -151,11 +143,12 @@ export const translations = {
     nav_alerts: "🚨 ઈમરજન્સી એલર્ટ",
     nav_feed: "📰 સોશિયલ મીડિયા લાઇવ ફીડ",
     nav_trends: "📈 અફવાઓ અને ટ્રેન્ડ",
-    nav_network: "🕸️ શંકાસ્પદ બોટ નેટવર્ક",
     nav_watchlist: "🎯 દેખરેખ સૂચિ",
     nav_reports: "📄 સરકારી પોલીસ રિપોર્ટ",
     nav_settings: "⚙️ એઆઈ નિયંત્રણ અને સેટિંગ્સ",
     nav_crawl: "⚡ પ્રોમ્પ્ટ ક્રોલર",
+    nav_intelligence: "📡 ઇન્ટેલિજન્સ",
+    nav_operations: "🔴 ઓપરેશન્સ",
     
     // Emergency Banner
     emergency_banner_title: "🚨 ઈમરજન્સી એલર્ટ (ગંભીર જોખમ):",
@@ -242,15 +235,6 @@ export const translations = {
     viral_velocity: "વાયરલ ગતિ",
     sentiment_index: "જનભાવના સૂચકાંક",
     
-    // Network View Page
-    network_page_title: "🕸️ શંકાસ્પદ ગેંગ અને બોટ નેટવર્ક વિશ્લેષક",
-    network_page_subtitle: "એક સાથે અફવા ફેલાવતા ફેક એકાઉન્ટ્સ અને નેટવર્ક ગ્રાફ",
-    net_nodes_title: "શંકાસ્પદ ખાતાઓનો નેટવર્ક નકશો",
-    net_legend: "સામાન્ય યુઝર | ઉચ્ચ-જોખમ પોસ્ટ | ઓટોમેટેડ બોટ એકાઉન્ટ | સંકલિત નેટવર્ક",
-    net_bot_clusters: "સ્વચાલિત બોટ ગેંગ્સ",
-    bot_cluster: "બોટ નેટવર્ક ક્લસ્ટર",
-    mastermind_node: "મુખ્ય સ્ત્રોત / માસ્ટરમાઇન્ડ",
-    
     // Settings & OpenRouter Page
     settings_title: "⚙️ ઓપનરાઉટર એઆઈ મલ્ટી-એજન્ટ અને સિસ્ટમ સેટિંગ્સ",
     settings_subtitle: "રીયલ-ટાઇમ LLM ઇન્ફરન્સ માટે ઓપનરાઉટર API કી, ફ્રી મોડલ્સ અને લાઇવ ક્રોલર નિયંત્રણ",
@@ -281,11 +265,12 @@ export const translations = {
     nav_alerts: "🚨 Critical Alerts",
     nav_feed: "📰 Social Media Live Feed",
     nav_trends: "📈 Spikes & Rumors Analysis",
-    nav_network: "🕸️ Bot Networks & Gang Mapping",
     nav_watchlist: "🎯 Target Watchlist",
     nav_reports: "📄 Official Police CTI Reports",
     nav_settings: "⚙️ AI & OpenRouter Settings",
     nav_crawl: "⚡ Prompt Crawler",
+    nav_intelligence: "📡 Intelligence",
+    nav_operations: "🔴 Operations",
     
     // Emergency Banner
     emergency_banner_title: "🚨 EMERGENCY CRITICAL ALERT:",
@@ -371,15 +356,6 @@ export const translations = {
     trends_sensitive_keywords: "⚠️ Sensitive High-Risk Keywords",
     viral_velocity: "Viral Velocity",
     sentiment_index: "Public Sentiment Index",
-    
-    // Network View Page
-    network_page_title: "🕸️ Bot Network & Gang Topology",
-    network_page_subtitle: "Graph mapping of coordinated troll armies, automated bot clusters, and central propagandist masterminds",
-    net_nodes_title: "Identified Network Nodes Map",
-    net_legend: "Normal User | Critical Post | Automated Bot Account | Coordinated Network",
-    net_bot_clusters: "Automated Bot Gangs",
-    bot_cluster: "Bot Network Cluster",
-    mastermind_node: "Central Source / Mastermind Node",
     
     // Settings & OpenRouter Page
     settings_title: "⚙️ OpenRouter AI Multi-Agent & System Settings",

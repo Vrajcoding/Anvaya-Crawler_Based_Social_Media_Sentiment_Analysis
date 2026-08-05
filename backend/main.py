@@ -4,7 +4,7 @@ import asyncio
 import datetime
 from storage.seed_data import initialize_seed_data
 from utils.config import settings
-from api.routes import posts, alerts, trends, network, watchlist, feedback, reports, stats, settings_router, agent_status
+from api.routes import posts, alerts, trends, watchlist, feedback, reports, stats, settings_router, agent_status
 from api.routes.crawl_routes import router as crawl_router
 from api.websocket import ws_manager
 from crawlers.spiders.real_social_spider import RealSocialCrawler
@@ -30,7 +30,6 @@ app.add_middleware(
 app.include_router(posts.router, prefix=settings.API_PREFIX)
 app.include_router(alerts.router, prefix=settings.API_PREFIX)
 app.include_router(trends.router, prefix=settings.API_PREFIX)
-app.include_router(network.router, prefix=settings.API_PREFIX)
 app.include_router(watchlist.router, prefix=settings.API_PREFIX)
 app.include_router(feedback.router, prefix=settings.API_PREFIX)
 app.include_router(reports.router, prefix=settings.API_PREFIX)

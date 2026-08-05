@@ -3,7 +3,6 @@ import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
 import ThreatFeed from './pages/ThreatFeed';
 import TrendAnalysis from './pages/TrendAnalysis';
-import NetworkView from './pages/NetworkView';
 import Alerts from './pages/Alerts';
 import Watchlist from './pages/Watchlist';
 import Reports from './pages/Reports';
@@ -13,7 +12,7 @@ import { AlertOctagon, X } from 'lucide-react';
 import { useLanguage } from './services/LanguageContext';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState('crawl');
   const [liveAlertNotification, setLiveAlertNotification] = useState(null);
   const { t } = useLanguage();
 
@@ -44,8 +43,6 @@ export default function App() {
         return <ThreatFeed />;
       case 'trends':
         return <TrendAnalysis />;
-      case 'network':
-        return <NetworkView />;
       case 'alerts':
         return <Alerts />;
       case 'watchlist':
