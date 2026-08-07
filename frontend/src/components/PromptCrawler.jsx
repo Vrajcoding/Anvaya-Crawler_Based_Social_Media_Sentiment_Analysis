@@ -1,24 +1,35 @@
 import React, { useState, useRef } from 'react';
+import { useLanguage } from '../services/LanguageContext';
+
+// Import custom PNG platform icons
+import xIcon from '../assets/x.png';
+import youtubeIcon from '../assets/youtube.png';
+import instaIcon from '../assets/insta.png';
+import webIcon from '../assets/web.png';
+import redditIcon from '../assets/reddit.png';
+import telegramIcon from '../assets/telegram.png';
+ 
 
 const API_BASE = 'http://localhost:8000/api/v1';
 
 const PLATFORMS = [
-  { id: 'X', label: 'X (Twitter)', emoji: '𝕏', color: '#000000', badge: '#1a1a2e' },
-  { id: 'YouTube', label: 'YouTube', emoji: '▶', color: '#FF0000', badge: '#1a0000' },
-  { id: 'Instagram', label: 'Instagram', emoji: '📸', color: '#E1306C', badge: '#1a0010' },
+  { id: 'X', label: 'X (Twitter)', icon: xIcon, emoji: '𝕏', color: '#000000', badge: '#1a1a2e' },
+  { id: 'YouTube', label: 'YouTube', icon: youtubeIcon, emoji: '▶', color: '#FF0000', badge: '#1a0000' },
+  { id: 'Instagram', label: 'Instagram', icon: instaIcon, emoji: '📸', color: '#E1306C', badge: '#1a0010' },
   { id: 'GoogleSuggest', label: 'Google Suggest', emoji: '🔍', color: '#4285F4', badge: '#00101a' },
-  { id: 'Web', label: 'Web', emoji: '🌐', color: '#00BFA5', badge: '#001a18' },
-  { id: 'Reddit', label: 'Reddit', emoji: '🤖', color: '#FF4500', badge: '#1a0a00' },
-  { id: 'Telegram', label: 'Telegram', emoji: '✈️', color: '#2AABEE', badge: '#001520' },
+  { id: 'Web', label: 'Web', icon: webIcon, emoji: '🌐', color: '#00BFA5', badge: '#001a18' },
+  { id: 'Reddit', label: 'Reddit', icon: redditIcon, emoji: '🤖', color: '#FF4500', badge: '#1a0a00' },
+  { id: 'Telegram', label: 'Telegram', icon: telegramIcon, emoji: '✈️', color: '#2AABEE', badge: '#001520' },
 ];
 
 // ── Styles ────────────────────────────────────────────────────────────────────
 const S = {
   page: {
     minHeight: '100vh',
-    background: 'linear-gradient(135deg, #0a0f1e 0%, #0d1b2a 50%, #111827 100%)',
+    background: 'var(--crawler-bg-gradient)',
     padding: '2rem',
-    fontFamily: "'Inter', 'Segoe UI', sans-serif",
+    fontFamily: "'Roboto', 'Inter', 'Segoe UI', sans-serif",
+    transition: 'background 0.3s ease, color 0.3s ease',
   },
   container: { maxWidth: '1100px', margin: '0 auto' },
   header: {
@@ -40,18 +51,18 @@ const S = {
   title: {
     fontSize: '2.4rem',
     fontWeight: 800,
-    background: 'linear-gradient(135deg, #60a5fa, #a78bfa, #34d399)',
+    background: 'var(--crawler-text-title)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
     margin: '0 0 0.5rem',
     lineHeight: 1.2,
   },
-  subtitle: { color: '#94a3b8', fontSize: '1rem', margin: 0 },
+  subtitle: { color: 'var(--text-muted)', fontSize: '1rem', margin: 0 },
   card: {
-    background: 'rgba(255,255,255,0.04)',
+    background: 'var(--crawler-card-bg)',
     backdropFilter: 'blur(16px)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    border: '1px solid var(--crawler-card-border)',
     borderRadius: '20px',
     padding: '2rem',
     marginBottom: '1.5rem',
@@ -59,11 +70,11 @@ const S = {
   inputRow: { display: 'flex', gap: '0.75rem', marginBottom: '1.25rem' },
   input: {
     flex: 1,
-    background: 'rgba(255,255,255,0.06)',
-    border: '1.5px solid rgba(255,255,255,0.12)',
+    background: 'var(--crawler-input-bg)',
+    border: '1.5px solid var(--crawler-input-border)',
     borderRadius: '12px',
     padding: '0.875rem 1.25rem',
-    color: '#f1f5f9',
+    color: 'var(--crawler-input-text)',
     fontSize: '1rem',
     outline: 'none',
     transition: 'border-color 0.2s',
@@ -93,9 +104,9 @@ const S = {
     gap: '0.4rem',
     padding: '0.45rem 1rem',
     borderRadius: '50px',
-    border: `1.5px solid ${active ? color : 'rgba(255,255,255,0.12)'}`,
-    background: active ? `${color}22` : 'rgba(255,255,255,0.04)',
-    color: active ? color : '#94a3b8',
+    border: `1.5px solid ${active ? color : 'var(--crawler-btn-inactive-border)'}`,
+    background: active ? `${color}22` : 'var(--crawler-btn-inactive-bg)',
+    color: active ? color : 'var(--crawler-btn-inactive-text)',
     fontWeight: 600,
     fontSize: '0.82rem',
     cursor: 'pointer',
@@ -107,7 +118,7 @@ const S = {
     alignItems: 'center',
     flexWrap: 'wrap',
   },
-  label: { color: '#94a3b8', fontSize: '0.85rem', marginBottom: '0.35rem', display: 'block' },
+  label: { color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.35rem', display: 'block' },
   rangeWrap: { display: 'flex', alignItems: 'center', gap: '0.75rem' },
   range: { accentColor: '#3b82f6', width: '130px', cursor: 'pointer' },
   rangeVal: {
@@ -121,7 +132,7 @@ const S = {
     width: '44px',
     height: '24px',
     borderRadius: '50px',
-    background: active ? 'linear-gradient(90deg,#3b82f6,#8b5cf6)' : 'rgba(255,255,255,0.1)',
+    background: active ? 'linear-gradient(90deg,#3b82f6,#8b5cf6)' : 'var(--crawler-btn-inactive-border)',
     border: 'none',
     cursor: 'pointer',
     position: 'relative',
@@ -139,9 +150,9 @@ const S = {
     transition: 'left 0.25s',
     boxShadow: '0 1px 4px rgba(0,0,0,0.3)',
   }),
-  toggleLabel: { color: '#94a3b8', fontSize: '0.85rem', cursor: 'pointer', userSelect: 'none' },
+  toggleLabel: { color: 'var(--text-muted)', fontSize: '0.85rem', cursor: 'pointer', userSelect: 'none' },
   sectionTitle: {
-    color: '#e2e8f0',
+    color: 'var(--text-dark)',
     fontWeight: 700,
     fontSize: '1.1rem',
     marginBottom: '1rem',
@@ -150,7 +161,7 @@ const S = {
     gap: '0.5rem',
   },
   platformResult: (color) => ({
-    background: 'rgba(255,255,255,0.03)',
+    background: 'var(--crawler-card-bg)',
     border: `1px solid ${color}33`,
     borderRadius: '16px',
     padding: '1.25rem',
@@ -181,19 +192,19 @@ const S = {
   }),
   postList: { display: 'flex', flexDirection: 'column', gap: '0.6rem' },
   postItem: {
-    background: 'rgba(255,255,255,0.04)',
+    background: 'var(--crawler-post-bg)',
     borderRadius: '10px',
     padding: '0.75rem 1rem',
-    borderLeft: '3px solid rgba(255,255,255,0.1)',
+    borderLeft: '3px solid var(--crawler-post-border)',
   },
-  postContent: { color: '#e2e8f0', fontSize: '0.87rem', lineHeight: 1.5, margin: '0 0 0.4rem' },
+  postContent: { color: 'var(--crawler-post-text)', fontSize: '0.87rem', lineHeight: 1.5, margin: '0 0 0.4rem' },
   postMeta: {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
     flexWrap: 'wrap',
   },
-  metaChip: { color: '#64748b', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.25rem' },
+  metaChip: { color: 'var(--crawler-meta-text)', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.25rem' },
   engagementRow: { display: 'flex', gap: '0.75rem', marginTop: '0.3rem' },
   engChip: (color) => ({
     fontSize: '0.72rem',
@@ -207,11 +218,11 @@ const S = {
   commentsBox: {
     marginTop: '0.6rem',
     paddingTop: '0.6rem',
-    borderTop: '1px solid rgba(255,255,255,0.06)',
+    borderTop: '1px solid var(--crawler-post-border)',
   },
   commentItem: {
     fontSize: '0.78rem',
-    color: '#94a3b8',
+    color: 'var(--text-muted)',
     padding: '0.25rem 0',
   },
   summaryBar: {
@@ -219,23 +230,23 @@ const S = {
     gap: '1.5rem',
     flexWrap: 'wrap',
     padding: '1rem 1.5rem',
-    background: 'rgba(59,130,246,0.08)',
-    border: '1px solid rgba(59,130,246,0.2)',
+    background: 'var(--crawler-summary-bg)',
+    border: '1px solid var(--crawler-summary-border)',
     borderRadius: '12px',
     marginBottom: '1.5rem',
   },
   summaryItem: { display: 'flex', flexDirection: 'column', gap: '0.15rem' },
   summaryVal: { color: '#60a5fa', fontWeight: 800, fontSize: '1.3rem' },
-  summaryLbl: { color: '#64748b', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' },
+  summaryLbl: { color: 'var(--crawler-meta-text)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' },
   skeletonCard: {
-    background: 'rgba(255,255,255,0.03)',
-    border: '1px solid rgba(255,255,255,0.06)',
+    background: 'var(--crawler-card-bg)',
+    border: '1px solid var(--crawler-card-border)',
     borderRadius: '16px',
     padding: '1.25rem',
     marginBottom: '1rem',
   },
   skeleton: (w, h) => ({
-    background: 'linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 75%)',
+    background: 'var(--crawler-skeleton-shimmer)',
     backgroundSize: '200% 100%',
     animation: 'shimmer 1.5s infinite',
     borderRadius: '6px',
@@ -246,11 +257,11 @@ const S = {
   emptyState: {
     textAlign: 'center',
     padding: '3rem 1rem',
-    color: '#475569',
+    color: 'var(--text-muted)',
   },
   emptyIcon: { fontSize: '3rem', marginBottom: '0.75rem' },
-  emptyText: { fontSize: '1rem', fontWeight: 600, color: '#64748b' },
-  emptySub: { fontSize: '0.85rem', color: '#475569', marginTop: '0.35rem' },
+  emptyText: { fontSize: '1rem', fontWeight: 600, color: 'var(--text-dark)' },
+  emptySub: { fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.35rem' },
   errorCard: {
     background: 'rgba(239,68,68,0.08)',
     border: '1px solid rgba(239,68,68,0.25)',
@@ -397,7 +408,7 @@ function HermesScoreBadge({ post }) {
         title="Click to see Hermes breakdown"
       >
         {/* Icon + label */}
-        <span style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 600, whiteSpace: 'nowrap' }}>
+        <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600, whiteSpace: 'nowrap' }}>
           🛡️ NLP Threat Score
         </span>
 
@@ -440,7 +451,7 @@ function HermesScoreBadge({ post }) {
           {severity}
         </span>
 
-        <span style={{ color: '#475569', fontSize: '0.7rem' }}>{showBreakdown ? '▲' : '▼'}</span>
+        <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem' }}>{showBreakdown ? '▲' : '▼'}</span>
       </div>
 
       {/* Expandable breakdown panel */}
@@ -454,8 +465,8 @@ function HermesScoreBadge({ post }) {
           fontSize: '0.75rem',
         }}>
           {reason && (
-            <p style={{ color: '#94a3b8', margin: '0 0 0.5rem', lineHeight: 1.5 }}>
-              <strong style={{ color: '#cbd5e1' }}>AI Reason:</strong> {reason}
+            <p style={{ color: 'var(--text-muted)', margin: '0 0 0.5rem', lineHeight: 1.5 }}>
+              <strong style={{ color: 'var(--text-dark)' }}>AI Reason:</strong> {reason}
             </p>
           )}
           {Object.keys(breakdown).length > 0 && (
@@ -465,11 +476,11 @@ function HermesScoreBadge({ post }) {
                   background: 'rgba(255,255,255,0.05)',
                   border: '1px solid rgba(255,255,255,0.08)',
                   borderRadius: '6px',
-                  padding: '0.15rem 0.5rem',
-                  color: '#64748b',
+                  padding: '0.15rem 0.55rem',
+                  color: 'var(--text-muted)',
                   fontSize: '0.68rem',
                 }}>
-                  {key.replace('_component', '')}: <strong style={{ color: '#94a3b8' }}>{val}</strong>
+                  {key.replace('_component', '')}: <strong style={{ color: 'var(--text-dark)' }}>{val}</strong>
                 </span>
               ))}
             </div>
@@ -481,6 +492,7 @@ function HermesScoreBadge({ post }) {
 }
 // ── Post card ─────────────────────────────────────────────────────────────────
 function PostCard({ post, platformColor }) {
+  const { t } = useLanguage();
   const [showComments, setShowComments] = useState(false);
   const eng = post.engagement || {};
   const hasComments = post.comments && post.comments.length > 0;
@@ -523,13 +535,13 @@ function PostCard({ post, platformColor }) {
         <div style={S.commentsBox}>
           <button
             onClick={() => setShowComments((p) => !p)}
-            style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: '0.78rem', padding: 0 }}
+            style={{ background: 'none', border: 'none', color: 'var(--crawler-meta-text)', cursor: 'pointer', fontSize: '0.78rem', padding: 0 }}
           >
-            {showComments ? '▲ Hide' : '▼ Show'} {post.comments.length} comment{post.comments.length !== 1 ? 's' : ''}
+            {showComments ? `▲ ${t('crawl_hide')}` : `▼ ${t('crawl_show')}`} {post.comments.length} {post.comments.length !== 1 ? t('crawl_comments') : t('crawl_comment')}
           </button>
           {showComments && post.comments.map((c, i) => (
             <div key={i} style={S.commentItem}>
-              <strong style={{ color: '#94a3b8' }}>{c.author}: </strong>{c.text}
+              <strong style={{ color: 'var(--text-muted)' }}>{c.author}: </strong>{c.text}
             </div>
           ))}
         </div>
@@ -540,6 +552,7 @@ function PostCard({ post, platformColor }) {
 
 // ── Platform result block ─────────────────────────────────────────────────────
 function PlatformResultBlock({ platformId, data }) {
+  const { t } = useLanguage();
   const [expanded, setExpanded] = useState(true);
   const pInfo = PLATFORMS.find((p) => p.id === platformId) || { emoji: '🌐', color: '#94a3b8', label: platformId };
   const isOk = data.status === 'success' || data.status === 'no_results' ? data.count > 0 : false;
@@ -548,17 +561,21 @@ function PlatformResultBlock({ platformId, data }) {
     <div style={S.platformResult(pInfo.color)}>
       <div style={S.platformHeader}>
         <div style={S.platformTitle(pInfo.color)}>
-          <span>{pInfo.emoji}</span>
+          {pInfo.icon ? (
+            <img src={pInfo.icon} alt="" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+          ) : (
+            <span>{pInfo.emoji}</span>
+          )}
           <span>{pInfo.label}</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <span style={S.statusBadge(isOk)}>
-            {isOk ? `✓ ${data.count} posts` : data.status === 'error' ? '✗ Error' : '○ No results'}
+            {isOk ? `✓ ${data.count} ${t('crawl_posts_count')}` : data.status === 'error' ? `✗ ${t('crawl_error')}` : `○ ${t('crawl_no_results')}`}
           </span>
-          <span style={{ color: '#64748b', fontSize: '0.75rem' }}>{data.duration_s}s</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>{data.duration_s}s</span>
           <button
             onClick={() => setExpanded((p) => !p)}
-            style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: '0.85rem' }}
+            style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '0.85rem' }}
           >
             {expanded ? '▲' : '▼'}
           </button>
@@ -572,8 +589,8 @@ function PlatformResultBlock({ platformId, data }) {
         </div>
       )}
       {expanded && (!data.posts || data.posts.length === 0) && (
-        <p style={{ color: '#475569', fontSize: '0.85rem', textAlign: 'center', padding: '0.75rem 0' }}>
-          {data.status === 'error' ? `⚠ ${data.error || 'Crawl failed'}` : 'No posts found for this platform.'}
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textAlign: 'center', padding: '0.75rem 0' }}>
+          {data.status === 'error' ? `⚠ ${data.error || t('crawl_failed_msg')}` : t('crawl_no_posts_platform')}
         </p>
       )}
     </div>
@@ -582,6 +599,7 @@ function PlatformResultBlock({ platformId, data }) {
 
 // ── Main PromptCrawler component ─────────────────────────────────────────────
 export default function PromptCrawler() {
+  const { t } = useLanguage();
   const [prompt, setPrompt] = useState('');
   const [selectedPlatforms, setSelectedPlatforms] = useState(['GoogleSuggest', 'Web', 'X']);
   const [limit, setLimit] = useState(20);
@@ -601,12 +619,12 @@ export default function PromptCrawler() {
 
   const handleCrawl = async () => {
     if (!prompt.trim()) {
-      setError('Please enter a search prompt.');
+      setError(t('crawl_err_prompt'));
       inputRef.current?.focus();
       return;
     }
     if (selectedPlatforms.length === 0) {
-      setError('Please select at least one platform.');
+      setError(t('crawl_err_platform'));
       return;
     }
     setError('');
@@ -687,7 +705,7 @@ export default function PromptCrawler() {
         }
       }
     } catch (e) {
-      setError(`Crawl failed: ${e.message}`);
+      setError(`${t('crawl_failed_msg')}: ${e.message}`);
     } finally {
       setLoading(false);
     }
@@ -733,23 +751,23 @@ export default function PromptCrawler() {
       <div style={S.container}>
         {/* Header */}
         <div style={S.header}>
-          <div style={S.badge}>⚡ Prompt Crawler v2.1</div>
-          <h1 style={S.title}>Social Media Intelligence</h1>
+          <div style={S.badge}>⚡ {t('nav_crawl')} v2.1</div>
+          <h1 style={S.title}>{t('crawl_title')}</h1>
           <p style={S.subtitle}>
-            Enter any search prompt — SentinelAI crawls all platforms in parallel
+            {t('crawl_subtitle')}
           </p>
         </div>
 
         {/* Search card */}
         <div style={S.card}>
-          <label style={{ ...S.label, fontSize: '0.9rem', color: '#cbd5e1', marginBottom: '0.6rem' }}>
-            Search Prompt
+          <label style={{ ...S.label, fontSize: '0.9rem', color: 'var(--text-dark)', marginBottom: '0.6rem' }}>
+            {t('crawl_search_prompt')}
           </label>
           <div style={S.inputRow}>
             <input
               ref={inputRef}
               type="text"
-              placeholder='e.g. "india protest" or "cjp news"'
+              placeholder={t('crawl_placeholder')}
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleCrawl()}
@@ -760,12 +778,12 @@ export default function PromptCrawler() {
               disabled={loading}
               style={{ ...S.btnPrimary, opacity: loading ? 0.6 : 1 }}
             >
-              {loading ? '⏳ Crawling…' : '🚀 Start Crawling'}
+              {loading ? `⏳ ${t('crawl_crawling')}` : `🚀 ${t('crawl_start')}`}
             </button>
           </div>
 
           {/* Platform toggles */}
-          <label style={S.label}>Platforms</label>
+          <label style={S.label}>{t('crawl_platforms')}</label>
           <div style={S.platformGrid}>
             {PLATFORMS.map((p) => (
               <button
@@ -773,7 +791,12 @@ export default function PromptCrawler() {
                 onClick={() => togglePlatform(p.id)}
                 style={S.platformBtn(selectedPlatforms.includes(p.id), p.color)}
               >
-                <span>{p.emoji}</span> {p.label}
+                {p.icon ? (
+                  <img src={p.icon} alt="" style={{ width: '16px', height: '16px', objectFit: 'contain' }} />
+                ) : (
+                  <span>{p.emoji}</span>
+                )}
+                <span>{p.label}</span>
               </button>
             ))}
           </div>
@@ -781,7 +804,7 @@ export default function PromptCrawler() {
           {/* Options row */}
           <div style={S.optionRow}>
             <div>
-              <label style={S.label}>Results per platform</label>
+              <label style={S.label}>{t('crawl_results_per_platform')}</label>
               <div style={S.rangeWrap}>
                 <input
                   type="range"
@@ -798,7 +821,7 @@ export default function PromptCrawler() {
             
             {/* Time Filter */}
             <div>
-              <label style={S.label}>Time Filter</label>
+              <label style={S.label}>{t('crawl_time_filter')}</label>
               <select
                 value={timeFilter}
                 onChange={(e) => setTimeFilter(e.target.value)}
@@ -810,11 +833,11 @@ export default function PromptCrawler() {
                   width: '120px'
                 }}
               >
-                <option value="any">Any Time</option>
-                <option value="24h">Past 24h</option>
-                <option value="48h">Past 48h</option>
-                <option value="1week">Past 1 Week</option>
-                <option value="1month">Past 1 Month</option>
+                <option value="any">{t('crawl_time_any')}</option>
+                <option value="24h">{t('crawl_time_24h')}</option>
+                <option value="48h">{t('crawl_time_48h')}</option>
+                <option value="1week">{t('crawl_time_1week')}</option>
+                <option value="1month">{t('crawl_time_1month')}</option>
               </select>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
@@ -829,7 +852,7 @@ export default function PromptCrawler() {
                 style={S.toggleLabel}
                 onClick={() => setFetchComments((p) => !p)}
               >
-                Fetch comments <span style={{ color: '#475569' }}>(+30s)</span>
+                {t('crawl_fetch_comments')} <span style={{ color: 'var(--text-muted)' }}>(+30s)</span>
               </span>
             </div>
           </div>
@@ -848,21 +871,21 @@ export default function PromptCrawler() {
             <div style={S.summaryBar}>
               <div style={S.summaryItem}>
                 <span style={S.summaryVal}>{totalPosts}</span>
-                <span style={S.summaryLbl}>Total Posts</span>
+                <span style={S.summaryLbl}>{t('crawl_total_posts')}</span>
               </div>
               <div style={S.summaryItem}>
                 <span style={S.summaryVal}>{results.platforms_crawled}</span>
-                <span style={S.summaryLbl}>Platforms</span>
+                <span style={S.summaryLbl}>{t('crawl_platforms')}</span>
               </div>
               <div style={S.summaryItem}>
                 <span style={S.summaryVal}>{elapsed || results.duration_s}s</span>
-                <span style={S.summaryLbl}>Duration</span>
+                <span style={S.summaryLbl}>{t('crawl_duration')}</span>
               </div>
               <div style={S.summaryItem}>
                 <span style={{ ...S.summaryVal, fontSize: '0.95rem', paddingTop: '0.2rem' }}>
                   {results.query}
                 </span>
-                <span style={S.summaryLbl}>Query</span>
+                <span style={S.summaryLbl}>{t('crawl_query')}</span>
               </div>
             </div>
 
@@ -902,7 +925,7 @@ export default function PromptCrawler() {
 
             {/* Per-platform results */}
             <div style={{ ...S.sectionTitle }}>
-              📊 Results by Platform
+              📊 {t('crawl_results_by_platform')}
             </div>
             {Object.entries(results.results).map(([platformId, data]) => (
               <PlatformResultBlock key={platformId} platformId={platformId} data={data} />
@@ -914,9 +937,9 @@ export default function PromptCrawler() {
         {!results && !loading && !error && (
           <div style={S.emptyState}>
             <div style={S.emptyIcon}>🔍</div>
-            <div style={S.emptyText}>Ready to crawl</div>
+            <div style={S.emptyText}>{t('crawl_ready')}</div>
             <div style={S.emptySub}>
-              Enter a prompt above and click "Start Crawling" to harvest social intelligence
+              {t('crawl_ready_desc')}
             </div>
           </div>
         )}

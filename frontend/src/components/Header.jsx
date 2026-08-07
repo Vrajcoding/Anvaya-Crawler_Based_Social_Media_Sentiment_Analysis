@@ -2,6 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Shield, PhoneCall, UserCheck, RefreshCw, ChevronDown, Moon, Sun } from 'lucide-react';
 import { useLanguage } from '../services/LanguageContext';
 
+// Import custom PNG assets
+import thunderIcon from '../assets/thunder.png';
+import houseIcon from '../assets/house.png';
+import sateliteIcon from '../assets/satelite.png';
+import operationIcon from '../assets/operation.png';
+import documentsIcon from '../assets/documents.png';
+import growthIcon from '../assets/growth.png';
+import socialmediaIcon from '../assets/socialmedia.png';
+import criticalareaIcon from '../assets/criticalarea.png';
+import targetwatchlistIcon from '../assets/targetwatchlist.png';
+
 export default function Header({ activeTab, setActiveTab, onRefresh }) {
   const { lang, setLang, t } = useLanguage();
   const [fontSize, setFontSize] = useState('normal');
@@ -108,32 +119,39 @@ export default function Header({ activeTab, setActiveTab, onRefresh }) {
         <div
           className={`gov-nav-item ${activeTab === 'crawl' ? 'active' : ''}`}
           onClick={() => handleNavClick('crawl')}
-          style={activeTab === 'crawl' ? { background: 'linear-gradient(135deg,#3b82f6,#8b5cf6)', color: '#fff', borderRadius: '6px', borderBottom: '4px solid #8b5cf6' } : {}}
+          style={activeTab === 'crawl' ? { background: 'linear-gradient(135deg,#3b82f6,#8b5cf6)', color: '#fff', borderRadius: '6px', borderBottom: '4px solid #8b5cf6', display: 'flex', alignItems: 'center', gap: '0.6rem' } : { display: 'flex', alignItems: 'center', gap: '0.6rem' }}
         >
-          ⚡ {t('nav_crawl')}
+          <img src={thunderIcon} alt="" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+          <span>{t('nav_crawl')}</span>
         </div>
 
         <div
           className={`gov-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
           onClick={() => handleNavClick('dashboard')}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}
         >
-          {t('nav_dashboard')}
+          <img src={houseIcon} alt="" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+          <span>{t('nav_dashboard')}</span>
         </div>
 
         <div
           className={`gov-nav-item has-dropdown ${['feed', 'trends'].includes(activeTab) ? 'dropdown-active' : ''}`}
           onMouseEnter={() => setOpenDropdown('intel')}
           onClick={() => setOpenDropdown(openDropdown === 'intel' ? null : 'intel')}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}
         >
-          {t('nav_intelligence')} <ChevronDown size={14} style={{ transition: 'transform 0.2s', transform: openDropdown === 'intel' ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+          <img src={sateliteIcon} alt="" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+          <span>{t('nav_intelligence')}</span>
+          <ChevronDown size={14} style={{ transition: 'transform 0.2s', transform: openDropdown === 'intel' ? 'rotate(180deg)' : 'rotate(0deg)' }} />
           {openDropdown === 'intel' && (
             <div className="nav-dropdown">
-              <div className={activeTab === 'feed' ? 'active' : ''} onClick={(e) => { e.stopPropagation(); handleNavClick('feed'); }}>
-                {t('nav_feed')}
+              <div className={activeTab === 'feed' ? 'active' : ''} onClick={(e) => { e.stopPropagation(); handleNavClick('feed'); }} style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+                <img src={socialmediaIcon} alt="" style={{ width: '18px', height: '18px', objectFit: 'contain' }} />
+                <span>{t('nav_feed')}</span>
               </div>
-              <div className={activeTab === 'trends' ? 'active' : ''} onClick={(e) => { e.stopPropagation(); handleNavClick('trends'); }}>
-                {t('nav_trends')}
+              <div className={activeTab === 'trends' ? 'active' : ''} onClick={(e) => { e.stopPropagation(); handleNavClick('trends'); }} style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+                <img src={growthIcon} alt="" style={{ width: '18px', height: '18px', objectFit: 'contain' }} />
+                <span>{t('nav_trends')}</span>
               </div>
             </div>
           )}
@@ -143,16 +161,20 @@ export default function Header({ activeTab, setActiveTab, onRefresh }) {
           className={`gov-nav-item has-dropdown ${['alerts', 'watchlist'].includes(activeTab) ? 'dropdown-active' : ''}`}
           onMouseEnter={() => setOpenDropdown('ops')}
           onClick={() => setOpenDropdown(openDropdown === 'ops' ? null : 'ops')}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}
         >
-          {t('nav_operations')} <ChevronDown size={14} style={{ transition: 'transform 0.2s', transform: openDropdown === 'ops' ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+          <img src={operationIcon} alt="" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+          <span>{t('nav_operations')}</span>
+          <ChevronDown size={14} style={{ transition: 'transform 0.2s', transform: openDropdown === 'ops' ? 'rotate(180deg)' : 'rotate(0deg)' }} />
           {openDropdown === 'ops' && (
             <div className="nav-dropdown">
-              <div className={activeTab === 'alerts' ? 'active' : ''} onClick={(e) => { e.stopPropagation(); handleNavClick('alerts'); }}>
-                {t('nav_alerts')}
+              <div className={activeTab === 'alerts' ? 'active' : ''} onClick={(e) => { e.stopPropagation(); handleNavClick('alerts'); }} style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+                <img src={criticalareaIcon} alt="" style={{ width: '18px', height: '18px', objectFit: 'contain' }} />
+                <span>{t('nav_alerts')}</span>
               </div>
-              <div className={activeTab === 'watchlist' ? 'active' : ''} onClick={(e) => { e.stopPropagation(); handleNavClick('watchlist'); }}>
-                {t('nav_watchlist')}
+              <div className={activeTab === 'watchlist' ? 'active' : ''} onClick={(e) => { e.stopPropagation(); handleNavClick('watchlist'); }} style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+                <img src={targetwatchlistIcon} alt="" style={{ width: '18px', height: '18px', objectFit: 'contain' }} />
+                <span>{t('nav_watchlist')}</span>
               </div>
             </div>
           )}
@@ -161,15 +183,19 @@ export default function Header({ activeTab, setActiveTab, onRefresh }) {
         <div
           className={`gov-nav-item ${activeTab === 'reports' ? 'active' : ''}`}
           onClick={() => handleNavClick('reports')}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}
         >
-          {t('nav_reports')}
+          <img src={documentsIcon} alt="" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+          <span>{t('nav_reports')}</span>
         </div>
 
         <div
           className={`gov-nav-item ${activeTab === 'settings' ? 'active' : ''}`}
           onClick={() => handleNavClick('settings')}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}
         >
-          {t('nav_settings')}
+          <img src={operationIcon} alt="" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+          <span>{t('nav_settings')}</span>
         </div>
 
       </nav>
