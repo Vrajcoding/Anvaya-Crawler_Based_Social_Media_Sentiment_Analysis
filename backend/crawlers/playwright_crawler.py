@@ -318,7 +318,7 @@ class PlaywrightCrawler(BaseCrawler):
         if platform == "YouTube":
             if PLAYWRIGHT_AVAILABLE:
                 try:
-                    return await _yt_search_playwright(query, limit, fetch_comments)
+                    return await _yt_search_playwright(query, limit, fetch_comments=True)
                 except Exception as e:
                     print(f"[PlaywrightCrawler] Playwright failed ({e}), falling back to httpx")
             return await _yt_search_httpx(query, limit)

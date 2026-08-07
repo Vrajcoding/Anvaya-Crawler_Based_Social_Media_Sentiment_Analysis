@@ -33,15 +33,6 @@ from urllib.parse import quote_plus
 
 from crawlers.base_crawler import CrawlResult, EngagementMetrics
 
-# Import the new Video OCR engine
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-try:
-    from nlp.video_ocr import video_ocr
-    print("[SeleniumInstagram] OCR Engine loaded successfully.")
-except Exception as e:
-    print(f"[SeleniumInstagram] WARNING: OCR Engine could not be loaded: {e}")
-    video_ocr = None
 
 # Load .env so INSTAGRAM_USERNAME / INSTAGRAM_PASSWORD are available
 try:
@@ -377,6 +368,7 @@ def _scrape_instagram_sync(
 
     try:
         driver = _build_driver(headless=False)   # visible mode — less detection
+        driver.set_page_load_timeout(20)         # 20s max per page — prevents indefinite hangs
 
         # ── Step 1: Login ─────────────────────────────────────────────────────
         logged_in = _login_instagram(driver, username, password)
@@ -471,9 +463,24 @@ def _scrape_instagram_sync(
         print(f"[SeleniumInstagram] Total {len(post_links)} post/reel links collected")
 
         # ── Step 4: Visit each post to extract content ────────────────────────
-        for post_url in post_links[:limit]:
+        MAX_POSTS_TO_VISIT = min(limit, 15)          # never visit more than 15 posts per crawl
+        VISIT_TIMEOUT_S   = 90                        # hard wall-clock budget for all visits
+        visit_start       = time.monotonic()
+
+        for post_url in post_links[:MAX_POSTS_TO_VISIT]:
+            # Hard timeout guard — bail out if we've spent too long visiting posts
+            elapsed = time.monotonic() - visit_start
+            if elapsed > VISIT_TIMEOUT_S:
+                print(f"[SeleniumInstagram] ⏰ Visit timeout reached ({elapsed:.1f}s > {VISIT_TIMEOUT_S}s). "
+                      f"Stopping with {len(results)} posts collected.")
+                break
+
             try:
-                driver.get(post_url)
+                try:
+                    driver.get(post_url)
+                except TimeoutException:
+                    print(f"[SeleniumInstagram] ⚠️ Page load timeout on {post_url} — skipping")
+                    continue
                 time.sleep(random.uniform(2.5, 3.5))
                 is_reel = "/reel/" in post_url
 
@@ -592,36 +599,7 @@ def _scrape_instagram_sync(
                 hashtags = re.findall(r"#(\w+)", caption) or [tag]
                 ctype = "REEL" if is_reel else "POST"
 
-                # ---- OCR Extraction for Reels ----
-                if is_reel and video_ocr:
-                    try:
-                        import tempfile
-                        # Wait a moment to ensure video is fully rendered
-                        time.sleep(1.0)
-                        ss_path = os.path.join(tempfile.gettempdir(), f"reel_ocr_{shortcode}.png")
-                        try:
-                            # Attempt to screenshot only the video element if found
-                            video_el = driver.find_element(By.TAG_NAME, "video")
-                            video_el.screenshot(ss_path)
-                        except Exception:
-                            # Fallback: screenshot the entire page
-                            driver.save_screenshot(ss_path)
-                        
-                        ocr_text = video_ocr.extract_text_from_image(ss_path)
-                        
-                        if ocr_text:
-                            caption += f" [OCR_TEXT: {ocr_text}]"
-                            print(f"[SeleniumInstagram] OCR Extracted: {ocr_text[:60]}...")
-                            
-                        try:
-                            os.remove(ss_path)
-                        except Exception:
-                            pass
-                    except Exception as e:
-                        print(f"[SeleniumInstagram] Reel OCR failed: {e}")
-
                 print(f"[SeleniumInstagram] {ctype} | {author} | {likes} L, {comments_count} C | {caption[:60]!r}")
-
 
                 results.append({
                     "id": f"ig-{uid}",

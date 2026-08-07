@@ -2,6 +2,11 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 import asyncio
 import datetime
+import sys
+
+if sys.platform == 'win32':
+    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+
 from storage.seed_data import initialize_seed_data
 from utils.config import settings
 from api.routes import posts, alerts, trends, watchlist, feedback, reports, stats, settings_router, agent_status
@@ -59,7 +64,7 @@ async def background_crawler_loop():
                     post_id = str(post.get("id") or f"bg_post_{cycle}")
                     content = post.get("content") or ""
                     if content:
-                        nlp_res = run_nlp_pipeline(post_id=post_id, text=content)
+                        nlp_res = await asyncio.to_thread(run_nlp_pipeline, post_id=post_id, text=content)
                         post["nlp_analysis"] = nlp_res
                         post["threat_level"] = nlp_res.get("threat_category", {}).get("label", "Neutral")
                         post["sentiment"] = nlp_res.get("sentiment", {}).get("label", "neutral")

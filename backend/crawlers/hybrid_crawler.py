@@ -25,7 +25,6 @@ from crawlers.telegram_crawler import TelegramCrawler
 #   "js"    → PlaywrightCrawler (headless Chromium)
 
 PLATFORM_ROUTING: Dict[str, str] = {
-    "X":             "fast",
     "GoogleSuggest": "fast",
     "Web":           "fast",
     "YouTube":       "js",
@@ -172,6 +171,46 @@ class HybridCrawler:
             "timestamp": datetime.datetime.utcnow().isoformat(),
             "results": results,
         }
+
+    # ── Multi-platform parallel streaming ────────────────────────────────────
+
+    async def stream_multi_platform(
+        self,
+        queries: List[str],
+        platforms: Optional[List[str]] = None,
+        limit: int = 20,
+        fetch_comments: bool = False,
+        time_filter: str = "any",
+    ):
+        """
+        Stream platform results as they complete using asyncio.as_completed.
+        Yields (platform_name, result_dict) pairs.
+        """
+        if platforms is None:
+            platforms = ALL_PLATFORMS
+
+        valid_platforms = [p for p in platforms if p in PLATFORM_ROUTING]
+        if not valid_platforms:
+            return
+
+        query = queries[0] if queries else ""
+
+        # Wrapper to return platform with the result
+        async def crawl_and_tag(plat):
+            res = await self.crawl_platform(query, plat, limit, fetch_comments, time_filter)
+            return plat, res
+
+        tasks = [
+            crawl_and_tag(platform)
+            for platform in valid_platforms
+        ]
+
+        for coro in asyncio.as_completed(tasks):
+            try:
+                platform, result = await coro
+                yield platform, result
+            except Exception:
+                pass
 
     # ── Watchlist management ─────────────────────────────────────────────────
 

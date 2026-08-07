@@ -111,7 +111,7 @@ def _build_x_driver() -> "webdriver.Chrome":
     # Option 1: webdriver-manager
     if _WDM_AVAILABLE:
         try:
-            path = ChromeDriverManager().install()
+            path = ChromeDriverManager(driver_version="150").install()
             driver = webdriver.Chrome(service=ChromeService(path), options=opts)
             print("[SeleniumX] Driver started via webdriver-manager.")
         except Exception as e:

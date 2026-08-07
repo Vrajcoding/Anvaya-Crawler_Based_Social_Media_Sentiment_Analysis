@@ -260,6 +260,55 @@ const S = {
     fontSize: '0.9rem',
     marginBottom: '1rem',
   },
+  exportBar: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.75rem',
+    padding: '0.85rem 1.25rem',
+    background: 'rgba(255,255,255,0.03)',
+    border: '1px solid rgba(255,255,255,0.08)',
+    borderRadius: '14px',
+    marginBottom: '1.5rem',
+    flexWrap: 'wrap',
+  },
+  exportLabel: {
+    color: '#64748b',
+    fontSize: '0.82rem',
+    fontWeight: 600,
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase',
+    marginRight: '0.25rem',
+  },
+  btnExportPDF: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.4rem',
+    background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
+    border: 'none',
+    borderRadius: '10px',
+    padding: '0.55rem 1.2rem',
+    color: '#fff',
+    fontWeight: 700,
+    fontSize: '0.83rem',
+    cursor: 'pointer',
+    transition: 'opacity 0.2s, transform 0.15s',
+    letterSpacing: '0.02em',
+  },
+  btnExportXLSX: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.4rem',
+    background: 'linear-gradient(135deg, #16a34a 0%, #14532d 100%)',
+    border: 'none',
+    borderRadius: '10px',
+    padding: '0.55rem 1.2rem',
+    color: '#fff',
+    fontWeight: 700,
+    fontSize: '0.83rem',
+    cursor: 'pointer',
+    transition: 'opacity 0.2s, transform 0.15s',
+    letterSpacing: '0.02em',
+  },
 };
 
 // ── Skeleton loader ───────────────────────────────────────────────────────────
@@ -542,6 +591,7 @@ export default function PromptCrawler() {
   const [results, setResults] = useState(null);
   const [error, setError] = useState('');
   const [elapsed, setElapsed] = useState(null);
+  const [exportLoading, setExportLoading] = useState({ pdf: false, excel: false });
   const inputRef = useRef(null);
 
   const togglePlatform = (id) =>
@@ -560,12 +610,22 @@ export default function PromptCrawler() {
       return;
     }
     setError('');
-    setResults(null);
+    
+    // Initialize results state for streaming
+    setResults({
+      query: prompt.trim(),
+      platforms_crawled: 0,
+      total_posts: 0,
+      duration_s: 0,
+      timestamp: new Date().toISOString(),
+      results: {}
+    });
+    
     setLoading(true);
     setElapsed(null);
-    const t0 = Date.now();
+    
     try {
-      const resp = await fetch(`${API_BASE}/crawl/prompt`, {
+      const resp = await fetch(`${API_BASE}/crawl/prompt/stream`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -576,17 +636,91 @@ export default function PromptCrawler() {
           fetch_comments: fetchComments,
         }),
       });
+      
       if (!resp.ok) {
         const detail = await resp.json().catch(() => ({}));
         throw new Error(detail?.detail || `HTTP ${resp.status}`);
       }
-      const data = await resp.json();
-      setResults(data);
-      setElapsed(((Date.now() - t0) / 1000).toFixed(1));
+
+      const reader = resp.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop(); // keep the last incomplete line in buffer
+
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          try {
+            const data = JSON.parse(line);
+            if (data.type === 'platform_result') {
+              setResults(prev => {
+                if (!prev) return prev;
+                return {
+                  ...prev,
+                  results: {
+                    ...prev.results,
+                    [data.platform]: data.data
+                  }
+                };
+              });
+            } else if (data.type === 'summary') {
+              setElapsed(data.duration_s);
+              setResults(prev => {
+                if (!prev) return prev;
+                return {
+                  ...prev,
+                  duration_s: data.duration_s,
+                  total_posts: data.total_posts,
+                  platforms_crawled: data.platforms_crawled
+                };
+              });
+            }
+          } catch (e) {
+            console.error("Error parsing stream chunk", e, line);
+          }
+        }
+      }
     } catch (e) {
       setError(`Crawl failed: ${e.message}`);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const exportResults = async (format) => {
+    if (!results) return;
+    setExportLoading((prev) => ({ ...prev, [format]: true }));
+    try {
+      const resp = await fetch(`${API_BASE}/crawl/export`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ format, results }),
+      });
+      if (!resp.ok) {
+        const detail = await resp.json().catch(() => ({}));
+        throw new Error(detail?.detail || `HTTP ${resp.status}`);
+      }
+      const blob = await resp.blob();
+      const ext = format === 'pdf' ? 'pdf' : 'xlsx';
+      const filename = `sentinelai_${(results.query || 'crawl').replace(/\s+/g, '_')}.${ext}`;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      setError(`Export failed: ${e.message}`);
+    } finally {
+      setExportLoading((prev) => ({ ...prev, [format]: false }));
     }
   };
 
@@ -730,6 +864,40 @@ export default function PromptCrawler() {
                 </span>
                 <span style={S.summaryLbl}>Query</span>
               </div>
+            </div>
+
+            {/* Export toolbar */}
+            <div style={S.exportBar}>
+              <span style={S.exportLabel}>⬇ Export</span>
+              <button
+                id="export-pdf-btn"
+                onClick={() => exportResults('pdf')}
+                disabled={exportLoading.pdf || exportLoading.excel}
+                style={{
+                  ...S.btnExportPDF,
+                  opacity: exportLoading.pdf ? 0.65 : 1,
+                  transform: exportLoading.pdf ? 'scale(0.97)' : 'scale(1)',
+                }}
+                title="Download results as a styled PDF report"
+              >
+                {exportLoading.pdf ? '⏳' : '📄'} {exportLoading.pdf ? 'Generating PDF…' : 'Export PDF'}
+              </button>
+              <button
+                id="export-excel-btn"
+                onClick={() => exportResults('excel')}
+                disabled={exportLoading.pdf || exportLoading.excel}
+                style={{
+                  ...S.btnExportXLSX,
+                  opacity: exportLoading.excel ? 0.65 : 1,
+                  transform: exportLoading.excel ? 'scale(0.97)' : 'scale(1)',
+                }}
+                title="Download results as an Excel spreadsheet (.xlsx)"
+              >
+                {exportLoading.excel ? '⏳' : '📊'} {exportLoading.excel ? 'Generating Excel…' : 'Export Excel'}
+              </button>
+              <span style={{ color: '#334155', fontSize: '0.78rem', marginLeft: 'auto' }}>
+                {totalPosts} posts · {results.platforms_crawled} platforms
+              </span>
             </div>
 
             {/* Per-platform results */}
