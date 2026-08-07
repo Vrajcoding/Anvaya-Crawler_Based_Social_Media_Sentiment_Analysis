@@ -8,6 +8,7 @@ import instaIcon from '../assets/insta.png';
 import webIcon from '../assets/web.png';
 import redditIcon from '../assets/reddit.png';
 import telegramIcon from '../assets/telegram.png';
+import searchIcon from '../assets/search.png';
  
 
 const API_BASE = 'http://localhost:8000/api/v1';
@@ -80,6 +81,10 @@ const S = {
     transition: 'border-color 0.2s',
   },
   btnPrimary: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.5rem',
     background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
     border: 'none',
     borderRadius: '12px',
@@ -778,7 +783,14 @@ export default function PromptCrawler() {
               disabled={loading}
               style={{ ...S.btnPrimary, opacity: loading ? 0.6 : 1 }}
             >
-              {loading ? `⏳ ${t('crawl_crawling')}` : `🚀 ${t('crawl_start')}`}
+              {loading ? (
+                <>⏳ {t('crawl_crawling')}</>
+              ) : (
+                <>
+                  <img src={searchIcon} alt="" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+                  <span>{t('crawl_start')}</span>
+                </>
+              )}
             </button>
           </div>
 
