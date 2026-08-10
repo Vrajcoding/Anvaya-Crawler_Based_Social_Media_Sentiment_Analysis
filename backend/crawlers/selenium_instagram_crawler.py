@@ -341,7 +341,6 @@ def _scrape_instagram_sync(
         return []
 
     # Re-load .env every time so edits take effect WITHOUT restarting the server.
-    # Use the directory of this file to find the backend .env reliably.
     _env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
     try:
         from dotenv import load_dotenv as _load
@@ -349,7 +348,6 @@ def _scrape_instagram_sync(
     except Exception:
         pass
 
-    # Read credentials from environment
     username = os.getenv("INSTAGRAM_USERNAME", "").strip()
     password = os.getenv("INSTAGRAM_PASSWORD", "").strip()
 
@@ -358,7 +356,7 @@ def _scrape_instagram_sync(
         print(
             "[SeleniumInstagram] ❌ INSTAGRAM credentials not configured in .env!\n"
             f"   Current INSTAGRAM_USERNAME='{username}'\n"
-            "   Please edit backend/.env and set real credentials, then trigger a crawl again."
+            "   Please edit backend/.env and set real credentials."
         )
         return []
 
@@ -366,9 +364,70 @@ def _scrape_instagram_sync(
     results: List[Dict[str, Any]] = []
     driver: Optional["webdriver.Chrome"] = None
 
+    # ── Helper: parse K/M/B suffixed numbers ─────────────────────────────────
+    def _parse_num(s: str) -> int:
+        if not s:
+            return 0
+        s = s.strip().upper().replace(",", "").replace(".", "")
+        try:
+            if s.endswith("K"):
+                return int(float(s[:-1]) * 1_000)
+            if s.endswith("M"):
+                return int(float(s[:-1]) * 1_000_000)
+            if s.endswith("B"):
+                return int(float(s[:-1]) * 1_000_000_000)
+            return int(float(s))
+        except Exception:
+            return 0
+
+    # ── Helper: extract all /p/ and /reel/ links via JavaScript ──────────────
+    def _collect_links_js(drv) -> List[str]:
+        try:
+            links = drv.execute_script("""
+                var seen = {};
+                var out = [];
+                document.querySelectorAll('a[href]').forEach(function(a) {
+                    var h = a.href || '';
+                    if ((h.indexOf('/p/') !== -1 || h.indexOf('/reel/') !== -1)
+                            && h.indexOf('instagram.com') !== -1
+                            && !seen[h]) {
+                        seen[h] = 1;
+                        out.push(h);
+                    }
+                });
+                return out;
+            """)
+            return links if isinstance(links, list) else []
+        except Exception:
+            return []
+
+    # ── Helper: extract a single meta-tag content ─────────────────────────────
+    def _meta(drv, selector: str) -> str:
+        try:
+            el = drv.find_element(By.CSS_SELECTOR, selector)
+            return (el.get_attribute("content") or "").strip()
+        except Exception:
+            return ""
+
+    # ── Helper: safe page get with timeout fallback ───────────────────────────
+    def _safe_get(drv, url: str) -> bool:
+        try:
+            drv.get(url)
+            return True
+        except TimeoutException:
+            print(f"[SeleniumInstagram] ⚠️ Page load timeout on {url} — skipping")
+            try:
+                drv.execute_script("window.stop();")
+            except Exception:
+                pass
+            return False
+        except Exception as e:
+            print(f"[SeleniumInstagram] ⚠️ Navigation error on {url}: {e}")
+            return False
+
     try:
-        driver = _build_driver(headless=False)   # visible mode — less detection
-        driver.set_page_load_timeout(20)         # 20s max per page — prevents indefinite hangs
+        driver = _build_driver(headless=False)
+        driver.set_page_load_timeout(25)
 
         # ── Step 1: Login ─────────────────────────────────────────────────────
         logged_in = _login_instagram(driver, username, password)
@@ -376,237 +435,296 @@ def _scrape_instagram_sync(
             print("[SeleniumInstagram] Login failed — cannot scrape.")
             return []
 
-        # ── Step 2: Build search URLs to try ────────────────────────────────
-        # Strategy: try multiple URLs until we find posts.
+        # ── Step 2: Build prioritised search URL list ─────────────────────────
         raw_query = query.strip()
-        words = [w for w in re.split(r"\s+", raw_query.lower()) if len(w) > 2
-                 and w not in {"the", "and", "for", "with", "about", "from", "this", "that", "in", "on", "at", "of"}]
+        stop_words = {"the", "and", "for", "with", "about", "from", "this",
+                      "that", "in", "on", "at", "of", "is", "are", "was"}
+        words = [w for w in re.split(r"\s+", raw_query.lower())
+                 if len(w) > 2 and w not in stop_words]
 
-        search_urls_to_try = []
-
-        # 1. Exact keyword search
-        search_urls_to_try.append(
-            f"https://www.instagram.com/explore/search/keyword/?q={quote_plus(raw_query)}"
-        )
-
-        # 2. Keyword search without stop words (e.g. "surat protest" instead of "protests in surat")
-        if len(words) > 0 and " ".join(words) != raw_query.lower():
-            clean_query = " ".join(words)
-            search_urls_to_try.append(
-                f"https://www.instagram.com/explore/search/keyword/?q={quote_plus(clean_query)}"
-            )
-
-        # 3. Hashtag explore with first meaningful word
+        candidate_urls: List[str] = []
         if words:
-            search_urls_to_try.append(
+            candidate_urls.append(
                 f"https://www.instagram.com/explore/tags/{quote_plus(words[0])}/"
             )
-
-        # 4. Hashtag explore with first two words joined (e.g. suratprotest)
         if len(words) >= 2:
-            search_urls_to_try.append(
+            candidate_urls.append(
                 f"https://www.instagram.com/explore/tags/{quote_plus(words[0] + words[1])}/"
             )
+        candidate_urls.append(
+            f"https://www.instagram.com/explore/tags/{quote_plus(tag)}/"
+        )
+        candidate_urls.append(
+            f"https://www.instagram.com/explore/search/keyword/?q={quote_plus(raw_query)}"
+        )
+        seen_u: set = set()
+        search_urls = [u for u in candidate_urls if not (u in seen_u or seen_u.add(u))]  # type: ignore
 
         post_links: List[str] = []
 
-        for search_url in search_urls_to_try:
-            if post_links:
+        # ── Step 3: Visit search URLs and collect post links via scrolling ────
+        for search_url in search_urls:
+            if len(post_links) >= limit:
                 break
             print(f"[SeleniumInstagram] Trying URL: {search_url}")
-            driver.get(search_url)
-            time.sleep(random.uniform(3.5, 5.0))
+            if not _safe_get(driver, search_url):
+                continue
+            time.sleep(random.uniform(3.0, 4.5))
 
-            # Check for "No results" page
             try:
-                page_text = driver.find_element(By.TAG_NAME, "body").text
-                if "No results" in page_text or "couldn't find anything" in page_text:
-                    print(f"[SeleniumInstagram] No results on {search_url} — trying next URL...")
+                body_text = driver.find_element(By.TAG_NAME, "body").text
+                if any(s in body_text for s in ["No results", "couldn't find anything",
+                                                  "Page Not Found", "Sorry, this page"]):
+                    print(f"[SeleniumInstagram] ✗ No results at {search_url}")
                     continue
             except Exception:
                 pass
 
-            # Scroll to lazy-load the post grid and collect links
+            max_scrolls = max(20, (limit // 5) + 10)
+            no_new_streak = 0
             last_count = 0
-            # Scroll up to (limit/10) times, assuming ~10 posts per scroll, plus some buffer
-            for _ in range(max(5, (limit // 8) + 2)):
-                driver.execute_script("window.scrollBy(0, 1000);")
-                time.sleep(random.uniform(1.0, 1.5))
-                
-                # ── Step 3: Collect post + reel links ─────────────────────────────
-                for sel in ["a[href*='/p/']", "a[href*='/reel/']","a[href*='/reels/']"]:
-                    try:
-                        for a in driver.find_elements(By.CSS_SELECTOR, sel):
-                            href = a.get_attribute("href") or ""
-                            if href and href not in post_links:
-                                post_links.append(href)
-                    except Exception:
-                        pass
-                
+            print(f"[SeleniumInstagram] Scrolling up to {max_scrolls}× (need ≥{limit})...")
+
+            for scroll_i in range(max_scrolls):
+                # Scroll to absolute document bottom — triggers Instagram lazy loader
+                driver.execute_script(
+                    "window.scrollTo(0, "
+                    "document.documentElement.scrollHeight || document.body.scrollHeight);"
+                )
+                time.sleep(random.uniform(1.5, 2.2))
+
+                # Occasional micro-nudge to jolt lazy loader
+                if scroll_i % 3 == 0:
+                    driver.execute_script("window.scrollBy(0, -400);")
+                    time.sleep(0.4)
+                    driver.execute_script("window.scrollBy(0, 600);")
+                    time.sleep(0.4)
+
+                # Collect all /p/ and /reel/ hrefs via a single JS call
+                added = 0
+                for href in _collect_links_js(driver):
+                    clean = re.sub(r"\?.*$", "", href).rstrip("/") + "/"
+                    if clean not in post_links:
+                        post_links.append(clean)
+                        added += 1
+
+                print(f"[SeleniumInstagram]   scroll {scroll_i+1}/{max_scrolls}: "
+                      f"{len(post_links)} links (+{added})")
+
                 if len(post_links) >= limit:
                     break
-                    
-                # Break early if no new links are found after scrolling
-                if len(post_links) == last_count and len(post_links) > 0:
-                    time.sleep(1.5)
-                    last_count = len(post_links)
-                    # double check
-                    continue
+
+                if len(post_links) == last_count:
+                    no_new_streak += 1
+                    if no_new_streak >= 5:
+                        print(f"[SeleniumInstagram] Stale ({no_new_streak} scrolls) — next URL")
+                        break
+                else:
+                    no_new_streak = 0
                 last_count = len(post_links)
 
-            print(f"[SeleniumInstagram] Found {len(post_links)} links on {search_url}")
+            print(f"[SeleniumInstagram] ↳ {len(post_links)} links after {search_url}")
 
         if not post_links:
-            print(f"[SeleniumInstagram] All URLs exhausted — no posts found for '{raw_query}'")
+            print(f"[SeleniumInstagram] All URLs exhausted — no posts for '{raw_query}'")
             return []
 
-        print(f"[SeleniumInstagram] Total {len(post_links)} post/reel links collected")
+        print(f"[SeleniumInstagram] ✅ {len(post_links)} unique links collected")
 
-        # ── Step 4: Visit each post to extract content ────────────────────────
-        MAX_POSTS_TO_VISIT = min(limit, 15)          # never visit more than 15 posts per crawl
-        VISIT_TIMEOUT_S   = 90                        # hard wall-clock budget for all visits
-        visit_start       = time.monotonic()
+        # ── Step 4: Visit each post and extract content ───────────────────────
+        to_visit = post_links[:min(limit, len(post_links))]
+        budget_s = max(240, len(to_visit) * 15)
+        t0 = time.monotonic()
+        _NO_FILTER = {"any", "all", "", "none"}
+        _FILTER_HOURS = {"24h": 24, "48h": 48, "1week": 168, "1month": 720}
+        print(f"[SeleniumInstagram] Visiting {len(to_visit)} posts (budget {budget_s}s)...")
 
-        for post_url in post_links[:MAX_POSTS_TO_VISIT]:
-            # Hard timeout guard — bail out if we've spent too long visiting posts
-            elapsed = time.monotonic() - visit_start
-            if elapsed > VISIT_TIMEOUT_S:
-                print(f"[SeleniumInstagram] ⏰ Visit timeout reached ({elapsed:.1f}s > {VISIT_TIMEOUT_S}s). "
-                      f"Stopping with {len(results)} posts collected.")
+        for post_url in to_visit:
+            if time.monotonic() - t0 > budget_s:
+                print(f"[SeleniumInstagram] ⏰ Budget exhausted — {len(results)} posts")
                 break
 
             try:
-                try:
-                    driver.get(post_url)
-                except TimeoutException:
-                    print(f"[SeleniumInstagram] ⚠️ Page load timeout on {post_url} — skipping")
+                if not _safe_get(driver, post_url):
                     continue
-                time.sleep(random.uniform(2.5, 3.5))
-                is_reel = "/reel/" in post_url
+                time.sleep(random.uniform(1.2, 2.0))
 
-                # ---- Robust extraction via page title / meta tag ----
+                is_reel = "/reel/" in post_url
                 caption = ""
-                author = "@ig_public"
-                likes = 0
+                author  = "@ig_public"
+                likes   = 0
                 comments_count = 0
                 post_date = None
 
-                try:
-                    # 1. Date extraction independent of title regex
+                # ── A. Open Graph meta tags (PRIMARY) ────────────────────────
+                og_desc   = _meta(driver, "meta[property='og:description']")
+                og_title  = _meta(driver, "meta[property='og:title']")
+                meta_desc = _meta(driver, "meta[name='description']")
+
+                # Caption: og:description = full caption text
+                if og_desc and og_desc.lower() not in {"instagram", ""}:
+                    caption = og_desc
+
+                # Author from og:title
+                # "username on Instagram: 'caption'" or "Name (@handle) • Instagram"
+                if og_title:
+                    m = re.match(
+                        r'^([A-Za-z0-9_.]+)\s+(?:\(@[^)]+\)\s+)?on\s+Instagram',
+                        og_title, re.IGNORECASE
+                    )
+                    if m:
+                        author = f"@{m.group(1).strip()}"
+                    else:
+                        m2 = re.search(r'\(@([A-Za-z0-9_.]+)\)', og_title)
+                        if m2:
+                            author = f"@{m2.group(1)}"
+
+                # Likes / comments from meta[name='description']
+                # "390K Likes, 1,223 Comments - username on July 22, 2026: 'caption'"
+                if meta_desc:
+                    ml = re.search(r'([\d.,KkMmBb]+)\s*[Ll]ikes?', meta_desc)
+                    mc = re.search(r'([\d.,KkMmBb]+)\s*[Cc]omments?', meta_desc)
+                    if ml:
+                        likes = _parse_num(ml.group(1))
+                    if mc:
+                        comments_count = _parse_num(mc.group(1))
+                    if not caption:
+                        cap_m = re.search(
+                            r'[A-Za-z0-9_.]+\s+on\s+[A-Za-z]+\s+\d+,\s+\d{4}\s*:\s*["\']?(.*)',
+                            meta_desc, re.DOTALL
+                        )
+                        if cap_m:
+                            caption = cap_m.group(1).strip().strip("\"'")
+
+                # ── B. Page title fallback ────────────────────────────────────
+                if not caption or caption.lower() in {"instagram", ""}:
+                    ptitle = driver.title or ""
+                    m_t = re.search(
+                        r'(?:([\d.,kKmM]+)\s*likes?,\s*)?'
+                        r'(?:([\d.,kKmM]+)\s*comments?\s*-\s*)?'
+                        r'([A-Za-z0-9_.]+)\s+on\s+([A-Za-z]+\s+\d+,\s+\d{4})\s*:\s*["\']?(.*)',
+                        ptitle, re.DOTALL
+                    )
+                    if m_t:
+                        ls, cs, aus, ds, caps = m_t.groups()
+                        if caps:
+                            caption = caps.strip().strip("\"'")
+                        if aus and author == "@ig_public":
+                            author = f"@{aus}"
+                        if ls and likes == 0:
+                            likes = _parse_num(ls)
+                        if cs and comments_count == 0:
+                            comments_count = _parse_num(cs)
+
+                # ── C. DOM fallback — h1 then first long span ─────────────────
+                if not caption or caption.lower() in {"instagram", ""}:
                     try:
-                        time_el = driver.find_element(By.CSS_SELECTOR, "time[datetime]")
-                        dt_str = time_el.get_attribute("datetime")
-                        if dt_str:
-                            import dateutil.parser
-                            post_date = dateutil.parser.isoparse(dt_str).replace(tzinfo=None)
+                        for h1 in driver.find_elements(By.TAG_NAME, "h1"):
+                            txt = h1.text.strip()
+                            if len(txt) > 15:
+                                caption = txt
+                                break
                     except Exception:
                         pass
-                        
-                    title = driver.title or ""
-                    # Instagram titles often look like:
-                    # "390K likes, 1,223 comments - username on July 22, 2026: 'Caption text...'"
-                    # Or: "username on July 22, 2026: 'Caption text...'"
-                    
-                    # Regex to extract all parts
-                    pattern = r'(?:([\d.,kKmM]+)\s*likes?,\s*)?(?:([\d.,kKmM]+)\s*comments?\s*-\s*)?([^\s]+)\s+on\s+([A-Za-z]+\s+\d+,\s+\d{4})\s*:\s*["\'](.*)["\']'
-                    m = re.search(pattern, title)
-                    if m:
-                        likes_str, comments_str, author_str, date_str, caption_str = m.groups()
-                        
-                        if caption_str:
-                            caption = caption_str.strip()
-                        if author_str:
-                            author = f"@{author_str}" if not author_str.startswith("@") else author_str
-                        
-                        # Parse likes/comments with K/M multipliers
-                        def parse_num(s):
-                            if not s: return 0
-                            s = s.upper().replace(',', '')
-                            if 'K' in s: return int(float(s.replace('K', '')) * 1000)
-                            if 'M' in s: return int(float(s.replace('M', '')) * 1000000)
-                            return int(float(s))
-                        
-                        likes = parse_num(likes_str)
-                        comments_count = parse_num(comments_str)
-                        
-                        # Fallback date parsing from title
-                        if not post_date and date_str:
-                            try:
-                                post_date = datetime.datetime.strptime(date_str, "%B %d, %Y")
-                            except Exception:
-                                pass
-                    else:
-                        # Fallback if title regex fails
-                        caption = driver.title
-                        
-                except Exception as e:
-                    print(f"[SeleniumInstagram] Title parse error: {e}")
 
-                # ---- Time Filter ----
-                if post_date and time_filter != "any":
-                    age_hours = (datetime.datetime.now() - post_date).total_seconds() / 3600
-                    max_hours = 24
-                    if time_filter == "48h":
-                        max_hours = 48
-                    elif time_filter == "1week":
-                        max_hours = 24 * 7
-                    elif time_filter == "1month":
-                        max_hours = 24 * 30
-                        
-                    if age_hours > max_hours:
-                        print(f"[SeleniumInstagram] ⚠️ Skipping post - older than {time_filter} ({age_hours:.1f}h old)")
+                if not caption or caption.lower() in {"instagram", ""}:
+                    try:
+                        for sp in driver.find_elements(
+                                By.CSS_SELECTOR, "span[dir='auto']"):
+                            txt = sp.text.strip()
+                            if len(txt) > 30 and txt.lower() != "instagram":
+                                caption = txt
+                                break
+                    except Exception:
+                        pass
+
+                # ── D. Author from article profile link ───────────────────────
+                if author == "@ig_public":
+                    try:
+                        for a_el in driver.find_elements(
+                                By.CSS_SELECTOR, "article a[href^='/']"):
+                            hv = a_el.get_attribute("href") or ""
+                            m_u = re.search(
+                                r'instagram\.com/([A-Za-z0-9_.]{2,30})/?$', hv
+                            )
+                            if m_u:
+                                cand = m_u.group(1)
+                                if cand not in {"explore", "p", "reel", "reels",
+                                                "stories", "direct", "accounts"}:
+                                    author = f"@{cand}"
+                                    break
+                    except Exception:
+                        pass
+
+                # ── E. Date extraction ────────────────────────────────────────
+                try:
+                    tel = driver.find_element(By.CSS_SELECTOR, "time[datetime]")
+                    dt_s = tel.get_attribute("datetime") or ""
+                    if dt_s:
+                        import dateutil.parser
+                        post_date = dateutil.parser.isoparse(dt_s).replace(tzinfo=None)
+                except Exception:
+                    pass
+
+                if not post_date and meta_desc:
+                    md = re.search(r'on\s+([A-Za-z]+\s+\d{1,2},\s+\d{4})', meta_desc)
+                    if md:
+                        try:
+                            post_date = datetime.datetime.strptime(md.group(1), "%B %d, %Y")
+                        except Exception:
+                            pass
+
+                # ── F. Time filter ────────────────────────────────────────────
+                if post_date and time_filter not in _NO_FILTER:
+                    age_h = (datetime.datetime.now() - post_date).total_seconds() / 3600
+                    max_h = _FILTER_HOURS.get(time_filter, 0)
+                    if max_h > 0 and age_h > max_h:
+                        print(f"[SeleniumInstagram] ⏩ Skipping (age={age_h:.0f}h > {time_filter})")
                         continue
 
-                # ---- Comments extraction (real DOM parsing) ----
+                # ── G. Comments (only when fetch_comments=True) ───────────────
                 post_comments: List[Dict[str, str]] = []
-                try:
-                    spans = driver.find_elements(By.CSS_SELECTOR,"span[dir='auto']")
-
-                    seen: set = set()
-                    for span in spans:
-                        txt = span.text.strip()
-                        if txt and len(txt) > 2 and txt not in seen:
-                            lower_txt = txt.lower()
-                            # Skip common Instagram UI elements
-                            if lower_txt in ["reply", "hide replies", "see translation"] or " likes" in lower_txt or (lower_txt.startswith("view all") and "replies" in lower_txt):
-                                continue
-
-                            if not caption or caption == driver.title:
-                                if len(txt) > 20:
-                                    caption=txt
-                                    seen.add(txt)
-                                    continue
-                            if txt != caption:
-                                # Check if comment contains the search keyword (using 'words' or 'raw_query' defined above)
-                                match = False
-                                for w in words:
-                                    if w in lower_txt:
-                                        match = True
-                                        break
-                                
-                                if match or raw_query in lower_txt:
-                                    post_comments.append({"author": "user", "text": txt[:300]})
-                                    seen.add(txt)
-                            if len(post_comments)>= 15:
+                if fetch_comments:
+                    try:
+                        seen_c: set = set()
+                        skip_ui = {"reply", "hide replies", "see translation",
+                                   "load more comments", "view more comments"}
+                        for sp in driver.find_elements(
+                                By.CSS_SELECTOR, "span[dir='auto']"):
+                            txt = sp.text.strip()
+                            ltxt = txt.lower()
+                            if (txt and len(txt) > 3 and txt not in seen_c
+                                    and ltxt not in skip_ui
+                                    and " likes" not in ltxt
+                                    and not (ltxt.startswith("view all")
+                                             and "replies" in ltxt)
+                                    and txt != caption):
+                                post_comments.append({"author": "user", "text": txt[:300]})
+                                seen_c.add(txt)
+                            if len(post_comments) >= 20:
                                 break
-                except Exception as e:
-                    print(f"[SeleniumInstagram] Comment extraction failed: {e}")
+                    except Exception as ce:
+                        print(f"[SeleniumInstagram] Comment extraction failed: {ce}")
 
-                # ---- Build result ----
-                sc_match = re.search(r"/(?:p|reel)/([A-Za-z0-9_-]+)/?", post_url)
-                shortcode = sc_match.group(1) if sc_match else uuid.uuid4().hex[:8]
+                # ── H. Build result ───────────────────────────────────────────
+                sc = re.search(r"/(?:p|reel)/([A-Za-z0-9_-]+)/?", post_url)
+                shortcode = sc.group(1) if sc else uuid.uuid4().hex[:8]
                 uid = hashlib.md5(shortcode.encode()).hexdigest()[:10]
                 hashtags = re.findall(r"#(\w+)", caption) or [tag]
                 ctype = "REEL" if is_reel else "POST"
 
-                print(f"[SeleniumInstagram] {ctype} | {author} | {likes} L, {comments_count} C | {caption[:60]!r}")
+                if not caption or caption.lower() in {"instagram", ""}:
+                    caption = f"Instagram {ctype.lower()} about #{tag}"
+
+                print(f"[SeleniumInstagram] ✅ {ctype} | {author} | "
+                      f"{likes:,}L {comments_count:,}C | {caption[:80]!r}")
 
                 results.append({
                     "id": f"ig-{uid}",
                     "platform": "Instagram",
                     "author_username": author,
                     "author_id": f"ig_{uid}",
-                    "content": caption[:600] or f"Instagram {ctype.lower()} about #{tag}",
+                    "content": caption[:600],
                     "url": post_url,
                     "hashtags": hashtags,
                     "language": "en",
@@ -616,17 +734,20 @@ def _scrape_instagram_sync(
                     "content_type": ctype,
                     "source_type": "SELENIUM_INSTAGRAM",
                     "crawled_at": datetime.datetime.utcnow().isoformat(),
-                    "created_at": datetime.datetime.utcnow().isoformat(),
+                    "created_at": (post_date.isoformat() if post_date
+                                   else datetime.datetime.utcnow().isoformat()),
                 })
 
-            except Exception as e:
-                print(f"[SeleniumInstagram] Error on {post_url}: {e}")
+            except Exception as exc:
+                print(f"[SeleniumInstagram] Error on {post_url}: {exc}")
                 continue
 
-    except WebDriverException as e:
-        print(f"[SeleniumInstagram] WebDriver error: {e}")
-    except Exception as e:
-        print(f"[SeleniumInstagram] Unexpected error: {e}")
+    except WebDriverException as exc:
+        print(f"[SeleniumInstagram] WebDriver error: {exc}")
+    except Exception as exc:
+        import traceback
+        print(f"[SeleniumInstagram] Unexpected error: {exc}")
+        traceback.print_exc()
     finally:
         if driver:
             try:
@@ -634,10 +755,98 @@ def _scrape_instagram_sync(
             except Exception:
                 pass
 
+    print(f"[SeleniumInstagram] 🏁 Done — {len(results)} posts for '{query}'")
     return results
 
 
 # ── Fallback stub generator ───────────────────────────────────────────────────
+
+def _generate_fallback_stubs(tag: str, limit: int) -> List[CrawlResult]:
+    """Returns realistic CTI stubs when scraping is unavailable."""
+    samples = [
+        f"⚠️ Alert near market area! Tensions rising. Stay safe. #SuratAlert #GujaratPolice #{tag}",
+        f"Fact Check: Viral video about #{tag} is MISLEADING. Official sources clarify. #FactCheck",
+        f"🔥 Rumour spreading about #{tag} — Police on ground, situation monitored. #GujaratCyberWatch",
+        f"Community update: Peace maintained in #{tag} zone. Authorities request calm. #AhmedabadUpdates",
+        f"Breaking: Coordinated misinformation campaign detected around #{tag}. #CyberAlert #InstaWatch",
+    ]
+    results = []
+    for text in samples[:limit]:
+        uid = uuid.uuid4().hex[:8]
+        results.append(CrawlResult(
+            id=f"ig-stub-{uid}",
+            platform="Instagram",
+            author_username=f"@ig_monitor_{uid[:4]}",
+            author_id=f"ig_{uid}",
+            content=text,
+            url=f"https://www.instagram.com/explore/tags/{tag}/",
+            hashtags=re.findall(r"#(\w+)", text),
+            language="en",
+            engagement=EngagementMetrics(
+                likes=random.randint(100, 5000),
+                comments=random.randint(10, 300),
+                shares=random.randint(5, 200),
+            ),
+            source_type="SELENIUM_IG_STUB",
+            crawled_at=datetime.datetime.utcnow().isoformat(),
+            created_at=datetime.datetime.utcnow().isoformat(),
+        ))
+    return results
+
+
+# ── Public async entry-point ──────────────────────────────────────────────────
+
+_executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="selenium_ig")
+
+
+async def selenium_instagram_search(
+    query: str,
+    limit: int = 10,
+    fetch_comments: bool = False,
+    time_filter: str = "all",
+) -> List[CrawlResult]:
+    """
+    Async wrapper — runs blocking Selenium in a thread executor.
+    Falls back to stubs if credentials are missing or scraping fails.
+    """
+    tag = re.sub(r"[\s#]+", "", query.strip().lower())
+    results: List[CrawlResult] = []
+
+    if SELENIUM_AVAILABLE:
+        try:
+            loop = asyncio.get_event_loop()
+            raw = await loop.run_in_executor(
+                _executor,
+                lambda: _scrape_instagram_sync(query, limit, fetch_comments, time_filter),
+            )
+            for r in raw:
+                results.append(CrawlResult(
+                    id=r["id"],
+                    platform=r["platform"],
+                    author_username=r["author_username"],
+                    author_id=r["author_id"],
+                    content=r["content"],
+                    url=r["url"],
+                    hashtags=r["hashtags"],
+                    language=r["language"],
+                    engagement=EngagementMetrics(
+                        likes=r.get("likes", 0),
+                        comments=len(r.get("post_comments", [])),
+                    ),
+                    comments=r.get("post_comments", []),
+                    source_type=r["source_type"],
+                    crawled_at=r["crawled_at"],
+                    created_at=r["created_at"],
+                ))
+        except Exception as exc:
+            print(f"[SeleniumInstagram] Executor error: {exc}")
+
+    if not results:
+        print(f"[SeleniumInstagram] No live results for #{tag} — using fallback stubs.")
+        results = _generate_fallback_stubs(tag, min(limit, 5))
+
+
+    return results[:limit]
 
 def _generate_fallback_stubs(tag: str, limit: int) -> List[CrawlResult]:
     """Returns realistic CTI stubs when scraping is unavailable."""
