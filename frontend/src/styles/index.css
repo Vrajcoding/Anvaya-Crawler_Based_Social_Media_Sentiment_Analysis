@@ -38,6 +38,25 @@
   --threat-low-border: #22c55e;
 
   --font-size-multiplier: 1;
+
+  /* Prompt Crawler Theme Variables - Dark */
+  --crawler-bg-gradient: linear-gradient(135deg, #0a0f1e 0%, #0d1b2a 50%, #111827 100%);
+  --crawler-card-bg: rgba(255, 255, 255, 0.04);
+  --crawler-card-border: rgba(255, 255, 255, 0.08);
+  --crawler-input-bg: rgba(255, 255, 255, 0.06);
+  --crawler-input-border: rgba(255, 255, 255, 0.12);
+  --crawler-input-text: #f1f5f9;
+  --crawler-btn-inactive-bg: rgba(255, 255, 255, 0.04);
+  --crawler-btn-inactive-border: rgba(255, 255, 255, 0.12);
+  --crawler-btn-inactive-text: #94a3b8;
+  --crawler-text-title: linear-gradient(135deg, #60a5fa, #a78bfa, #34d399);
+  --crawler-post-bg: rgba(255, 255, 255, 0.04);
+  --crawler-post-text: #e2e8f0;
+  --crawler-post-border: rgba(255, 255, 255, 0.1);
+  --crawler-meta-text: #64748b;
+  --crawler-summary-bg: rgba(59, 130, 246, 0.08);
+  --crawler-summary-border: rgba(59, 130, 246, 0.2);
+  --crawler-skeleton-shimmer: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 75%);
 }
 
 [data-theme="light"] {
@@ -77,13 +96,32 @@
   --threat-low-bg: #f0fdf4;
   --threat-low-text: #166534;
   --threat-low-border: #4ade80;
+
+  /* Prompt Crawler Theme Variables - Light */
+  --crawler-bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+  --crawler-card-bg: rgba(255, 255, 255, 0.9);
+  --crawler-card-border: rgba(0, 0, 0, 0.12);
+  --crawler-input-bg: #ffffff;
+  --crawler-input-border: #cbd5e1;
+  --crawler-input-text: #0f172a;
+  --crawler-btn-inactive-bg: #f8fafc;
+  --crawler-btn-inactive-border: #cbd5e1;
+  --crawler-btn-inactive-text: #475569;
+  --crawler-text-title: linear-gradient(135deg, #1e3a8a, #2563eb, #0f766e);
+  --crawler-post-bg: #f8fafc;
+  --crawler-post-text: #0f172a;
+  --crawler-post-border: #cbd5e1;
+  --crawler-meta-text: #475569;
+  --crawler-summary-bg: rgba(37, 99, 235, 0.06);
+  --crawler-summary-border: rgba(37, 99, 235, 0.18);
+  --crawler-skeleton-shimmer: linear-gradient(90deg, rgba(0,0,0,0.04) 25%, rgba(0,0,0,0.08) 50%, rgba(0,0,0,0.04) 75%);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Outfit', 'Segoe UI', Tahoma, sans-serif;
+  font-family: 'Roboto', 'Outfit', 'Segoe UI', Tahoma, sans-serif;
 }
 
 body {
