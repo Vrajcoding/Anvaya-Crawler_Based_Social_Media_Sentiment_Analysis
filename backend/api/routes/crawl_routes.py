@@ -23,6 +23,15 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
+import re
+
+ILLEGAL_CHARACTERS_RE = re.compile(r'[\000-\010]|[\013-\014]|[\016-\037]')
+
+def sanitize(val):
+    if isinstance(val, str):
+        return ILLEGAL_CHARACTERS_RE.sub('', val)
+    return val
+
 from crawlers.hybrid_crawler import get_hybrid_crawler, ALL_PLATFORMS
 from nlp_service.models.inference import run_nlp_pipeline
 from storage.db_client import db_client
@@ -215,7 +224,7 @@ def _auto_save_excel(result: Dict[str, Any]) -> None:
                     post.get("timestamp") or post.get("crawled_at") or "",
                 ]
                 for ci, val in enumerate(vals, 1):
-                    cell = ws_all.cell(row=row_idx, column=ci, value=val)
+                    cell = ws_all.cell(row=row_idx, column=ci, value=sanitize(val))
                     cell.font = CELL_FONT
                     cell.fill = fill
                     cell.border = border
@@ -255,12 +264,16 @@ def _auto_save_excel(result: Dict[str, Any]) -> None:
                     post.get("timestamp") or post.get("crawled_at") or "",
                 ]
                 for ci, val in enumerate(vals, 1):
-                    cell = ws.cell(row=rn, column=ci, value=val)
+                    cell = ws.cell(row=rn, column=ci, value=sanitize(val))
                     cell.font = CELL_FONT
                     cell.fill = fill
                     cell.border = border
                     cell.alignment = WRAP
                 ws.row_dimensions[rn].height = 50
+
+        # Make "All Posts" the active sheet when opening
+        if "All Posts" in wb.sheetnames:
+            wb.active = wb.sheetnames.index("All Posts")
 
         wb.save(filepath)
         total = sum(len(v.get("posts", [])) for v in platform_results.values())
@@ -325,6 +338,8 @@ async def stream_crawl_by_prompt(
         global_start = time.monotonic()
         total_posts = 0
         platforms_crawled = 0
+        _stream_accumulated = {}
+
         
         async for platform, plat_res in crawler.stream_multi_platform(
             queries=[request.prompt],
@@ -341,6 +356,7 @@ async def stream_crawl_by_prompt(
                     plat_res["posts"] = enriched
                 total_posts += plat_res.get("count", 0)
             
+            _stream_accumulated[platform] = plat_res
             yield json.dumps({"type": "platform_result", "platform": platform, "data": plat_res}) + "\n"
         
         total_elapsed = round(time.monotonic() - global_start, 2)
@@ -771,7 +787,7 @@ def _generate_excel(results: Dict[str, Any]) -> bytes:
                 post.get("timestamp") or "",
             ]
             for col_idx, val in enumerate(values, 1):
-                cell = ws_all.cell(row=row_idx, column=col_idx, value=val)
+                cell = ws_all.cell(row=row_idx, column=col_idx, value=sanitize(val))
                 cell.font = CELL_FONT
                 cell.fill = fill
                 cell.border = border
@@ -814,12 +830,15 @@ def _generate_excel(results: Dict[str, Any]) -> bytes:
                 post.get("timestamp") or "",
             ]
             for col_idx, val in enumerate(values, 1):
-                cell = ws.cell(row=row_num, column=col_idx, value=val)
+                cell = ws.cell(row=row_num, column=col_idx, value=sanitize(val))
                 cell.font = CELL_FONT
                 cell.fill = fill
                 cell.border = border
                 cell.alignment = WRAP
             ws.row_dimensions[row_num].height = 48
+
+    # Make "All Posts" the active sheet when opening
+    wb.active = wb.sheetnames.index("All Posts")
 
     buf = io.BytesIO()
     wb.save(buf)
