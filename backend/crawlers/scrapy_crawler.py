@@ -68,9 +68,9 @@ class ScrapyCrawler(BaseCrawler):
         elif platform == "GoogleSuggest":
             return await self._crawl_google_suggest(query, limit)
         elif platform == "Web":
-            return await self._crawl_web(query, limit)
+            return await self._crawl_web(query, limit, time_filter)
         elif platform == "Reddit":
-            return await self._crawl_reddit(query, limit)
+            return await self._crawl_reddit(query, limit, time_filter)
         return []
 
     # ── X / Twitter (via Nitter RSS) ────────────────────────────────────────
@@ -117,8 +117,8 @@ class ScrapyCrawler(BaseCrawler):
                     continue  # try next mirror
 
         # ── Tier 3: Real Web search fallback for X ────────────────────────
-        print("[ScrapyCrawler] Nitter/Selenium unavailable — fetching real web results for query.")
-        web_results = await self._crawl_web(f"{query} twitter", limit)
+        print("[ScrapyCrawler] Nitter/Selenium unavailable — fetching real web results for X query.")
+        web_results = await self._crawl_web(f"{query} twitter", limit, time_filter)
         for r in web_results:
             r.platform = "X"
             r.source_type = "SCRAPY_X_WEB"
@@ -245,11 +245,16 @@ class ScrapyCrawler(BaseCrawler):
 
     # ── Generic Web (DuckDuckGo HTML) ────────────────────────────────────────
 
-    async def _crawl_web(self, query: str, limit: int) -> List[CrawlResult]:
+    async def _crawl_web(self, query: str, limit: int, time_filter: str = "any") -> List[CrawlResult]:
         """Scrape DuckDuckGo HTML results (no API key needed)."""
         encoded = quote_plus(query)
         url = f"https://html.duckduckgo.com/html/?q={encoded}"
         results: List[CrawlResult] = []
+
+        df_param = ""
+        if time_filter == "24h": df_param = "d"
+        elif time_filter in ("48h", "1week"): df_param = "w"
+        elif time_filter == "1month": df_param = "m"
 
         async with httpx.AsyncClient(
             timeout=15.0,
@@ -262,8 +267,7 @@ class ScrapyCrawler(BaseCrawler):
             },
         ) as client:
             try:
-                # Add 'df': 'd' to restrict search to the past 24 hours (day)
-                resp = await client.post(url, data={"q": query, "b": "", "df": "d"})
+                resp = await client.post(url, data={"q": query, "b": "", "df": df_param})
                 if resp.status_code == 200:
                     soup = BeautifulSoup(resp.text, "html.parser")
                     for result_div in soup.select(".result")[:limit]:
@@ -319,7 +323,7 @@ class ScrapyCrawler(BaseCrawler):
         "Sec-Fetch-Site": "same-origin",
     }
 
-    async def _crawl_reddit(self, query: str, limit: int) -> List[CrawlResult]:
+    async def _crawl_reddit(self, query: str, limit: int, time_filter: str = "any") -> List[CrawlResult]:
         """
         Fetch real Reddit posts using a 3-tier strategy:
           1. reddit.com/search.json  (main JSON API)
@@ -327,14 +331,14 @@ class ScrapyCrawler(BaseCrawler):
           3. reddit.com/search.rss  (RSS — always public)
         Extracts full post title + selftext body so results are content-rich.
         """
-        results = await self._reddit_json(query, limit, base="https://www.reddit.com")
+        results = await self._reddit_json(query, limit, base="https://www.reddit.com", time_filter=time_filter)
         if not results:
-            results = await self._reddit_json(query, limit, base="https://old.reddit.com")
+            results = await self._reddit_json(query, limit, base="https://old.reddit.com", time_filter=time_filter)
         if not results:
-            results = await self._reddit_rss(query, limit)
+            results = await self._reddit_rss(query, limit, time_filter=time_filter)
         return results[:limit]
 
-    async def _reddit_json(self, query: str, limit: int, base: str) -> List[CrawlResult]:
+    async def _reddit_json(self, query: str, limit: int, base: str, time_filter: str = "any") -> List[CrawlResult]:
         """
         Fetch Reddit posts using paginated JSON search API.
         Reddit allows max 100 per page; we page through using the 'after' cursor
@@ -354,9 +358,14 @@ class ScrapyCrawler(BaseCrawler):
             while len(results) < limit:
                 need       = limit - len(results)
                 fetch_size = min(need, 100)   # never exceed Reddit's per-page cap
+                t_param = "all"
+                if time_filter == "24h": t_param = "day"
+                elif time_filter in ("48h", "1week"): t_param = "week"
+                elif time_filter == "1month": t_param = "month"
+
                 url = (
                     f"{base}/search.json"
-                    f"?q={encoded}&sort=new&limit={fetch_size}&type=link&t=day"
+                    f"?q={encoded}&sort=new&limit={fetch_size}&type=link&t={t_param}"
                     + (f"&after={after}" if after else "")
                 )
 
@@ -444,10 +453,16 @@ class ScrapyCrawler(BaseCrawler):
         print(f"[Reddit] Total collected: {len(results)} posts")
         return results
 
-    async def _reddit_rss(self, query: str, limit: int) -> List[CrawlResult]:
+    async def _reddit_rss(self, query: str, limit: int, time_filter: str = "any") -> List[CrawlResult]:
         """Last-resort: scrape Reddit's public RSS search feed."""
         encoded = quote_plus(query)
-        url = f"https://www.reddit.com/search.rss?q={encoded}&sort=new&t=day"
+        
+        t_param = "all"
+        if time_filter == "24h": t_param = "day"
+        elif time_filter in ("48h", "1week"): t_param = "week"
+        elif time_filter == "1month": t_param = "month"
+        
+        url = f"https://www.reddit.com/search.rss?q={encoded}&sort=new&t={t_param}"
         results: List[CrawlResult] = []
 
         async with httpx.AsyncClient(
