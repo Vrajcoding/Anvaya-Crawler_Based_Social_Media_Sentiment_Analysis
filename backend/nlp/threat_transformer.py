@@ -124,6 +124,7 @@ def _load_model():
             model=THREAT_MODEL,
             cache_dir=CACHE_DIR,
             device=device,
+            torch_dtype=torch.float32,
         )
         _model_loaded = True
         logger.info("Threat classifier transformer loaded successfully.")

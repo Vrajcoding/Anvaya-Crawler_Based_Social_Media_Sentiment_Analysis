@@ -325,6 +325,7 @@ async def stream_crawl_by_prompt(
         global_start = time.monotonic()
         total_posts = 0
         platforms_crawled = 0
+        accumulated_results: Dict[str, Any] = {}
         
         async for platform, plat_res in crawler.stream_multi_platform(
             queries=[request.prompt],
@@ -341,6 +342,7 @@ async def stream_crawl_by_prompt(
                     plat_res["posts"] = enriched
                 total_posts += plat_res.get("count", 0)
             
+            accumulated_results[platform] = plat_res
             yield json.dumps({"type": "platform_result", "platform": platform, "data": plat_res}) + "\n"
         
         total_elapsed = round(time.monotonic() - global_start, 2)
@@ -359,7 +361,7 @@ async def stream_crawl_by_prompt(
             "total_posts": total_posts,
             "platforms_crawled": platforms_crawled,
             "duration_s": total_elapsed,
-            "results": _stream_accumulated,
+            "results": accumulated_results,
         }
         await asyncio.to_thread(_auto_save_excel, full_result)
 

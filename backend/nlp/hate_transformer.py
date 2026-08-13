@@ -115,6 +115,7 @@ def _load_model():
             tokenizer=HATE_MODEL_INDIC,
             cache_dir=CACHE_DIR,
             device=device,
+            torch_dtype=torch.float32,
             top_k=None,
             truncation=True,
             max_length=512,

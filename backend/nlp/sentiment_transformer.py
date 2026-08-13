@@ -54,6 +54,7 @@ def _load_model():
             tokenizer=SENTIMENT_MODEL,
             cache_dir=CACHE_DIR,
             device=device,
+            torch_dtype=torch.float32,
             top_k=None,  # Return all class probabilities
             truncation=True,
             max_length=512,

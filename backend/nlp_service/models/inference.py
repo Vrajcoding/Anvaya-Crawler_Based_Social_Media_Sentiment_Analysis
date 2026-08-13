@@ -126,6 +126,7 @@ def _load_sentiment_model() -> bool:
             "sentiment-analysis",
             model=model_name,
             device=device,
+            torch_dtype=torch.float32,
             top_k=None,
             truncation=True,
             max_length=512,
@@ -157,6 +158,7 @@ def _load_threat_model() -> bool:
             "zero-shot-classification",
             model=model_name,
             device=device,
+            torch_dtype=torch.float32,
         )
         _zero_shot_loaded = True
         logger.info("✓ Threat classifier transformer loaded successfully.")
@@ -186,6 +188,7 @@ def _load_hate_model() -> bool:
             model=model_name,
             tokenizer=model_name,
             device=device,
+            torch_dtype=torch.float32,
             top_k=None,
             truncation=True,
             max_length=512,
