@@ -44384,8 +44384,8 @@
       "language_detected": "en",
       "requires_human_review": false,
       "model_version": "sentinelai-nlp-v2.0",
-      "processed_at": "2026-08-11T17:59:12Z",
-      "inference_time_ms": 3266.89
+      "processed_at": "2026-08-11T17:59:56Z",
+      "inference_time_ms": 2159.44
     },
     "threat_level": "Neutral",
     "sentiment": "neutral",
@@ -44457,8 +44457,8 @@
       "language_detected": "en",
       "requires_human_review": true,
       "model_version": "sentinelai-nlp-v2.0",
-      "processed_at": "2026-08-11T17:59:16Z",
-      "inference_time_ms": 3665.39
+      "processed_at": "2026-08-11T17:59:59Z",
+      "inference_time_ms": 2686.23
     },
     "threat_level": "Neutral",
     "sentiment": "negative",
@@ -44530,11 +44530,4829 @@
       "language_detected": "en",
       "requires_human_review": false,
       "model_version": "sentinelai-nlp-v2.0",
-      "processed_at": "2026-08-11T17:59:18Z",
-      "inference_time_ms": 1742.0
+      "processed_at": "2026-08-11T18:00:01Z",
+      "inference_time_ms": 1434.16
     },
     "threat_level": "Neutral",
     "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-08ecad85",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_13316",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 456,
+      "shares": 202,
+      "comments": 59
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:00:16.957113",
+    "created_at": "2026-08-11T18:00:16.957132",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-08ecad85",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:01:08Z",
+      "inference_time_ms": 3578.11
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-59cb66d4",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_37007",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 1107,
+      "shares": 227,
+      "comments": 55
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:00:16.957427",
+    "created_at": "2026-08-11T18:00:16.957451",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-59cb66d4",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:01:10Z",
+      "inference_time_ms": 2445.32
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-6ff1828b",
+    "platform": "facebook",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_45209",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 665,
+      "shares": 187,
+      "comments": 28
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:00:16.957703",
+    "created_at": "2026-08-11T18:00:16.957715",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-6ff1828b",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:01:12Z",
+      "inference_time_ms": 1565.95
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-a0bb75a3",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_11902",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 298,
+      "shares": 205,
+      "comments": 7
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:01:28.273532",
+    "created_at": "2026-08-11T18:01:28.274430",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-a0bb75a3",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:02:16Z",
+      "inference_time_ms": 2480.92
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-79fc4886",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_73591",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 966,
+      "shares": 57,
+      "comments": 73
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:01:28.275142",
+    "created_at": "2026-08-11T18:01:28.275169",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-79fc4886",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:02:18Z",
+      "inference_time_ms": 2439.58
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-9d5ad920",
+    "platform": "youtube",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_54134",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 785,
+      "shares": 148,
+      "comments": 44
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:01:28.275756",
+    "created_at": "2026-08-11T18:01:28.275777",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-9d5ad920",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:02:20Z",
+      "inference_time_ms": 1845.5
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-61124608",
+    "platform": "instagram",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_30566",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 563,
+      "shares": 76,
+      "comments": 33
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:02:36.497251",
+    "created_at": "2026-08-11T18:02:36.497271",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-61124608",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:03:21Z",
+      "inference_time_ms": 2044.02
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-eb93960d",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_63245",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 620,
+      "shares": 240,
+      "comments": 23
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:02:36.497592",
+    "created_at": "2026-08-11T18:02:36.497608",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-eb93960d",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:03:24Z",
+      "inference_time_ms": 2071.17
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-7a924302",
+    "platform": "youtube",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_92577",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 271,
+      "shares": 27,
+      "comments": 23
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:02:36.497852",
+    "created_at": "2026-08-11T18:02:36.497865",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-7a924302",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:03:25Z",
+      "inference_time_ms": 1330.82
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-f6e161bf",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_68656",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 975,
+      "shares": 22,
+      "comments": 30
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:03:41.268100",
+    "created_at": "2026-08-11T18:03:41.268119",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-f6e161bf",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:04:26Z",
+      "inference_time_ms": 2135.27
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-ba5d0ca9",
+    "platform": "instagram",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_28573",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 748,
+      "shares": 56,
+      "comments": 36
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:03:41.268386",
+    "created_at": "2026-08-11T18:03:41.268399",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-ba5d0ca9",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:04:28Z",
+      "inference_time_ms": 2170.16
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-a59f566f",
+    "platform": "youtube",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_68009",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 1169,
+      "shares": 182,
+      "comments": 60
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:03:41.268590",
+    "created_at": "2026-08-11T18:03:41.268602",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-a59f566f",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:04:30Z",
+      "inference_time_ms": 1402.83
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-3324c219",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_65690",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 1093,
+      "shares": 287,
+      "comments": 39
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:04:46.023898",
+    "created_at": "2026-08-11T18:04:46.023929",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-3324c219",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:05:31Z",
+      "inference_time_ms": 2070.13
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-ad524add",
+    "platform": "instagram",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_94867",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 377,
+      "shares": 43,
+      "comments": 52
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:04:46.024332",
+    "created_at": "2026-08-11T18:04:46.024352",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-ad524add",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:05:34Z",
+      "inference_time_ms": 2136.58
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-fd8017c9",
+    "platform": "x",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_87712",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 725,
+      "shares": 147,
+      "comments": 54
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:04:46.024661",
+    "created_at": "2026-08-11T18:04:46.024680",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-fd8017c9",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:05:35Z",
+      "inference_time_ms": 1365.67
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-eb8a7bfa",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_13378",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 199,
+      "shares": 273,
+      "comments": 55
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:05:51.247008",
+    "created_at": "2026-08-11T18:05:51.247034",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-eb8a7bfa",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:06:36Z",
+      "inference_time_ms": 2130.02
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-62f1cfc5",
+    "platform": "instagram",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_55239",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 352,
+      "shares": 36,
+      "comments": 66
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:05:51.247491",
+    "created_at": "2026-08-11T18:05:51.247518",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-62f1cfc5",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:06:38Z",
+      "inference_time_ms": 2084.79
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-380a1255",
+    "platform": "facebook",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_97240",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 373,
+      "shares": 71,
+      "comments": 13
+    },
+    "is_bot": false,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-08-11T18:05:51.247846",
+    "created_at": "2026-08-11T18:05:51.247874",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-380a1255",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:06:40Z",
+      "inference_time_ms": 1390.1
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-c720fef5",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_69262",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 256,
+      "shares": 136,
+      "comments": 15
+    },
+    "is_bot": false,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-08-11T18:06:55.925399",
+    "created_at": "2026-08-11T18:06:55.925417",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-c720fef5",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:07:41Z",
+      "inference_time_ms": 2151.65
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-c45cc28e",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_16834",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 669,
+      "shares": 239,
+      "comments": 6
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:06:55.925691",
+    "created_at": "2026-08-11T18:06:55.925705",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-c45cc28e",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:07:43Z",
+      "inference_time_ms": 2200.75
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-0f3756bc",
+    "platform": "youtube",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_51838",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 299,
+      "shares": 70,
+      "comments": 9
+    },
+    "is_bot": true,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-08-11T18:06:55.925901",
+    "created_at": "2026-08-11T18:06:55.925913",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-0f3756bc",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:07:45Z",
+      "inference_time_ms": 1346.02
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-c0fcd593",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_22504",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 1034,
+      "shares": 102,
+      "comments": 8
+    },
+    "is_bot": false,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-08-11T18:08:01.171194",
+    "created_at": "2026-08-11T18:08:01.171213",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-c0fcd593",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:08:47Z",
+      "inference_time_ms": 2190.23
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-0109eb20",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_90308",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 920,
+      "shares": 234,
+      "comments": 26
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:08:01.171512",
+    "created_at": "2026-08-11T18:08:01.171526",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-0109eb20",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:08:49Z",
+      "inference_time_ms": 2138.18
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-bfa34563",
+    "platform": "facebook",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_86290",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 919,
+      "shares": 164,
+      "comments": 65
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:08:01.171776",
+    "created_at": "2026-08-11T18:08:01.171797",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-bfa34563",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:08:50Z",
+      "inference_time_ms": 1444.21
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-7f14061b",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_12722",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 348,
+      "shares": 6,
+      "comments": 38
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:09:06.636579",
+    "created_at": "2026-08-11T18:09:06.636607",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-7f14061b",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:09:52Z",
+      "inference_time_ms": 2300.86
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-b429bce5",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_46021",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 1075,
+      "shares": 74,
+      "comments": 27
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:09:06.637041",
+    "created_at": "2026-08-11T18:09:06.637063",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-b429bce5",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:09:54Z",
+      "inference_time_ms": 2104.96
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-692ac01b",
+    "platform": "x",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_37031",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 70,
+      "shares": 256,
+      "comments": 25
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:09:06.637417",
+    "created_at": "2026-08-11T18:09:06.637439",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-692ac01b",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:09:56Z",
+      "inference_time_ms": 1379.38
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-6163d0b7",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_85791",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 1079,
+      "shares": 162,
+      "comments": 37
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:10:11.720346",
+    "created_at": "2026-08-11T18:10:11.720368",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-6163d0b7",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:10:57Z",
+      "inference_time_ms": 2037.23
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-978efb47",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_91768",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 265,
+      "shares": 31,
+      "comments": 25
+    },
+    "is_bot": false,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-08-11T18:10:11.720698",
+    "created_at": "2026-08-11T18:10:11.720711",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-978efb47",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:10:59Z",
+      "inference_time_ms": 2065.71
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-5e08a620",
+    "platform": "instagram",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_40815",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 1126,
+      "shares": 33,
+      "comments": 79
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:10:11.720936",
+    "created_at": "2026-08-11T18:10:11.720951",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-5e08a620",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:11:00Z",
+      "inference_time_ms": 1399.15
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-0c3349bd",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_39802",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 1161,
+      "shares": 17,
+      "comments": 61
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:11:16.532206",
+    "created_at": "2026-08-11T18:11:16.532233",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-0c3349bd",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:12:02Z",
+      "inference_time_ms": 2031.97
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-a8fe1106",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_74236",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 624,
+      "shares": 172,
+      "comments": 80
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:11:16.532701",
+    "created_at": "2026-08-11T18:11:16.532724",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-a8fe1106",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:12:04Z",
+      "inference_time_ms": 2135.16
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-54a8c0c1",
+    "platform": "instagram",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_38983",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 665,
+      "shares": 144,
+      "comments": 37
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:11:16.532998",
+    "created_at": "2026-08-11T18:11:16.533011",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-54a8c0c1",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:12:05Z",
+      "inference_time_ms": 1360.33
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-5bedcbcf",
+    "platform": "instagram",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_28437",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 326,
+      "shares": 267,
+      "comments": 5
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:12:21.505829",
+    "created_at": "2026-08-11T18:12:21.505847",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-5bedcbcf",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:13:06Z",
+      "inference_time_ms": 2026.61
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-0876250f",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_79251",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 587,
+      "shares": 162,
+      "comments": 10
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:12:21.506144",
+    "created_at": "2026-08-11T18:12:21.506157",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-0876250f",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:13:08Z",
+      "inference_time_ms": 2019.7
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-f286e553",
+    "platform": "x",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_99950",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 103,
+      "shares": 16,
+      "comments": 38
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:12:21.506370",
+    "created_at": "2026-08-11T18:12:21.506382",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-f286e553",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:13:10Z",
+      "inference_time_ms": 1349.34
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-1a4e32f2",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_97724",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 495,
+      "shares": 132,
+      "comments": 60
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:13:25.872889",
+    "created_at": "2026-08-11T18:13:25.872915",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-1a4e32f2",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:14:11Z",
+      "inference_time_ms": 2099.58
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-5fa00b4d",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_67574",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 309,
+      "shares": 290,
+      "comments": 33
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:13:25.873376",
+    "created_at": "2026-08-11T18:13:25.873391",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-5fa00b4d",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:14:13Z",
+      "inference_time_ms": 2069.17
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-b576eed3",
+    "platform": "facebook",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_20728",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 1180,
+      "shares": 215,
+      "comments": 2
+    },
+    "is_bot": false,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-08-11T18:13:25.873622",
+    "created_at": "2026-08-11T18:13:25.873635",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-b576eed3",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:14:15Z",
+      "inference_time_ms": 1439.87
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-b064aa0a",
+    "platform": "instagram",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_46825",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 670,
+      "shares": 170,
+      "comments": 74
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:14:31.077019",
+    "created_at": "2026-08-11T18:14:31.077037",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-b064aa0a",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:15:16Z",
+      "inference_time_ms": 2374.26
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-6ed72341",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_66172",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 582,
+      "shares": 59,
+      "comments": 27
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:14:31.077290",
+    "created_at": "2026-08-11T18:14:31.077302",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-6ed72341",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:15:18Z",
+      "inference_time_ms": 2112.61
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-4e229910",
+    "platform": "youtube",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_41069",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 308,
+      "shares": 193,
+      "comments": 71
+    },
+    "is_bot": false,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-08-11T18:14:31.077513",
+    "created_at": "2026-08-11T18:14:31.077526",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-4e229910",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:15:20Z",
+      "inference_time_ms": 1392.83
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-a95e1af9",
+    "platform": "instagram",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_65852",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 1191,
+      "shares": 250,
+      "comments": 42
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:15:35.911831",
+    "created_at": "2026-08-11T18:15:35.911860",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-a95e1af9",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:16:22Z",
+      "inference_time_ms": 2081.52
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-6c522f5f",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_89870",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 271,
+      "shares": 201,
+      "comments": 69
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:15:35.912239",
+    "created_at": "2026-08-11T18:15:35.912252",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-6c522f5f",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:16:24Z",
+      "inference_time_ms": 2065.66
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-14b3ce94",
+    "platform": "youtube",
+    "author_username": "@surendra_singh",
+    "author_id": "usr_17728",
+    "content": "Army opens its establishments to students through 43 internship projects this year.",
+    "url": "https://timesofindia.indiatimes.com/india/army-opens-its-establishments-to-students-through-43-internship-projects-this-year/articleshow/133160299.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 375,
+      "shares": 174,
+      "comments": 71
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:15:35.912549",
+    "created_at": "2026-08-11T18:15:35.912562",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-14b3ce94",
+      "sentiment": {
+        "label": "positive",
+        "confidence": 0.8908,
+        "probabilities": {
+          "positive": 0.8908,
+          "neutral": 0.1032,
+          "negative": 0.0061
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.6501,
+        "all_scores": {
+          "Neutral": 0.6501,
+          "Inflammatory": 0.0741,
+          "Incitement to Violence": 0.2525,
+          "Fake News": 0.0233
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.241,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.0032
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:16:26Z",
+      "inference_time_ms": 1442.51
+    },
+    "threat_level": "Neutral",
+    "sentiment": "positive",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-248ee99f",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_34060",
+    "content": "FSSAI tightens pan masala packaging norms; bans plastic, foil and synthetic laminates. India's food regulatory authority has implemented a ban on plastic packaging for pan masala. The new regulations require the use of sustainable materials such as paper, paperboard, or other naturally sourced options, explicitly prohibiting synthetic polymers and laminates. However, the use of tin and glass conta",
+    "url": "https://timesofindia.indiatimes.com/india/fssai-tightens-pan-masala-packaging-norms-bans-plastic-foil-and-synthetic-laminates/articleshow/133162799.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 20,
+      "shares": 295,
+      "comments": 72
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:16:41.862435",
+    "created_at": "2026-08-11T18:16:41.862456",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-248ee99f",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.7048,
+        "probabilities": {
+          "negative": 0.7048,
+          "neutral": 0.253,
+          "positive": 0.0422
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.8884,
+        "all_scores": {
+          "Neutral": 0.8884,
+          "Inflammatory": 0.041,
+          "Incitement to Violence": 0.0467,
+          "Fake News": 0.0239
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1851,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.2076
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:17:29Z",
+      "inference_time_ms": 1957.07
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-7ffe1797",
+    "platform": "instagram",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_42239",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 266,
+      "shares": 227,
+      "comments": 57
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:16:41.862751",
+    "created_at": "2026-08-11T18:16:41.862765",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-7ffe1797",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:17:31Z",
+      "inference_time_ms": 2178.92
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-8665b8cd",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_65887",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 48,
+      "shares": 250,
+      "comments": 29
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:16:41.863048",
+    "created_at": "2026-08-11T18:16:41.863062",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-8665b8cd",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:17:33Z",
+      "inference_time_ms": 1960.78
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-a756b988",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_36276",
+    "content": "FSSAI tightens pan masala packaging norms; bans plastic, foil and synthetic laminates. India's food regulatory authority has implemented a ban on plastic packaging for pan masala. The new regulations require the use of sustainable materials such as paper, paperboard, or other naturally sourced options, explicitly prohibiting synthetic polymers and laminates. However, the use of tin and glass conta",
+    "url": "https://timesofindia.indiatimes.com/india/fssai-tightens-pan-masala-packaging-norms-bans-plastic-foil-and-synthetic-laminates/articleshow/133162799.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 242,
+      "shares": 126,
+      "comments": 79
+    },
+    "is_bot": false,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-08-11T18:17:49.353362",
+    "created_at": "2026-08-11T18:17:49.353379",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-a756b988",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.7048,
+        "probabilities": {
+          "negative": 0.7048,
+          "neutral": 0.253,
+          "positive": 0.0422
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.8884,
+        "all_scores": {
+          "Neutral": 0.8884,
+          "Inflammatory": 0.041,
+          "Incitement to Violence": 0.0467,
+          "Fake News": 0.0239
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1851,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.2076
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:18:36Z",
+      "inference_time_ms": 2171.8
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-b76e10e6",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_53848",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 321,
+      "shares": 216,
+      "comments": 30
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:17:49.353613",
+    "created_at": "2026-08-11T18:17:49.353625",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-b76e10e6",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:18:38Z",
+      "inference_time_ms": 2124.42
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-324124b7",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_23363",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 352,
+      "shares": 24,
+      "comments": 51
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:17:49.353896",
+    "created_at": "2026-08-11T18:17:49.353908",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-324124b7",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:18:40Z",
+      "inference_time_ms": 1984.05
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-227baba5",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_12830",
+    "content": "FSSAI tightens pan masala packaging norms; bans plastic, foil and synthetic laminates. India's food regulatory authority has implemented a ban on plastic packaging for pan masala. The new regulations require the use of sustainable materials such as paper, paperboard, or other naturally sourced options, explicitly prohibiting synthetic polymers and laminates. However, the use of tin and glass conta",
+    "url": "https://timesofindia.indiatimes.com/india/fssai-tightens-pan-masala-packaging-norms-bans-plastic-foil-and-synthetic-laminates/articleshow/133162799.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 712,
+      "shares": 222,
+      "comments": 32
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:18:56.355035",
+    "created_at": "2026-08-11T18:18:56.355057",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-227baba5",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.7048,
+        "probabilities": {
+          "negative": 0.7048,
+          "neutral": 0.253,
+          "positive": 0.0422
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.8884,
+        "all_scores": {
+          "Neutral": 0.8884,
+          "Inflammatory": 0.041,
+          "Incitement to Violence": 0.0467,
+          "Fake News": 0.0239
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1851,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.2076
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:19:43Z",
+      "inference_time_ms": 2053.21
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-a5b72fbc",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_31496",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 882,
+      "shares": 225,
+      "comments": 34
+    },
+    "is_bot": false,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-08-11T18:18:56.355324",
+    "created_at": "2026-08-11T18:18:56.355338",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-a5b72fbc",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:19:45Z",
+      "inference_time_ms": 2150.68
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-a0c8a837",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_99748",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 790,
+      "shares": 280,
+      "comments": 27
+    },
+    "is_bot": false,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-08-11T18:18:56.355650",
+    "created_at": "2026-08-11T18:18:56.355663",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-a0c8a837",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:19:47Z",
+      "inference_time_ms": 1965.3
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-a1b00fd4",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_95925",
+    "content": "FSSAI tightens pan masala packaging norms; bans plastic, foil and synthetic laminates. India's food regulatory authority has implemented a ban on plastic packaging for pan masala. The new regulations require the use of sustainable materials such as paper, paperboard, or other naturally sourced options, explicitly prohibiting synthetic polymers and laminates. However, the use of tin and glass conta",
+    "url": "https://timesofindia.indiatimes.com/india/fssai-tightens-pan-masala-packaging-norms-bans-plastic-foil-and-synthetic-laminates/articleshow/133162799.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 855,
+      "shares": 151,
+      "comments": 10
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:20:03.617260",
+    "created_at": "2026-08-11T18:20:03.617278",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-a1b00fd4",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.7048,
+        "probabilities": {
+          "negative": 0.7048,
+          "neutral": 0.253,
+          "positive": 0.0422
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.8884,
+        "all_scores": {
+          "Neutral": 0.8884,
+          "Inflammatory": 0.041,
+          "Incitement to Violence": 0.0467,
+          "Fake News": 0.0239
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1851,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.2076
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:20:50Z",
+      "inference_time_ms": 2060.85
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-bc02d39f",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_52477",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 815,
+      "shares": 281,
+      "comments": 65
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:20:03.617519",
+    "created_at": "2026-08-11T18:20:03.617532",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-bc02d39f",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:20:52Z",
+      "inference_time_ms": 2269.6
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-d9fa4deb",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_93230",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 882,
+      "shares": 92,
+      "comments": 42
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:20:03.617786",
+    "created_at": "2026-08-11T18:20:03.617798",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-d9fa4deb",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:20:54Z",
+      "inference_time_ms": 2110.64
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-e4cfbf19",
+    "platform": "instagram",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_59152",
+    "content": "FSSAI tightens pan masala packaging norms; bans plastic, foil and synthetic laminates. India's food regulatory authority has implemented a ban on plastic packaging for pan masala. The new regulations require the use of sustainable materials such as paper, paperboard, or other naturally sourced options, explicitly prohibiting synthetic polymers and laminates. However, the use of tin and glass conta",
+    "url": "https://timesofindia.indiatimes.com/india/fssai-tightens-pan-masala-packaging-norms-bans-plastic-foil-and-synthetic-laminates/articleshow/133162799.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 380,
+      "shares": 81,
+      "comments": 42
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:21:10.641078",
+    "created_at": "2026-08-11T18:21:10.641096",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-e4cfbf19",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.7048,
+        "probabilities": {
+          "negative": 0.7048,
+          "neutral": 0.253,
+          "positive": 0.0422
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.8884,
+        "all_scores": {
+          "Neutral": 0.8884,
+          "Inflammatory": 0.041,
+          "Incitement to Violence": 0.0467,
+          "Fake News": 0.0239
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1851,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.2076
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:21:58Z",
+      "inference_time_ms": 1935.99
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-0c9882b2",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_79327",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 352,
+      "shares": 151,
+      "comments": 21
+    },
+    "is_bot": false,
+    "coordination_group": "coord_group_alpha",
+    "crawled_at": "2026-08-11T18:21:10.641408",
+    "created_at": "2026-08-11T18:21:10.641437",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-0c9882b2",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:22:00Z",
+      "inference_time_ms": 2450.57
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-b46937ca",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_14340",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Surat",
+      "state": "Gujarat",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    "engagement": {
+      "likes": 1161,
+      "shares": 297,
+      "comments": 2
+    },
+    "is_bot": true,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:21:10.641833",
+    "created_at": "2026-08-11T18:21:10.641858",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-b46937ca",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:22:03Z",
+      "inference_time_ms": 2602.69
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-deb68c96",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_88272",
+    "content": "FSSAI tightens pan masala packaging norms; bans plastic, foil and synthetic laminates. India's food regulatory authority has implemented a ban on plastic packaging for pan masala. The new regulations require the use of sustainable materials such as paper, paperboard, or other naturally sourced options, explicitly prohibiting synthetic polymers and laminates. However, the use of tin and glass conta",
+    "url": "https://timesofindia.indiatimes.com/india/fssai-tightens-pan-masala-packaging-norms-bans-plastic-foil-and-synthetic-laminates/articleshow/133162799.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 1124,
+      "shares": 192,
+      "comments": 30
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:22:19.476847",
+    "created_at": "2026-08-11T18:22:19.476873",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-deb68c96",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.7048,
+        "probabilities": {
+          "negative": 0.7048,
+          "neutral": 0.253,
+          "positive": 0.0422
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.8884,
+        "all_scores": {
+          "Neutral": 0.8884,
+          "Inflammatory": 0.041,
+          "Incitement to Violence": 0.0467,
+          "Fake News": 0.0239
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1851,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.2076
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:23:06Z",
+      "inference_time_ms": 2039.37
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-13ea79db",
+    "platform": "instagram",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_19172",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 223,
+      "shares": 235,
+      "comments": 47
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:22:19.477135",
+    "created_at": "2026-08-11T18:22:19.477147",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-13ea79db",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:23:09Z",
+      "inference_time_ms": 2441.08
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-816b00db",
+    "platform": "facebook",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_21240",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 980,
+      "shares": 281,
+      "comments": 17
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:22:19.477381",
+    "created_at": "2026-08-11T18:22:19.477393",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-816b00db",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:23:11Z",
+      "inference_time_ms": 2112.89
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-8dd55b24",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_99815",
+    "content": "FSSAI tightens pan masala packaging norms; bans plastic, foil and synthetic laminates. India's food regulatory authority has implemented a ban on plastic packaging for pan masala. The new regulations require the use of sustainable materials such as paper, paperboard, or other naturally sourced options, explicitly prohibiting synthetic polymers and laminates. However, the use of tin and glass conta",
+    "url": "https://timesofindia.indiatimes.com/india/fssai-tightens-pan-masala-packaging-norms-bans-plastic-foil-and-synthetic-laminates/articleshow/133162799.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Vadodara",
+      "state": "Gujarat",
+      "lat": 22.3072,
+      "lng": 73.1812
+    },
+    "engagement": {
+      "likes": 557,
+      "shares": 275,
+      "comments": 8
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:23:27.304687",
+    "created_at": "2026-08-11T18:23:27.304718",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-8dd55b24",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.7048,
+        "probabilities": {
+          "negative": 0.7048,
+          "neutral": 0.253,
+          "positive": 0.0422
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.8884,
+        "all_scores": {
+          "Neutral": 0.8884,
+          "Inflammatory": 0.041,
+          "Incitement to Violence": 0.0467,
+          "Fake News": 0.0239
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1851,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.2076
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:23:30Z",
+      "inference_time_ms": 2200.87
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-9d912bbe",
+    "platform": "youtube",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_79458",
+    "content": "RG Kar case: FIR against ex-TMC MLA over 'hurried' cremation of rape victim. In a significant development, an FIR has been filed against former TMC MLA Nirmal Ghosh and two individuals in connection with the alleged swift cremation of a junior doctor last year. The doctor's father alleged that the cremation was executed hastily to thwart an autopsy and cover up evidence. Meanwhile, the CBI is inde",
+    "url": "https://timesofindia.indiatimes.com/india/rg-kar-case-fir-against-ex-tmc-mla-over-hurried-cremation-of-rape-victim/articleshow/133161241.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "lat": 23.0225,
+      "lng": 72.5714
+    },
+    "engagement": {
+      "likes": 60,
+      "shares": 127,
+      "comments": 74
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:23:27.305143",
+    "created_at": "2026-08-11T18:23:27.305160",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-9d912bbe",
+      "sentiment": {
+        "label": "neutral",
+        "confidence": 0.5878,
+        "probabilities": {
+          "neutral": 0.5878,
+          "negative": 0.3845,
+          "positive": 0.0276
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.546,
+        "all_scores": {
+          "Neutral": 0.546,
+          "Inflammatory": 0.166,
+          "Incitement to Violence": 0.2428,
+          "Fake News": 0.0452
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1619,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.1237
+      },
+      "language_detected": "en",
+      "requires_human_review": false,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:23:33Z",
+      "inference_time_ms": 2757.37
+    },
+    "threat_level": "Neutral",
+    "sentiment": "neutral",
+    "is_hate_speech": false
+  },
+  {
+    "id": "live-rss-54942a6c",
+    "platform": "x",
+    "author_username": "@toi_news_desk",
+    "author_id": "usr_98805",
+    "content": "70 dead, 204 roads blocked: Himachal Pradesh reels under monsoon fury; damage tops Rs 910 crore. Himachal Pradesh has been severely affected by monsoon rains, resulting in 70 fatalities and 204 roadblocks. Damages to public property have skyrocketed to over Rs 910 crore. The primary causes of these tragic deaths include landslides and mishaps from steep terrains. Additionally, 93 lives were lost d",
+    "url": "https://timesofindia.indiatimes.com/india/70-dead-204-roads-blocked-himachal-pradesh-reels-under-monsoon-fury-damage-tops-rs-910-crore/articleshow/133160297.cms",
+    "hashtags": [
+      "SuratAlert",
+      "CyberWatch"
+    ],
+    "language": "en",
+    "geo_location": {
+      "city": "Rajkot",
+      "state": "Gujarat",
+      "lat": 22.3039,
+      "lng": 70.8022
+    },
+    "engagement": {
+      "likes": 215,
+      "shares": 238,
+      "comments": 63
+    },
+    "is_bot": false,
+    "coordination_group": null,
+    "crawled_at": "2026-08-11T18:23:27.305554",
+    "created_at": "2026-08-11T18:23:27.305575",
+    "source_type": "REAL_WEB_CRAWL",
+    "nlp_analysis": {
+      "post_id": "live-rss-54942a6c",
+      "sentiment": {
+        "label": "negative",
+        "confidence": 0.9536,
+        "probabilities": {
+          "negative": 0.9536,
+          "neutral": 0.0326,
+          "positive": 0.0137
+        },
+        "model": "xlm-roberta-sentiment"
+      },
+      "threat_category": {
+        "label": "Neutral",
+        "confidence": 0.778,
+        "all_scores": {
+          "Neutral": 0.778,
+          "Inflammatory": 0.048,
+          "Incitement to Violence": 0.1606,
+          "Fake News": 0.0134
+        },
+        "model": "deberta-zero-shot+keywords"
+      },
+      "hate_speech": {
+        "flag": false,
+        "confidence": 0.1334,
+        "target_group_hint": null,
+        "matched_terms": [],
+        "model": "hatexplain+keywords"
+      },
+      "fake_news_signal": {
+        "status": "unverified",
+        "matched_claim_id": null,
+        "similarity": 0.3308
+      },
+      "language_detected": "en",
+      "requires_human_review": true,
+      "model_version": "sentinelai-nlp-v2.0",
+      "processed_at": "2026-08-11T18:23:35Z",
+      "inference_time_ms": 1934.51
+    },
+    "threat_level": "Neutral",
+    "sentiment": "negative",
     "is_hate_speech": false
   }
 ]
