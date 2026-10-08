@@ -474,15 +474,24 @@ def run_nlp_pipeline(
         logger.error(f"[{post_id}] Fake news matching crashed: {e}")
         fake_news_signal = {"status": "not_flagged", "matched_claim_id": None, "similarity": 0.0}
 
-    # ── Step 7: Human Review Flagging ─────────────────────────────────────
+    # ── Step 7: Call-to-Action Extraction (Feature 4.2) ───────────────────
+    try:
+        from nlp_service.models.cta_extractor import CTAExtractor
+        cta_result = CTAExtractor.extract(text)
+    except Exception as e:
+        logger.error(f"[{post_id}] CTA extraction crashed: {e}")
+        cta_result = {"is_cta": False, "when": [], "where": [], "who": []}
+
+    # ── Step 8: Human Review Flagging ─────────────────────────────────────
     requires_human_review = (
         threat_result.get("label") in ["Incitement to Violence", "Fake News"]
         or threat_result.get("confidence", 0) > 0.75
         or hate_result.get("flag", False)
         or fake_news_signal.get("status") == "matched"
+        or cta_result.get("is_cta", False)
     )
 
-    # ── Step 8: Assemble result ───────────────────────────────────────────
+    # ── Step 9: Assemble result ───────────────────────────────────────────
     elapsed_ms = round((time.time() - start_time) * 1000, 2)
 
     return {
@@ -491,6 +500,7 @@ def run_nlp_pipeline(
         "threat_category": threat_result,
         "hate_speech": hate_result,
         "fake_news_signal": fake_news_signal,
+        "cta": cta_result,
         "language_detected": lang,
         "requires_human_review": requires_human_review,
         "model_version": "sentinelai-nlp-v2.0",

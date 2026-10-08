@@ -1,0 +1,151 @@
+{
+  "districts": [
+    {
+      "name": "Ahmedabad",
+      "name_gu": "અમદાવાદ",
+      "name_hi": "अहमदाबाद",
+      "aliases": ["amdavad", "ahd", "ahmadabad"],
+      "lat": 23.0225,
+      "lon": 72.5714,
+      "cities": ["Ahmedabad", "Gandhinagar", "Sanand", "Dholka", "Dhandhuka"]
+    },
+    {
+      "name": "Surat",
+      "name_gu": "સુરત",
+      "name_hi": "सूरत",
+      "aliases": ["surat city", "diamond city", "surti"],
+      "lat": 21.1702,
+      "lon": 72.8311,
+      "cities": ["Surat", "Bardoli", "Navsari", "Vyara", "Mandvi"]
+    },
+    {
+      "name": "Vadodara",
+      "name_gu": "વડોદરા",
+      "name_hi": "वडोदरा",
+      "aliases": ["baroda", "vadodra", "vdodara"],
+      "lat": 22.3072,
+      "lon": 73.1812,
+      "cities": ["Vadodara", "Anand", "Kheda", "Nadiad", "Petlad"]
+    },
+    {
+      "name": "Rajkot",
+      "name_gu": "રાજકોટ",
+      "name_hi": "राजकोट",
+      "aliases": ["rajkot city", "rjt"],
+      "lat": 22.3039,
+      "lon": 70.8022,
+      "cities": ["Rajkot", "Morbi", "Gondal", "Jetpur", "Wankaner"]
+    },
+    {
+      "name": "Bhavnagar",
+      "name_gu": "ભાવનગર",
+      "name_hi": "भावनगर",
+      "aliases": ["bhavnagar city", "bhav"],
+      "lat": 21.7645,
+      "lon": 72.1519,
+      "cities": ["Bhavnagar", "Sihor", "Palitana", "Mahuva", "Talaja"]
+    },
+    {
+      "name": "Jamnagar",
+      "name_gu": "જામનગર",
+      "name_hi": "जामनगर",
+      "aliases": ["jam city", "jamnagar dist"],
+      "lat": 22.4707,
+      "lon": 70.0577,
+      "cities": ["Jamnagar", "Dwarka", "Khambhalia", "Bhanvad"]
+    },
+    {
+      "name": "Gandhinagar",
+      "name_gu": "ગાંધીનગર",
+      "name_hi": "गांधीनगर",
+      "aliases": ["gandhi nagar", "capital"],
+      "lat": 23.2156,
+      "lon": 72.6369,
+      "cities": ["Gandhinagar", "Mansa", "Kalol", "Dehgam"]
+    },
+    {
+      "name": "Kutch",
+      "name_gu": "કચ્છ",
+      "name_hi": "कच्छ",
+      "aliases": ["kachchh", "bhuj", "kutch dist"],
+      "lat": 23.7337,
+      "lon": 69.8597,
+      "cities": ["Bhuj", "Gandhidham", "Anjar", "Mundra", "Mandvi", "Nakhatrana"]
+    },
+    {
+      "name": "Mehsana",
+      "name_gu": "મહેસાણા",
+      "name_hi": "मेहसाणा",
+      "aliases": ["mahesana", "mehesana"],
+      "lat": 23.5879,
+      "lon": 72.3693,
+      "cities": ["Mehsana", "Patan", "Unjha", "Visnagar", "Kadi"]
+    },
+    {
+      "name": "Anand",
+      "name_gu": "આણંદ",
+      "name_hi": "आनंद",
+      "aliases": ["anand dist", "vallabh vidyanagar"],
+      "lat": 22.5567,
+      "lon": 72.9520,
+      "cities": ["Anand", "Vallabh Vidyanagar", "Karamsad", "Petlad", "Umreth"]
+    },
+    {
+      "name": "Navsari",
+      "name_gu": "નવસારી",
+      "name_hi": "नवसारी",
+      "aliases": ["navsari dist"],
+      "lat": 20.9467,
+      "lon": 72.9520,
+      "cities": ["Navsari", "Gandevi", "Jalalpore", "Chikhli"]
+    },
+    {
+      "name": "Panchmahal",
+      "name_gu": "પંચમહાલ",
+      "name_hi": "पंचमहाल",
+      "aliases": ["godhra", "panchmahal dist"],
+      "lat": 22.7779,
+      "lon": 73.6143,
+      "cities": ["Godhra", "Dahod", "Halol", "Limkheda", "Ghoghamba"]
+    },
+    {
+      "name": "Surendranagar",
+      "name_gu": "સુરેન્દ્રનગર",
+      "name_hi": "सुरेंद्रनगर",
+      "aliases": ["surendra nagar", "wadhwan"],
+      "lat": 22.7283,
+      "lon": 71.6490,
+      "cities": ["Surendranagar", "Wadhwan", "Chotila", "Dhrangadhra"]
+    },
+    {
+      "name": "Valsad",
+      "name_gu": "વલસાડ",
+      "name_hi": "वलसाड",
+      "aliases": ["valsad dist", "bulsar"],
+      "lat": 20.5992,
+      "lon": 72.9342,
+      "cities": ["Valsad", "Vapi", "Udvada", "Pardi"]
+    },
+    {
+      "name": "Bharuch",
+      "name_gu": "ભરૂચ",
+      "name_hi": "भरूच",
+      "aliases": ["broach", "bharuch dist"],
+      "lat": 21.7051,
+      "lon": 72.9959,
+      "cities": ["Bharuch", "Ankleshwar", "Jambusar", "Vagra"]
+    }
+  ],
+
+  "localities": [
+    "Chowk Bazaar", "ચોક બજાર", "चौक बाजार",
+    "Surat Chowk", "Teen Darwaza", "Relief Road",
+    "Manek Chowk", "Law Garden", "Prahlad Nagar",
+    "Sindhi Market", "Khanpur", "Jamalpur"
+  ],
+
+  "script_patterns": {
+    "gujarati": "[\u0A80-\u0AFF]",
+    "hindi_devanagari": "[\u0900-\u097F]"
+  }
+}

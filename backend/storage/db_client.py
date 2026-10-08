@@ -53,14 +53,18 @@ class InMemoryDatabase:
                 neg_prob = s_dict.get("probabilities", {}).get("negative", 0.8 if s_dict.get("label") == "negative" else 0.05)
                 threat_cls_score = t_dict.get("confidence", 0.2) if t_dict.get("label") != "Neutral" else 0.05
                 hate_score = h_dict.get("confidence", 0.0) if h_dict.get("flag") else 0.0
-                bot_score = 0.8 if post.get("is_bot") else 0.0
-                coord_score = 0.7 if post.get("coordination_group") else 0.0
+                # REAL coordination signals — read from post (set by _run_coordination_pipeline in main.py)
+                # These are computed by coordination module, NEVER random.random()
+                bot_score = float(post.get("bot_likelihood", 0.0))
+                coord_score = float(post.get("sync_score", 0.0))
+                cluster_size = post.get("duplicate_cluster_size", 1)
+                engagement_velocity = min(cluster_size / 20.0, 1.0)
                 
                 scoring = ThreatScorer.calculate_score(
                     sentiment_neg=neg_prob,
                     threat_class_score=threat_cls_score,
                     hate_speech_score=hate_score,
-                    engagement_velocity=0.3,
+                    engagement_velocity=engagement_velocity,
                     coordination_score=coord_score,
                     bot_likelihood=bot_score
                 )
@@ -69,7 +73,7 @@ class InMemoryDatabase:
                     "sentiment": neg_prob,
                     "classification": threat_cls_score,
                     "hate_speech": hate_score,
-                    "velocity": 0.3,
+                    "velocity": engagement_velocity,
                     "coordination": coord_score,
                     "bot": bot_score
                 }

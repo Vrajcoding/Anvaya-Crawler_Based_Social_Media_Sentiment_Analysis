@@ -40,10 +40,14 @@ class Settings(BaseModel):
     AGENT_ALERT_MODEL: str = os.getenv("AGENT_ALERT_MODEL", "qwen/qwen-2.5-7b-instruct:free")
     USE_REAL_CRAWLER: bool = True
     
-    # Telegram MTProto credentials (from https://my.telegram.org/apps)
+    # Telegram MTProto credentials (from https://my.telegram.org/apps) — ROTATE if exposed
     TELEGRAM_API_ID: str = os.getenv("TELEGRAM_API_ID", "")
     TELEGRAM_API_HASH: str = os.getenv("TELEGRAM_API_HASH", "")
     TELEGRAM_SESSION_NAME: str = os.getenv("TELEGRAM_SESSION_NAME", "sentinelai_session")
+
+    # Telegram Bot API (simpler, safer, for alert dispatch — from @BotFather)
+    TELEGRAM_BOT_TOKEN: str = os.getenv("TELEGRAM_BOT_TOKEN", "")
+    TELEGRAM_CHAT_ID: str = os.getenv("TELEGRAM_CHAT_ID", "")
     
     # Database
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./sentinelai.db")

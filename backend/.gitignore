@@ -39,3 +39,22 @@ htmlcov/
 .idea/
 .DS_Store
 *.swp
+
+# ── Security: NEVER commit these ──────────────────────────────────────────────
+*.session                  # Telegram MTProto session files
+.x_login_debug.png
+debug_*.py
+test_x_*.py
+
+# ML model weights
+*.pt
+*.pth
+*.bin
+*.onnx
+models/
+
+# Crawled data store
+data/crawled_posts_store.json
+
+# pycache
+__pycache__/

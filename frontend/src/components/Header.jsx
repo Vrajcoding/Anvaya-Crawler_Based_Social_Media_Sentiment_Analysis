@@ -135,7 +135,7 @@ export default function Header({ activeTab, setActiveTab, onRefresh }) {
         </div>
 
         <div
-          className={`gov-nav-item has-dropdown ${['feed', 'trends'].includes(activeTab) ? 'dropdown-active' : ''}`}
+          className={`gov-nav-item has-dropdown ${['feed', 'trends', 'network', 'map'].includes(activeTab) ? 'dropdown-active' : ''}`}
           onMouseEnter={() => setOpenDropdown('intel')}
           onClick={() => setOpenDropdown(openDropdown === 'intel' ? null : 'intel')}
           style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}
@@ -152,6 +152,14 @@ export default function Header({ activeTab, setActiveTab, onRefresh }) {
               <div className={activeTab === 'trends' ? 'active' : ''} onClick={(e) => { e.stopPropagation(); handleNavClick('trends'); }} style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
                 <img src={growthIcon} alt="" style={{ width: '18px', height: '18px', objectFit: 'contain' }} />
                 <span>{t('nav_trends')}</span>
+              </div>
+              <div className={activeTab === 'network' ? 'active' : ''} onClick={(e) => { e.stopPropagation(); handleNavClick('network'); }} style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+                <span style={{ fontSize: '1rem' }}>🕸️</span>
+                <span>Network Graph</span>
+              </div>
+              <div className={activeTab === 'map' ? 'active' : ''} onClick={(e) => { e.stopPropagation(); handleNavClick('map'); }} style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+                <span style={{ fontSize: '1rem' }}>🗺️</span>
+                <span>Risk Map</span>
               </div>
             </div>
           )}

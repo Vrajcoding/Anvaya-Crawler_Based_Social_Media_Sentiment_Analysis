@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+  # ── Backend: FastAPI ──────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - backend_data:/app/data
+    environment:
+      - ENV=development
+      - DEBUG=true
+      - USE_REAL_CRAWLER=true
+      - DATABASE_URL=sqlite:///./sentinelai.db
+      # Override these with your real keys in .env or environment
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-your_key_here}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
+    depends_on: []
+    restart: unless-stopped
+    networks:
+      - sentinelai
+
+  # ── Frontend: Vite React ──────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - sentinelai
+
+volumes:
+  backend_data:
+
+networks:
+  sentinelai:
+    driver: bridge
